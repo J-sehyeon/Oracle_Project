@@ -1,0 +1,115 @@
+Sapiens2/.DS_Store
+Sapiens2/.cache/
+Sapiens2/.venv-sapiens2/
+Sapiens2/models/
+!Sapiens2/outputs/
+Sapiens2/outputs/*
+!Sapiens2/outputs/test1/
+Sapiens2/tmp/
+Sapiens2/__pycache__/
+Sapiens2/.pytest_cache/
+*.pyc
+
+# data
+Sapiens2/inputs
+
+# etc
+docs
+graphify-out
+.DS_Store
+
+
+# sapiens2
+# Byte-compiled / optimized / DLL files
+Sapiens2/sapiens2/__pycache__/
+Sapiens2/sapiens2/*.py[cod]
+Sapiens2/sapiens2/*$py.class
+Sapiens2/sapiens2/*.so
+Sapiens2/sapiens2/
+
+# Distribution / packaging
+Sapiens2/sapiens2/.Python
+Sapiens2/sapiens2/build/
+Sapiens2/sapiens2/develop-eggs/
+Sapiens2/sapiens2/dist/
+Sapiens2/sapiens2/downloads/
+Sapiens2/sapiens2/eggs/
+Sapiens2/sapiens2/.eggs/
+Sapiens2/sapiens2/lib/
+Sapiens2/sapiens2/lib64/
+Sapiens2/sapiens2/parts/
+Sapiens2/sapiens2/sdist/
+Sapiens2/sapiens2/var/
+Sapiens2/sapiens2/wheels/
+Sapiens2/sapiens2/share/python-wheels/
+Sapiens2/sapiens2/*.egg-info/
+Sapiens2/sapiens2/.installed.cfg
+Sapiens2/sapiens2/*.egg
+Sapiens2/sapiens2/MANIFEST
+Sapiens2/sapiens2/
+
+# PyInstaller
+Sapiens2/sapiens2/*.manifest
+Sapiens2/sapiens2/*.spec
+Sapiens2/sapiens2/
+
+# Installer logs
+Sapiens2/sapiens2/pip-log.txt
+Sapiens2/sapiens2/pip-delete-this-directory.txt
+Sapiens2/sapiens2/
+
+# Unit test / coverage
+Sapiens2/sapiens2/htmlcov/
+Sapiens2/sapiens2/.tox/
+Sapiens2/sapiens2/.nox/
+Sapiens2/sapiens2/.coverage
+Sapiens2/sapiens2/.coverage.*
+Sapiens2/sapiens2/.cache
+Sapiens2/sapiens2/nosetests.xml
+Sapiens2/sapiens2/coverage.xml
+Sapiens2/sapiens2/*.cover
+Sapiens2/sapiens2/*.py,cover
+Sapiens2/sapiens2/.hypothesis/
+Sapiens2/sapiens2/.pytest_cache/
+Sapiens2/sapiens2/cover/
+Sapiens2/sapiens2/
+
+# Environments
+Sapiens2/sapiens2/.env
+Sapiens2/sapiens2/.venv
+Sapiens2/sapiens2/env/
+Sapiens2/sapiens2/venv/
+Sapiens2/sapiens2/ENV/
+Sapiens2/sapiens2/env.bak/
+Sapiens2/sapiens2/venv.bak/
+Sapiens2/sapiens2/
+
+# IDE / editors
+Sapiens2/sapiens2/.idea/
+Sapiens2/sapiens2/.vscode/
+Sapiens2/sapiens2/*.swp
+Sapiens2/sapiens2/*.swo
+Sapiens2/sapiens2/*~
+Sapiens2/sapiens2/.DS_Store
+Sapiens2/sapiens2/
+
+# Jupyter / notebooks
+Sapiens2/sapiens2/.ipynb_checkpoints
+Sapiens2/sapiens2/*.ipynb_checkpoints/
+Sapiens2/sapiens2/
+
+# Project-specific
+Sapiens2/sapiens2/work_dirs/
+Sapiens2/sapiens2/outputs/
+Sapiens2/sapiens2/checkpoints/
+Sapiens2/sapiens2/logs/
+Sapiens2/sapiens2/wandb/
+Sapiens2/sapiens2/*.pth
+Sapiens2/sapiens2/*.pt
+Sapiens2/sapiens2/*.safetensors
+Sapiens2/sapiens2/*.ckpt
+Sapiens2/sapiens2/
+
+# Misc
+Sapiens2/sapiens2/.claude/
+Sapiens2/sapiens2/*.profraw

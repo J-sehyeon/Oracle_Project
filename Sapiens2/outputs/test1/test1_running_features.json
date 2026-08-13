@@ -1,0 +1,147 @@
+{
+  "input_format": "sapiens2_body18_v1",
+  "fps": 25.0,
+  "body_reference_px": 499.40374960143697,
+  "distance_normalization": "% body_reference",
+  "events": {
+    "left": {
+      "initial_contact": [
+        15,
+        24,
+        46,
+        55,
+        85,
+        106,
+        115,
+        144,
+        173,
+        201,
+        230,
+        257,
+        284,
+        312,
+        339,
+        366,
+        393,
+        419,
+        446,
+        474
+      ],
+      "toe_off": [
+        5,
+        17,
+        37,
+        48,
+        67,
+        97,
+        107,
+        127,
+        156,
+        184,
+        212,
+        241,
+        269,
+        297,
+        323,
+        350,
+        378,
+        406,
+        431,
+        458,
+        487
+      ]
+    },
+    "right": {
+      "initial_contact": [
+        7,
+        39,
+        70,
+        99,
+        129,
+        158,
+        187,
+        215,
+        243,
+        270,
+        298,
+        325,
+        352,
+        379,
+        406,
+        433,
+        460,
+        488
+      ],
+      "toe_off": [
+        22,
+        53,
+        83,
+        113,
+        142,
+        170,
+        198,
+        226,
+        255,
+        282,
+        309,
+        337,
+        364,
+        391,
+        418,
+        445,
+        473
+      ]
+    }
+  },
+  "features": {
+    "FEAT-01": {
+      "value": -11.750057198273868,
+      "unit": "degrees"
+    },
+    "FEAT-02": {
+      "value": 46.23895205675592,
+      "unit": "degrees"
+    },
+    "FEAT-03": {
+      "value": 107.14285714285714,
+      "unit": "steps/min"
+    },
+    "FEAT-04": {
+      "value": 480.0,
+      "unit": "ms"
+    },
+    "FEAT-05": {
+      "value": 640.0,
+      "unit": "ms"
+    },
+    "FEAT-06": {
+      "value": 15.795677025058927,
+      "unit": "% body_reference"
+    },
+    "FEAT-07": {
+      "value": -2.6995355440455415,
+      "unit": "degrees"
+    },
+    "FEAT-08": {
+      "value": 2.199758107230383,
+      "unit": "% body_reference"
+    },
+    "FEAT-09": {
+      "value": 15.79648040150239,
+      "unit": "degrees"
+    },
+    "FEAT-10": {
+      "value": 0.0,
+      "unit": "percent"
+    },
+    "FEAT-11": {
+      "value": 21.426825253823,
+      "unit": "percent"
+    },
+    "FEAT-12": {
+      "value": null,
+      "unit": "BW/s",
+      "reason": "Force-plate GRF data is required; pose coordinates alone cannot directly measure vertical loading rate."
+    }
+  }
+}
