@@ -107,7 +107,7 @@ def install_mps_nms_fallback(nms_module: Any) -> None:
         if getattr(getattr(boxes, "device", None), "type", None) != "mps":
             return original_nms(boxes, scores, *args, **kwargs)
         dets, keep = original_nms(boxes.cpu(), scores.cpu(), *args, **kwargs)
-        return dets.to(boxes.device), keep.to(boxes.device)
+        return dets.to(boxes.device), keep
 
     nms._rtmpose_mps_fallback = True
     nms_module.nms = nms

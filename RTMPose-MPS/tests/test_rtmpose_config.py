@@ -95,7 +95,7 @@ def test_topdown_inference_switches_registry_scope_for_each_model():
     assert received_boxes == [[1, 2, 3, 4]]
 
 
-def test_mps_nms_fallback_runs_only_nms_on_cpu_and_returns_to_mps():
+def test_mps_nms_fallback_keeps_indices_on_cpu_for_mmengine():
     class Tensor:
         def __init__(self, name, device):
             self.name = name
@@ -122,4 +122,4 @@ def test_mps_nms_fallback_runs_only_nms_on_cpu_and_returns_to_mps():
 
     assert module.calls == [("cpu", "cpu", {"iou_threshold": 0.7})]
     assert dets.device.type == "mps"
-    assert keep.device.type == "mps"
+    assert keep.device.type == "cpu"
