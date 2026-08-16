@@ -24,6 +24,13 @@ def test_install_dry_run_identifies_pinned_openmmlab_sources():
     assert result.returncode == 0, result.stderr
     assert "open-mmlab/mmpose" in result.stdout
     assert "open-mmlab/mmdetection" in result.stdout
+    assert "setuptools<81" in result.stdout
+    assert "MMCV build isolation: disabled" in result.stdout
+    assert "Editable package build isolation: disabled" in result.stdout
+    assert "jin-s13/xtcocoapi" in result.stdout
+    assert "v1.14.3" in result.stdout
+    assert "MMDetection .mim config links: enabled" in result.stdout
+    assert "MMPose .mim config links: enabled" in result.stdout
 
 
 def test_checker_dry_run_lists_mps_and_default_models():

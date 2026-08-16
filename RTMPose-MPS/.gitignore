@@ -4,6 +4,8 @@
 models/
 mmpose/
 mmdetection/
+xtcocoapi/
+inputs/
 outputs/
 __pycache__/
 .pytest_cache/

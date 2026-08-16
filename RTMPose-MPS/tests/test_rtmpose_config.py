@@ -3,6 +3,7 @@ from pathlib import Path
 import pytest
 
 from scripts.rtmpose_config import select_model_paths
+from scripts.rtmpose_infer import run_topdown_inference, trusted_checkpoint_loading
 
 
 def test_m_variant_selects_coco17_rtmpose_m_checkpoint(tmp_path: Path):
@@ -31,3 +32,60 @@ def test_unknown_variant_is_rejected(tmp_path: Path):
     """Accepting an unsupported variant would silently change the quality contract."""
     with pytest.raises(ValueError, match="RTMPOSE_VARIANT"):
         select_model_paths(tmp_path, "l")
+
+
+def test_trusted_checkpoint_loading_only_overrides_torch_load_in_context():
+    class FakeTorch:
+        def __init__(self):
+            self.calls = []
+
+        def load(self, *args, **kwargs):
+            self.calls.append((args, kwargs))
+            return "loaded"
+
+    torch = FakeTorch()
+    original_load = torch.load.__func__
+
+    with trusted_checkpoint_loading(torch):
+        assert torch.load("official.pth") == "loaded"
+
+    assert torch.load.__func__ is original_load
+    assert torch.calls == [(("official.pth",), {"weights_only": False})]
+
+
+def test_topdown_inference_switches_registry_scope_for_each_model():
+    class Instances:
+        bboxes = [[1, 2, 3, 4]]
+        scores = [0.9]
+        labels = [0]
+
+        def cpu(self):
+            return self
+
+        def numpy(self):
+            return self
+
+    class DetectionResult:
+        pred_instances = Instances()
+
+    scopes = []
+    received_boxes = []
+
+    def set_scope(scope):
+        scopes.append(scope)
+
+    def infer_detector(model, image):
+        return DetectionResult()
+
+    def infer_pose(model, image, boxes):
+        received_boxes.extend(boxes)
+        return ["pose"]
+
+    det_result, pose_results = run_topdown_inference(
+        "detector", "pose", "frame.jpg", 0.3, set_scope, infer_detector, infer_pose
+    )
+
+    assert isinstance(det_result.pred_instances, Instances)
+    assert pose_results == ["pose"]
+    assert scopes == ["mmdet", "mmpose"]
+    assert received_boxes == [[1, 2, 3, 4]]

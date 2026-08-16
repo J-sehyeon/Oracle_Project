@@ -35,17 +35,16 @@ done
 
 "$PYTHON_BIN" - <<'PY'
 import platform
+from importlib.metadata import version
 
 import torch
-import mmdet
-import mmpose
 
 print(f"Python: {platform.python_version()} ({platform.machine()})")
 print(f"PyTorch: {torch.__version__}")
 print(f"MPS built: {torch.backends.mps.is_built()}")
 print(f"MPS available: {torch.backends.mps.is_available()}")
-print(f"MMDetection: {mmdet.__version__}")
-print(f"MMPose: {mmpose.__version__}")
+print(f"MMDetection: {version('mmdet')}")
+print(f"MMPose: {version('mmpose')}")
 
 if not torch.backends.mps.is_built() or not torch.backends.mps.is_available():
     raise SystemExit("MPS is required for auto execution but is unavailable.")
