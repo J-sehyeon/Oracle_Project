@@ -2,6 +2,7 @@
 
 import argparse
 import json
+from importlib import import_module
 from contextlib import contextmanager
 from pathlib import Path
 from typing import Any
@@ -96,6 +97,22 @@ def run_topdown_inference(
     return det_result, inference_topdown(pose_model, image_path, person_boxes)
 
 
+def install_mps_nms_fallback(nms_module: Any) -> None:
+    """Run MMCV's unsupported MPS NMS operation on CPU only."""
+    original_nms = nms_module.nms
+    if getattr(original_nms, "_rtmpose_mps_fallback", False):
+        return
+
+    def nms(boxes: Any, scores: Any, *args: Any, **kwargs: Any) -> tuple[Any, Any]:
+        if getattr(getattr(boxes, "device", None), "type", None) != "mps":
+            return original_nms(boxes, scores, *args, **kwargs)
+        dets, keep = original_nms(boxes.cpu(), scores.cpu(), *args, **kwargs)
+        return dets.to(boxes.device), keep.to(boxes.device)
+
+    nms._rtmpose_mps_fallback = True
+    nms_module.nms = nms
+
+
 def main() -> None:
     args = parse_args()
     if not args.input_dir.is_dir():
@@ -109,6 +126,9 @@ def main() -> None:
     from mmdet.apis import inference_detector, init_detector
     from mmengine.registry import init_default_scope
     from mmpose.apis import inference_topdown, init_model
+
+    if args.device == "mps":
+        install_mps_nms_fallback(import_module("mmcv.ops.nms"))
 
     root = Path(__file__).resolve().parents[1]
     paths = select_model_paths(root, args.variant)

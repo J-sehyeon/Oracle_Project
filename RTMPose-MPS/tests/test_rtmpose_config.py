@@ -3,7 +3,11 @@ from pathlib import Path
 import pytest
 
 from scripts.rtmpose_config import select_model_paths
-from scripts.rtmpose_infer import run_topdown_inference, trusted_checkpoint_loading
+from scripts.rtmpose_infer import (
+    install_mps_nms_fallback,
+    run_topdown_inference,
+    trusted_checkpoint_loading,
+)
 
 
 def test_m_variant_selects_coco17_rtmpose_m_checkpoint(tmp_path: Path):
@@ -89,3 +93,33 @@ def test_topdown_inference_switches_registry_scope_for_each_model():
     assert pose_results == ["pose"]
     assert scopes == ["mmdet", "mmpose"]
     assert received_boxes == [[1, 2, 3, 4]]
+
+
+def test_mps_nms_fallback_runs_only_nms_on_cpu_and_returns_to_mps():
+    class Tensor:
+        def __init__(self, name, device):
+            self.name = name
+            self.device = type("Device", (), {"type": device})()
+
+        def cpu(self):
+            return Tensor(self.name, "cpu")
+
+        def to(self, device):
+            return Tensor(self.name, device.type)
+
+    class Module:
+        def __init__(self):
+            self.calls = []
+
+        def nms(self, boxes, scores, **kwargs):
+            self.calls.append((boxes.device.type, scores.device.type, kwargs))
+            return Tensor("dets", "cpu"), Tensor("keep", "cpu")
+
+    module = Module()
+    install_mps_nms_fallback(module)
+
+    dets, keep = module.nms(Tensor("boxes", "mps"), Tensor("scores", "mps"), iou_threshold=0.7)
+
+    assert module.calls == [("cpu", "cpu", {"iou_threshold": 0.7})]
+    assert dets.device.type == "mps"
+    assert keep.device.type == "mps"
