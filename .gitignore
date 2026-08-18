@@ -2,13 +2,18 @@ Sapiens2/.DS_Store
 Sapiens2/.cache/
 Sapiens2/.venv-sapiens2/
 Sapiens2/models/
+
 !Sapiens2/outputs/
 Sapiens2/outputs/*
 !Sapiens2/outputs/test1/
+
 Sapiens2/tmp/
 Sapiens2/__pycache__/
 Sapiens2/.pytest_cache/
 *.pyc
+
+# venv
+.venv
 
 # data
 Sapiens2/inputs
@@ -17,7 +22,10 @@ Sapiens2/inputs
 docs
 graphify-out
 .DS_Store
-
+*.task
+**/outputs
+docs
+.pytest_cache
 
 # sapiens2
 # Byte-compiled / optimized / DLL files

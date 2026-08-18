@@ -90,6 +90,24 @@ def test_draw_person_connects_left_ankle_to_wholebody_foot_keypoints():
     assert np.any(image[50, 50] != 0)
 
 
+def test_draw_person_connects_wholebody_hand_finger_keypoints():
+    """COCO-WholeBody connects each hand root through all finger joints."""
+    person = _person()
+    person["keypoints"] = [[0, 0] for _ in range(133)]
+    person["keypoint_scores"] = [0.0] * 133
+    person["observed"] = [False] * 133
+    person["imputed_keypoints"] = [None] * 133
+    person["keypoints"][91] = [20, 20]  # left hand root
+    person["keypoints"][92] = [80, 80]  # left thumb 1
+    person["keypoint_scores"][91] = person["keypoint_scores"][92] = 0.9
+    person["observed"][91] = person["observed"][92] = True
+    image = np.zeros((100, 100, 3), dtype=np.uint8)
+
+    draw_person(image, person)
+
+    assert np.any(image[50, 50] != 0)
+
+
 def test_draw_person_does_not_connect_nose_directly_to_shoulder():
     person = _person()
     person["keypoints"] = [[0, 0]] * 17

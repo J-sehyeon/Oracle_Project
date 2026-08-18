@@ -12,8 +12,8 @@ from scripts.pose_track import Detection, build_frame_record
 
 IMAGE_EXTENSIONS = {".bmp", ".jpeg", ".jpg", ".png", ".webp"}
 RTMW_MODEL_ID = "akore/rtmw-x-384x288"
-MODEL_WIDTH = 384
-MODEL_HEIGHT = 288
+MODEL_WIDTH = 288
+MODEL_HEIGHT = 384
 
 
 @contextmanager
@@ -51,7 +51,7 @@ def _image_paths(input_dir: Path) -> list[Path]:
 
 
 def prepare_rtmw_inputs(processor: Any, image: Any) -> dict[str, Any]:
-    """Prepare the 384x288 tensor expected by the RTMW-X checkpoint."""
+    """Prepare the height-384, width-288 tensor expected by RTMW-X."""
     return processor(
         images=image,
         size={"height": MODEL_HEIGHT, "width": MODEL_WIDTH},
@@ -59,18 +59,18 @@ def prepare_rtmw_inputs(processor: Any, image: Any) -> dict[str, Any]:
     )
 
 
-def model_keypoints_to_image(
-    keypoints: list[list[float]], bbox: list[float], model_width: int = MODEL_WIDTH,
-    model_height: int = MODEL_HEIGHT,
-) -> list[list[float]]:
-    """Map RTMW's 384x288 model-space coordinates back into the source image."""
-    left, top, right, bottom = bbox
-    width = right - left
-    height = bottom - top
-    return [
-        [left + point[0] * width / model_width, top + point[1] * height / model_height]
-        for point in keypoints
-    ]
+def repair_rtmw_runtime_buffers(pose_model: Any) -> None:
+    gau = pose_model.head.gau
+    gau.sqrt_s.fill_(gau.s**0.5)
+
+
+def serialize_predictions(payload: dict[str, Any]) -> str:
+    try:
+        return json.dumps(payload, ensure_ascii=False, indent=2, allow_nan=False)
+    except ValueError as error:
+        raise ValueError(
+            "Pose predictions must be JSON-compliant and contain only finite numbers."
+        ) from error
 
 
 def _person_boxes(det_result: Any, bbox_thr: float) -> list[tuple[list[float], float]]:
@@ -92,10 +92,10 @@ def _predict_person(
     inputs = prepare_rtmw_inputs(processor, person_crop)
     inputs = {name: value.to(device) for name, value in inputs.items()}
     with torch.no_grad():
-        outputs = pose_model(**inputs, coordinate_mode="model")
+        outputs = pose_model(**inputs, bbox=bbox, coordinate_mode="image")
     keypoints = outputs.keypoints[0].detach().cpu().tolist()
     scores = outputs.scores[0].detach().cpu().tolist()
-    return model_keypoints_to_image(keypoints, bbox), _as_float_list(scores)
+    return keypoints, _as_float_list(scores)
 
 
 def install_mps_nms_fallback(nms_module: Any) -> None:
@@ -135,7 +135,9 @@ def main() -> None:
     detector_checkpoint = root / "models/rtmdet-nano/rtmdet_nano_8xb32-100e_coco-obj365-person-05d8511e.pth"
     detector = init_detector(str(detector_config), str(detector_checkpoint), device=args.device)
     processor = AutoImageProcessor.from_pretrained(RTMW_MODEL_ID, trust_remote_code=True)
-    pose_model = AutoModel.from_pretrained(RTMW_MODEL_ID, trust_remote_code=True).to(args.device).eval()
+    pose_model = AutoModel.from_pretrained(RTMW_MODEL_ID, trust_remote_code=True)
+    repair_rtmw_runtime_buffers(pose_model)
+    pose_model = pose_model.to(args.device).eval()
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
     previous = None
@@ -166,7 +168,7 @@ def main() -> None:
         "frames": frames,
     }
     output_json = args.output_dir / "pose_predictions.json"
-    output_json.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    output_json.write_text(serialize_predictions(payload), encoding="utf-8")
     print(f"Frames processed: {len(frames)}")
     print(f"Predictions: {output_json}")
 

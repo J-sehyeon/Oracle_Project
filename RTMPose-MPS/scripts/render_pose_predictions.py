@@ -34,6 +34,20 @@ WHOLEBODY_FOOT_SKELETON = (
     (15, 17), (15, 18), (15, 19),  # left ankle → big toe, small toe, heel
     (16, 20), (16, 21), (16, 22),  # right ankle → big toe, small toe, heel
 )
+WHOLEBODY_HAND_SKELETON = tuple(
+    edge
+    for root, first_joints in (
+        (91, (92, 96, 100, 104, 108)),
+        (112, (113, 117, 121, 125, 129)),
+    )
+    for first in first_joints
+    for edge in (
+        (root, first),
+        (first, first + 1),
+        (first + 1, first + 2),
+        (first + 2, first + 3),
+    )
+)
 OBSERVED_COLOR = (0, 255, 0)
 IMPUTED_COLOR = (0, 165, 255)
 DrawPoint = tuple[tuple[int, int], str] | None
@@ -73,6 +87,8 @@ def draw_person(image: np.ndarray, person: dict) -> None:
     skeleton = COCO_SKELETON
     if len(points) >= 23:
         skeleton += WHOLEBODY_FOOT_SKELETON
+    if len(points) >= 133:
+        skeleton += WHOLEBODY_HAND_SKELETON
     for start_index, end_index in skeleton:
         start = points[start_index]
         end = points[end_index]
