@@ -33,11 +33,12 @@ def test_install_dry_run_identifies_pinned_openmmlab_sources():
     assert "MMPose .mim config links: enabled" in result.stdout
 
 
-def test_checker_dry_run_lists_mps_and_default_models():
-    """Removing a required MPS or default-model check must fail this test."""
+def test_checker_dry_run_lists_mps_and_rtmw_dependencies():
+    """The environment check must name the RTMW model and its runtime."""
     result = run_script(CHECK_SCRIPT, "--dry-run")
 
     assert result.returncode == 0, result.stderr
     assert "MPS" in result.stdout
     assert "RTMDet-nano" in result.stdout
-    assert "RTMPose-M" in result.stdout
+    assert "RTMW-X" in result.stdout
+    assert "Transformers" in result.stdout

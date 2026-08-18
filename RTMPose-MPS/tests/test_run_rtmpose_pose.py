@@ -16,8 +16,8 @@ def run_script(*args: str) -> subprocess.CompletedProcess[str]:
     )
 
 
-def test_dry_run_defaults_to_mps_rtmpose_m_and_coco17(tmp_path: Path):
-    """Changing auto device or the default pose model must fail this test."""
+def test_dry_run_defaults_to_mps_rtmw_x_and_coco_wholebody(tmp_path: Path):
+    """The production launcher must advertise the RTMW WholeBody contract."""
     images = tmp_path / "images"
     images.mkdir()
 
@@ -25,8 +25,9 @@ def test_dry_run_defaults_to_mps_rtmpose_m_and_coco17(tmp_path: Path):
 
     assert result.returncode == 0, result.stderr
     assert "--device mps" in result.stdout
-    assert "rtmpose-m_8xb256-420e_coco-256x192" in result.stdout
-    assert "17 body keypoints" in result.stdout
+    assert "scripts.rtmw_infer" in result.stdout
+    assert "RTMW-X" in result.stdout
+    assert "133 whole-body keypoints" in result.stdout
 
 
 def test_dry_run_allows_only_explicit_cpu_override(tmp_path: Path):

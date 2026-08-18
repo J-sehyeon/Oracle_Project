@@ -30,6 +30,10 @@ COCO_SKELETON = (
     (3, 5),
     (4, 6),
 )
+WHOLEBODY_FOOT_SKELETON = (
+    (15, 17), (15, 18), (15, 19),  # left ankle → big toe, small toe, heel
+    (16, 20), (16, 21), (16, 22),  # right ankle → big toe, small toe, heel
+)
 OBSERVED_COLOR = (0, 255, 0)
 IMPUTED_COLOR = (0, 165, 255)
 DrawPoint = tuple[tuple[int, int], str] | None
@@ -66,7 +70,10 @@ def select_draw_points(person: dict) -> list[DrawPoint]:
 def draw_person(image: np.ndarray, person: dict) -> None:
     """Draw one person's COCO-17 skeleton and keypoints in place."""
     points = select_draw_points(person)
-    for start_index, end_index in COCO_SKELETON:
+    skeleton = COCO_SKELETON
+    if len(points) >= 23:
+        skeleton += WHOLEBODY_FOOT_SKELETON
+    for start_index, end_index in skeleton:
         start = points[start_index]
         end = points[end_index]
         if start is None or end is None:

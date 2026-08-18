@@ -1,6 +1,6 @@
-# RTMPose on Apple Silicon MPS
+# RTMW on Apple Silicon MPS
 
-이 폴더는 기존 `Sapiens2/`와 독립된 RTMPose 실행 환경이다. 기본 조합은 사람 검출용 **RTMDet-nano**와 COCO 17개 신체 관절용 **RTMPose-M**(256×192)이다. 얼굴·손의 상세 keypoint는 출력하지 않는다.
+이 폴더는 기존 `Sapiens2/`와 독립된 RTMW 실행 환경이다. 기본 조합은 사람 검출용 **RTMDet-nano**와 COCO-WholeBody 133개 관절용 **RTMW-X**(384×288)이다. 발가락·뒤꿈치, 얼굴, 손 keypoint를 함께 출력한다.
 
 ## 구성
 
@@ -8,8 +8,8 @@
 | --- | --- |
 | 실행 장치 | Apple Metal Performance Shaders (MPS) |
 | 검출 모델 | RTMDet-nano person, OpenMMLab 공식 checkpoint |
-| 포즈 모델 | RTMPose-M, COCO 17 body keypoints, 256×192 |
-| 대안 포즈 모델 | `RTMPOSE_VARIANT=s`의 RTMPose-S |
+| 포즈 모델 | RTMW-X, COCO-WholeBody 133 keypoints, 384×288 |
+| 포즈 모델 출처 | `akore/rtmw-x-384x288` (Hugging Face, 첫 추론 시 다운로드) |
 | MMPose upstream | `v1.3.2` |
 | MMDetection upstream | `v3.2.0` |
 
@@ -19,7 +19,7 @@
 
 ```bash
 ./scripts/install_rtmpose_mps.sh
-./scripts/download_rtmpose_models.sh
+./scripts/download_rtmw_models.sh
 ./scripts/check_rtmpose_environment.sh
 ```
 
@@ -30,10 +30,9 @@
 ```bash
 ./scripts/run_rtmpose_pose.sh /absolute/path/to/images
 ./scripts/run_rtmpose_pose.sh /absolute/path/to/images /absolute/path/to/output
-RTMPOSE_VARIANT=s ./scripts/run_rtmpose_pose.sh /absolute/path/to/images
 ```
 
-기본 출력은 `outputs/pose/`다. `pose_predictions.json`에는 프레임별 사람 bbox, 17개 원본 keypoint, score, 관측 여부, 가림/저신뢰 시 별도 추정한 keypoint, track id가 기록된다. `imputed_keypoints`는 원본 모델 예측을 수정하지 않는다.
+기본 출력은 `outputs/pose/`다. `pose_predictions.json`에는 프레임별 사람 bbox, 133개 원본 keypoint, score, 관측 여부, 가림/저신뢰 시 별도 추정한 keypoint, track id가 기록된다. 키포인트는 body 17개, feet 6개(양발 엄지발가락·새끼발가락·뒤꿈치), face 68개, hands 42개다. `imputed_keypoints`는 원본 모델 예측을 수정하지 않는다.
 
 ## 예측 결과를 원본 이미지에 그리기
 
@@ -58,13 +57,13 @@ RTMPOSE_VARIANT=s ./scripts/run_rtmpose_pose.sh /absolute/path/to/images
 | --- | --- |
 | `parse_args()` | JSON 파일, 원본 이미지 폴더, 출력 폴더의 세 CLI 인자를 읽는다. |
 | `select_draw_points(person)` | 각 관절에서 `observed`가 참이고 score가 유효한 숫자이면 원본 keypoint를 선택한다. 아니면 `imputed_keypoints`를 선택하고, 둘 다 없으면 그리지 않는다. |
-| `draw_person(image, person)` | COCO-17 골격선을 먼저 그리고 관절점을 그린다. 보정점이 포함된 골격선은 주황색으로 표시한다. |
+| `draw_person(image, person)` | COCO-17 골격선과, 133점 결과일 때 양발의 발목→엄지발가락·새끼발가락·뒤꿈치 선을 그리고 관절점을 표시한다. 보정점이 포함된 골격선은 주황색으로 표시한다. |
 | `render_predictions(...)` | JSON을 읽고 프레임별 원본 이미지를 찾아 모든 사람의 pose를 적용한 뒤 같은 이름으로 저장한다. |
 | `main()` | 렌더링을 실행하고 처리한 이미지 수와 출력 폴더를 표시한다. 오류가 나면 문제가 된 경로를 출력한다. |
 
-이 렌더러는 RTMDet·RTMPose 모델을 다시 불러오지 않는다. 이미 생성된 JSON을 OpenCV로 시각화만 하므로 MPS 설정과 무관하게 실행할 수 있다.
+이 렌더러는 RTMDet·RTMW 모델을 다시 불러오지 않는다. 이미 생성된 JSON을 OpenCV로 시각화만 하므로 MPS 설정과 무관하게 실행할 수 있다.
 
 ## 모델 출처
 
-- [MMPose RTMPose 공식 데모](https://mmpose.readthedocs.io/en/latest/demos.html)
+- [RTMW 모델](https://huggingface.co/akore/rtmw-x-384x288)
 - [MMPose 설치 문서](https://mmpose.readthedocs.io/en/latest/installation.html)

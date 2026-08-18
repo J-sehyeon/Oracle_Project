@@ -10,7 +10,8 @@ if [[ "${1:-}" == "--dry-run" ]]; then
   echo "PyTorch MPS build and runtime availability"
   echo "MMPose and MMDetection imports"
   echo "RTMDet-nano checkpoint"
-  echo "RTMPose-M checkpoint"
+  echo "RTMW-X model via Transformers / Hugging Face"
+  echo "Transformers runtime"
   exit 0
 fi
 
@@ -24,11 +25,9 @@ if [[ ! -x "$PYTHON_BIN" ]]; then
   exit 1
 fi
 
-for required in \
-  "$MODELS_DIR/rtmdet-nano/rtmdet_nano_8xb32-100e_coco-obj365-person-05d8511e.pth" \
-  "$MODELS_DIR/rtmpose/rtmpose-m_simcc-aic-coco_pt-aic-coco_420e-256x192-63eb25f7_20230126.pth"; do
+for required in "$MODELS_DIR/rtmdet-nano/rtmdet_nano_8xb32-100e_coco-obj365-person-05d8511e.pth"; do
   if [[ ! -f "$required" ]]; then
-    echo "Missing model file: $required. Run scripts/download_rtmpose_models.sh first." >&2
+    echo "Missing model file: $required. Run scripts/download_rtmw_models.sh first." >&2
     exit 1
   fi
 done
@@ -45,6 +44,7 @@ print(f"MPS built: {torch.backends.mps.is_built()}")
 print(f"MPS available: {torch.backends.mps.is_available()}")
 print(f"MMDetection: {version('mmdet')}")
 print(f"MMPose: {version('mmpose')}")
+print(f"Transformers: {version('transformers')}")
 
 if not torch.backends.mps.is_built() or not torch.backends.mps.is_available():
     raise SystemExit("MPS is required for auto execution but is unavailable.")

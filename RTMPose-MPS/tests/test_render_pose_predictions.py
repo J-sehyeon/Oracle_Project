@@ -72,6 +72,24 @@ def test_draw_person_connects_coco_ear_to_shoulder():
     assert np.any(image[50, 50] != 0)
 
 
+def test_draw_person_connects_left_ankle_to_wholebody_foot_keypoints():
+    """COCO-WholeBody adds big toe, small toe, and heel after the 17 body points."""
+    person = _person()
+    person["keypoints"] = [[0, 0]] * 23
+    person["keypoint_scores"] = [0.0] * 23
+    person["observed"] = [False] * 23
+    person["imputed_keypoints"] = [None] * 23
+    person["keypoints"][15] = [20, 20]  # left ankle
+    person["keypoints"][17] = [80, 80]  # left big toe
+    person["keypoint_scores"][15] = person["keypoint_scores"][17] = 0.9
+    person["observed"][15] = person["observed"][17] = True
+    image = np.zeros((100, 100, 3), dtype=np.uint8)
+
+    draw_person(image, person)
+
+    assert np.any(image[50, 50] != 0)
+
+
 def test_draw_person_does_not_connect_nose_directly_to_shoulder():
     person = _person()
     person["keypoints"] = [[0, 0]] * 17

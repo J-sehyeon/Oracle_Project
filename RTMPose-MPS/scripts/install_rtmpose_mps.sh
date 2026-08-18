@@ -16,7 +16,7 @@ if [[ "${1:-}" == "--dry-run" ]]; then
   echo "MMPose: https://github.com/open-mmlab/mmpose.git @ $MMPPOSE_REF"
   echo "MMDetection: https://github.com/open-mmlab/mmdetection.git @ $MMDET_REF"
   echo "xtcocotools source: https://github.com/jin-s13/xtcocoapi.git @ $XTCOCO_REF"
-  echo "Dependencies: setuptools<81 torch torchvision openmim mmengine mmcv==2.1.0"
+  echo "Dependencies: setuptools<81 torch torchvision transformers pillow safetensors openmim mmengine mmcv==2.1.0"
   echo "MMCV build isolation: disabled (uses setuptools<81 for OpenMIM compatibility)"
   echo "Editable package build isolation: disabled (exposes installed PyTorch)"
   echo "MMDetection .mim config links: enabled for mmdet:: config inheritance"
@@ -59,7 +59,7 @@ git -C "$XTCOCO_DIR" checkout --detach "$XTCOCO_REF"
 
 PYTHON_BIN="$VENV_DIR/bin/python"
 uv pip install --python "$PYTHON_BIN" --upgrade pip "setuptools<81" wheel
-uv pip install --python "$PYTHON_BIN" torch torchvision openmim
+uv pip install --python "$PYTHON_BIN" torch torchvision transformers pillow safetensors openmim
 uv pip install --python "$PYTHON_BIN" "mmengine>=0.7.1,<1.0.0"
 "$PYTHON_BIN" -m pip install --no-build-isolation "mmcv==2.1.0"
 uv pip install --python "$PYTHON_BIN" cython
@@ -97,4 +97,4 @@ for MIM_DIR in "$MMPOSE_PACKAGE_DIR/.mim" "$SITE_PACKAGES_DIR/mmpose/.mim"; do
   ln -sfn "$MMPPOSE_DIR/model-index.yml" "$MIM_DIR/model-index.yml"
 done
 
-echo "RTMPose MPS environment installed: $VENV_DIR"
+echo "RTMW MPS environment installed: $VENV_DIR"
