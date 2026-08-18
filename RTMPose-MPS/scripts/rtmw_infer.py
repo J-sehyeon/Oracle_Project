@@ -50,6 +50,15 @@ def _image_paths(input_dir: Path) -> list[Path]:
     return sorted(path for path in input_dir.iterdir() if path.suffix.lower() in IMAGE_EXTENSIONS)
 
 
+def prepare_rtmw_inputs(processor: Any, image: Any) -> dict[str, Any]:
+    """Prepare the 384x288 tensor expected by the RTMW-X checkpoint."""
+    return processor(
+        images=image,
+        size={"height": MODEL_HEIGHT, "width": MODEL_WIDTH},
+        return_tensors="pt",
+    )
+
+
 def model_keypoints_to_image(
     keypoints: list[list[float]], bbox: list[float], model_width: int = MODEL_WIDTH,
     model_height: int = MODEL_HEIGHT,
@@ -80,7 +89,7 @@ def _predict_person(
 ) -> tuple[list[list[float]], list[float]]:
     left, top, right, bottom = (round(value) for value in bbox)
     person_crop = image.crop((left, top, right, bottom))
-    inputs = processor(images=person_crop, return_tensors="pt")
+    inputs = prepare_rtmw_inputs(processor, person_crop)
     inputs = {name: value.to(device) for name, value in inputs.items()}
     with torch.no_grad():
         outputs = pose_model(**inputs, coordinate_mode="model")
