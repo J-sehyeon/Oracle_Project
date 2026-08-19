@@ -2,6 +2,7 @@ from pathlib import Path
 
 import pytest
 
+import scripts.rtmpose_infer as rtmpose_infer
 from scripts.rtmpose_config import select_model_paths
 from scripts.rtmpose_infer import (
     install_mps_nms_fallback,
@@ -30,6 +31,27 @@ def test_s_variant_selects_optional_smaller_coco17_checkpoint(tmp_path: Path):
     assert paths.pose_checkpoint.name == (
         "rtmpose-s_simcc-coco_pt-aic-coco_420e-256x192-8edcf0d7_20230127.pth"
     )
+
+
+def test_halpe26_variant_selects_the_pinned_m_384x288_model(tmp_path: Path):
+    """The Halpe branch must use the selected 26-keypoint checkpoint, not COCO-17."""
+    paths = select_model_paths(tmp_path, "halpe26")
+
+    assert paths.pose_config.name == "rtmpose-m_8xb512-700e_body8-halpe26-384x288.py"
+    assert paths.pose_checkpoint.name == (
+        "rtmpose-m_simcc-body7_pt-body7-halpe26_700e-384x288-89e6428b_20230605.pth"
+    )
+
+
+def test_halpe26_metadata_describes_its_26_keypoint_output():
+    """Reporting COCO-17 metadata for Halpe-26 would corrupt downstream interpretation."""
+    assert rtmpose_infer.model_metadata("halpe26", "mps") == {
+        "detector": "RTMDet-nano",
+        "pose": "RTMPose-M Halpe-26",
+        "keypoints": 26,
+        "keypoint_format": "Halpe-26",
+        "device": "mps",
+    }
 
 
 def test_unknown_variant_is_rejected(tmp_path: Path):

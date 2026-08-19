@@ -1,6 +1,6 @@
-# RTMW on Apple Silicon MPS
+# Selectable HPE on Apple Silicon MPS
 
-이 폴더는 기존 `Sapiens2/`와 독립된 RTMW 실행 환경이다. 기본 조합은 사람 검출용 **RTMDet-nano**와 COCO-WholeBody 133개 관절용 **RTMW-X**(384×288)이다. 발가락·뒤꿈치, 얼굴, 손 keypoint를 함께 출력한다.
+이 폴더는 기존 `Sapiens2/`와 독립된 HPE 실행 환경이다. 사람 검출은 항상 **RTMDet-nano**이며, HPE 모델만 **RTMW-X** 또는 **RTMPose-M Halpe-26**(384×288)으로 선택한다.
 
 ## 구성
 
@@ -8,8 +8,9 @@
 | --- | --- |
 | 실행 장치 | Apple Metal Performance Shaders (MPS) |
 | 검출 모델 | RTMDet-nano person, OpenMMLab 공식 checkpoint |
-| 포즈 모델 | RTMW-X, COCO-WholeBody 133 keypoints, 384×288 |
-| 포즈 모델 출처 | `akore/rtmw-x-384x288` (Hugging Face, 첫 추론 시 다운로드) |
+| HPE 모델 | `rtmw`: RTMW-X, COCO-WholeBody 133 keypoints, 384×288 (기본값) |
+| HPE 모델 | `halpe26`: RTMPose-M Halpe-26, 26 keypoints, 384×288 |
+| 모델 출처 | RTMW-X는 `akore/rtmw-x-384x288`에서 첫 추론 시 다운로드, Halpe-26은 OpenMMLab checkpoint |
 | MMPose upstream | `v1.3.2` |
 | MMDetection upstream | `v3.2.0` |
 
@@ -30,9 +31,10 @@
 ```bash
 ./scripts/run_rtmpose_pose.sh /absolute/path/to/images
 ./scripts/run_rtmpose_pose.sh /absolute/path/to/images /absolute/path/to/output
+RTMPOSE_HPE_MODEL=halpe26 ./scripts/run_rtmpose_pose.sh /absolute/path/to/images
 ```
 
-기본 출력은 `outputs/pose/`다. `pose_predictions.json`에는 프레임별 사람 bbox, 133개 원본 keypoint, score, 관측 여부, 가림/저신뢰 시 별도 추정한 keypoint, track id가 기록된다. 키포인트는 body 17개, feet 6개(양발 엄지발가락·새끼발가락·뒤꿈치), face 68개, hands 42개다. `imputed_keypoints`는 원본 모델 예측을 수정하지 않는다.
+기본 출력은 `outputs/pose/`다. `pose_predictions.json`에는 프레임별 사람 bbox, 원본 keypoint, score, 관측 여부, 가림/저신뢰 시 별도 추정한 keypoint, track id가 기록된다. `rtmw`는 body 17개, feet 6개, face 68개, hands 42개인 133점을 출력한다. `halpe26`은 COCO body 17점과 머리·목·골반, 발가락·뒤꿈치를 포함한 26점을 출력한다. `imputed_keypoints`는 원본 모델 예측을 수정하지 않는다.
 
 ## 예측 결과를 원본 이미지에 그리기
 

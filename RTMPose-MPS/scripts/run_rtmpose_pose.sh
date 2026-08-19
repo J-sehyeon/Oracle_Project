@@ -7,6 +7,7 @@ PREFERRED_DEVICE="${RTMPOSE_DEVICE:-auto}"
 KPT_THR="${RTMPOSE_KPT_THR:-0.3}"
 BBOX_THR="${RTMPOSE_BBOX_THR:-0.3}"
 RTMW_MODEL_ID="akore/rtmw-x-384x288"
+HPE_MODEL="${RTMPOSE_HPE_MODEL:-rtmw}"
 DRY_RUN=0
 
 if [[ "${1:-}" == "--dry-run" ]]; then
@@ -41,13 +42,28 @@ fi
 DETECTOR_CONFIG="$ROOT_DIR/mmpose/projects/rtmpose/rtmdet/person/rtmdet_nano_320-8xb32_coco-person.py"
 DETECTOR_CHECKPOINT="$ROOT_DIR/models/rtmdet-nano/rtmdet_nano_8xb32-100e_coco-obj365-person-05d8511e.pth"
 
-COMMAND=(
-  "$PYTHON_BIN" -m scripts.rtmw_infer "$INPUT_DIR" "$OUTPUT_DIR"
-  --device "$DEVICE" --kpt-thr "$KPT_THR" --bbox-thr "$BBOX_THR"
-)
-
-echo "Pose output: 133 whole-body keypoints"
-echo "Pose model: RTMW-X ($RTMW_MODEL_ID)"
+case "$HPE_MODEL" in
+  rtmw)
+    COMMAND=(
+      "$PYTHON_BIN" -m scripts.rtmw_infer "$INPUT_DIR" "$OUTPUT_DIR"
+      --device "$DEVICE" --kpt-thr "$KPT_THR" --bbox-thr "$BBOX_THR"
+    )
+    echo "Pose output: 133 whole-body keypoints"
+    echo "Pose model: RTMW-X ($RTMW_MODEL_ID)"
+    ;;
+  halpe26)
+    COMMAND=(
+      "$PYTHON_BIN" -m scripts.rtmpose_infer "$INPUT_DIR" "$OUTPUT_DIR"
+      --device "$DEVICE" --variant halpe26 --kpt-thr "$KPT_THR" --bbox-thr "$BBOX_THR"
+    )
+    echo "Pose output: 26 keypoints"
+    echo "Pose model: RTMPose-M Halpe-26 (384x288)"
+    ;;
+  *)
+    echo "RTMPOSE_HPE_MODEL must be rtmw or halpe26" >&2
+    exit 2
+    ;;
+esac
 printf '%q ' "${COMMAND[@]}"
 printf '\n'
 

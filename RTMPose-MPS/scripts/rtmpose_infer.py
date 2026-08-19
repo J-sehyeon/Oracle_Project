@@ -35,7 +35,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("input_dir", type=Path)
     parser.add_argument("output_dir", type=Path)
     parser.add_argument("--device", choices=("mps", "cpu"), required=True)
-    parser.add_argument("--variant", choices=("m", "s"), default="m")
+    parser.add_argument("--variant", choices=("m", "s", "halpe26"), default="m")
     parser.add_argument("--bbox-thr", type=float, default=0.3)
     parser.add_argument("--kpt-thr", type=float, default=0.3)
     return parser.parse_args()
@@ -43,6 +43,23 @@ def parse_args() -> argparse.Namespace:
 
 def _as_float_list(values: Any) -> list[float]:
     return [float(value) for value in values]
+
+
+def model_metadata(variant: str, device: str) -> dict[str, Any]:
+    if variant == "halpe26":
+        return {
+            "detector": "RTMDet-nano",
+            "pose": "RTMPose-M Halpe-26",
+            "keypoints": 26,
+            "keypoint_format": "Halpe-26",
+            "device": device,
+        }
+    return {
+        "detector": "RTMDet-nano",
+        "pose": f"RTMPose-{variant.upper()}",
+        "keypoints": 17,
+        "device": device,
+    }
 
 
 def _detections_from_results(
@@ -158,12 +175,7 @@ def main() -> None:
         )
         frames.append(record)
     payload = {
-        "model": {
-            "detector": "RTMDet-nano",
-            "pose": f"RTMPose-{args.variant.upper()}",
-            "keypoints": 17,
-            "device": args.device,
-        },
+        "model": model_metadata(args.variant, args.device),
         "frames": frames,
     }
     output_json = args.output_dir / "pose_predictions.json"
