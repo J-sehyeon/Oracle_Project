@@ -65,6 +65,19 @@ RTMPOSE_HPE_MODEL=halpe26 ./scripts/run_rtmpose_pose.sh /absolute/path/to/images
 
 이 렌더러는 RTMDet·RTMW 모델을 다시 불러오지 않는다. 이미 생성된 JSON을 OpenCV로 시각화만 하므로 MPS 설정과 무관하게 실행할 수 있다.
 
+### Halpe-26 결과 렌더링
+
+`RTMPOSE_HPE_MODEL=halpe26`으로 생성한 26점 결과는 전용 렌더러를 사용한다. 머리·목·골반과 양발의 발가락·뒤꿈치 연결을 Halpe-26 골격으로 그린다.
+
+```bash
+.venv-rtmpose/bin/python scripts/render_halpe26_predictions.py \
+  outputs/pose/pose_predictions.json \
+  inputs/videos/test1/frames \
+  outputs/pose/rendered-halpe26
+```
+
+이 스크립트는 JSON의 `model.keypoints`가 정확히 26일 때만 실행된다. RTMW 133점 출력에는 기존 `render_pose_predictions.py`를 사용한다.
+
 ## 모델 출처
 
 - [RTMW 모델](https://huggingface.co/akore/rtmw-x-384x288)
