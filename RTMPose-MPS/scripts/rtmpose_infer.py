@@ -62,6 +62,19 @@ def model_metadata(variant: str, device: str) -> dict[str, Any]:
     }
 
 
+def force_local_file_backend(pose_model: Any) -> None:
+    """Make top-down inference read local image paths without Petrel."""
+    pipeline = pose_model.cfg["test_dataloader"]["dataset"]["pipeline"]
+    for transform in pipeline:
+        if transform.get("type") == "LoadImage":
+            transform["backend_args"] = {"backend": "local"}
+
+
+def configure_pose_model_for_variant(pose_model: Any, variant: str) -> None:
+    if variant == "halpe26":
+        force_local_file_backend(pose_model)
+
+
 def _detections_from_results(
     det_result: Any, pose_results: list[Any], bbox_thr: float
 ) -> list[Detection]:
@@ -156,6 +169,7 @@ def main() -> None:
         pose_model = init_model(
             str(paths.pose_config), str(paths.pose_checkpoint), device=args.device
         )
+    configure_pose_model_for_variant(pose_model, args.variant)
     args.output_dir.mkdir(parents=True, exist_ok=True)
     previous = None
     frames = []

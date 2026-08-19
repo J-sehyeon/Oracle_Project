@@ -54,6 +54,56 @@ def test_halpe26_metadata_describes_its_26_keypoint_output():
     }
 
 
+def test_force_local_file_backend_replaces_petrel_for_pose_image_loading():
+    """Local images must not trigger the private Petrel storage client."""
+    model = type(
+        "Model",
+        (),
+        {
+            "cfg": {
+                "test_dataloader": {
+                    "dataset": {
+                        "pipeline": [
+                            {"type": "LoadImage", "backend_args": {"backend": "petrel"}},
+                            {"type": "TopdownAffine"},
+                        ]
+                    }
+                }
+            }
+        },
+    )()
+
+    rtmpose_infer.force_local_file_backend(model)
+
+    assert model.cfg["test_dataloader"]["dataset"]["pipeline"] == [
+        {"type": "LoadImage", "backend_args": {"backend": "local"}},
+        {"type": "TopdownAffine"},
+    ]
+
+
+def test_only_halpe26_replaces_the_pose_model_file_backend():
+    """Changing prior COCO RTMPose variants would violate the HPE-only split."""
+    model = type(
+        "Model",
+        (),
+        {
+            "cfg": {
+                "test_dataloader": {
+                    "dataset": {
+                        "pipeline": [{"type": "LoadImage", "backend_args": {"backend": "petrel"}}]
+                    }
+                }
+            }
+        },
+    )()
+
+    rtmpose_infer.configure_pose_model_for_variant(model, "m")
+
+    assert model.cfg["test_dataloader"]["dataset"]["pipeline"][0]["backend_args"] == {
+        "backend": "petrel"
+    }
+
+
 def test_unknown_variant_is_rejected(tmp_path: Path):
     """Accepting an unsupported variant would silently change the quality contract."""
     with pytest.raises(ValueError, match="RTMPOSE_VARIANT"):
