@@ -26,6 +26,7 @@ graphify-out
 **/outputs
 docs
 .pytest_cache
+.worktrees/
 
 # sapiens2
 # Byte-compiled / optimized / DLL files
