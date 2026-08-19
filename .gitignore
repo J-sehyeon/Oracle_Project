@@ -12,6 +12,9 @@ Sapiens2/__pycache__/
 Sapiens2/.pytest_cache/
 *.pyc
 
+# other repo
+mmdeploy
+
 # venv
 .venv
 

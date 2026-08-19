@@ -36,6 +36,11 @@ RTMPOSE_HPE_MODEL=halpe26 ./scripts/run_rtmpose_pose.sh /absolute/path/to/images
 
 기본 출력은 `outputs/pose/`다. `pose_predictions.json`에는 프레임별 사람 bbox, 원본 keypoint, score, 관측 여부, 가림/저신뢰 시 별도 추정한 keypoint, track id가 기록된다. `rtmw`는 body 17개, feet 6개, face 68개, hands 42개인 133점을 출력한다. `halpe26`은 COCO body 17점과 머리·목·골반, 발가락·뒤꿈치를 포함한 26점을 출력한다. `imputed_keypoints`는 원본 모델 예측을 수정하지 않는다.
 
+### RTMPose:Halpe26
+```bash
+cd /Users/hyeon/SeSAC_Project/RTMPose-MPS
+RTMPOSE_HPE_MODEL=halpe26 ./scripts/run_rtmpose_pose.sh inputs/videos/test1/frames
+```
 ## 예측 결과를 원본 이미지에 그리기
 
 프로젝트의 `RTMPose-MPS` 폴더에서 다음 명령을 실행한다.

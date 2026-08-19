@@ -11,9 +11,15 @@ dependencies = [
     "google-cloud-storage>=3.13.1",
     "google-genai>=2.18.1",
     "mediapipe==0.10.35",
+    "mmengine>=0.10.7",
     "pillow>=12.3.0",
     "torch>=2.13.0",
     "torchvision>=0.28.0",
     "tqdm>=4.70.0",
     "transformers>=5.15.0",
+]
+
+[tool.uv.workspace]
+members = [
+    "PoC",
 ]
