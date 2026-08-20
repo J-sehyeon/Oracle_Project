@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 set -e
 
-SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+echo "HPE 진입"
+
+HPE_DIR="$(cd "$(dirname "$0")" && pwd)"
+SCRIPT_DIR="$(cd "$HPE_DIR/.." && pwd)"
 POC_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 
 echo "PoC 진행 위치 : $POC_DIR"
@@ -27,8 +30,6 @@ shift
 if [[ "${1:-}" == "--extract" ]]; then
 
     ## mp4 탐지 코드
-    RUN_DIR="$POC_DIR/run/$RUN_FOLDER"
-
     VIDEO_PATH=$(find "$RUN_DIR" \
         -maxdepth 1 \
         -type f \
@@ -45,7 +46,7 @@ if [[ "${1:-}" == "--extract" ]]; then
 
     ## 스크립트 실행
     "$POC_DIR/.venv/bin/python" \
-        "$SCRIPT_DIR/extract_frames.py" \
+        "$HPE_DIR/extract_frames.py" \
         "$VIDEO_PATH" \
         "$RUN_DIR/inputs"
 
@@ -53,30 +54,34 @@ if [[ "${1:-}" == "--extract" ]]; then
 fi
 
 ## HPE 추론
+printf '\nHPE 추론\n'
 "$POC_DIR/.venv/bin/python" \
-  "$SCRIPT_DIR/hpe_model.py" \
+  "$HPE_DIR/hpe_model.py" \
+  "$POC_DIR" \
   "$RUN_FOLDER" \
   "$@"
 
 ## 렌더링
+printf '\n렌더링\n'
 "$POC_DIR/.venv/bin/python" \
-  "$SCRIPT_DIR/render.py" \
-  "$POC_DIR/run/$RUN_FOLDER/inputs" \
-  "$POC_DIR/run/$RUN_FOLDER/outputs"
+  "$HPE_DIR/render.py" \
+  "$RUN_DIR/inputs" \
+  "$RUN_DIR/outputs"
 
 ## 렌더링 이미지로 영상 합성
+printf '\n이미지 합성\n'
 "$POC_DIR/.venv/bin/python" \
-  "$SCRIPT_DIR/compose_video.py" \
-  "$POC_DIR/run/$RUN_FOLDER/outputs/details.json" \
-  "$POC_DIR/run/$RUN_FOLDER/outputs/rendered" \
-  "$POC_DIR/run/$RUN_FOLDER/outputs/_rendered.mp4"
+  "$HPE_DIR/compose_video.py" \
+  "$RUN_DIR/outputs/details.json" \
+  "$RUN_DIR/outputs/rendered" \
+  "$RUN_DIR/outputs/_rendered.mp4"
 
-"ffmpeg" \
-  "-hide_banner" \
-  "-loglevel error" \
-  "-stats" \
-  "-i run/test1/outputs/_rendered.mp4" \
-  "-c:v libx264" \
-  "-pix_fmt yuv420p" \
-  "-movflags +faststart" \
-  "run/test1/outputs/rendered.mp4" \
+ffmpeg \
+  -hide_banner \
+  -loglevel error \
+  -stats \
+  -i "$RUN_DIR/outputs/_rendered.mp4" \
+  -c:v libx264 \
+  -pix_fmt yuv420p \
+  -movflags +faststart \
+  "$RUN_DIR/outputs/rendered.mp4"

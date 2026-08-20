@@ -1,14 +1,23 @@
 from pathlib import Path
 import json
-print("현 작업 위치:", Path.cwd())
+import argparse
 
 from pathlib import Path
 
 # 노트북이 실행된 현재 위치(프로젝트 루트) 지정
-project_root = Path.cwd()
+# Parser
+parser = argparse.ArgumentParser()
+parser.add_argument("poc_folder", type=Path)
+parser.add_argument("run_folder", type=str)
+args = parser.parse_args()
+
+project_root = args.poc_folder
+RUN_FOLDER = args.run_folder
+RUN_DIR = project_root / "run" / RUN_FOLDER
 
 # 루트 디렉토리 바로 아래의 pose_predictions.json 지정
-json_path = project_root / "PoC" / "run" / "test1" / "outputs" / "pose_predictions.json"
+OUTPUTS_DIR = RUN_DIR / "outputs"
+json_path = OUTPUTS_DIR / "pose_predictions.json"
 
 print("프로젝트 루트:", project_root)
 print("JSON 경로:", json_path)
@@ -352,4 +361,16 @@ support_features["postural_lean_deg"]= np.degrees(
     )
 )
 
-print(support_features["postural_lean_deg"].mean().round(2))
+features = {
+    'feature1': support_features["postural_lean_deg"].mean().round(2)
+}
+
+feature_path = OUTPUTS_DIR / "feature_results.json"
+feature_path.write_text(
+        json.dumps(
+            features,
+            ensure_ascii=False,
+            indent=2,
+        ),
+        encoding="utf-8",
+)

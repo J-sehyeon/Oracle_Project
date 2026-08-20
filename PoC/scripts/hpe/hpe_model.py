@@ -9,10 +9,11 @@ import time
 from tqdm import tqdm
 from rtmlib import RTMDet, RTMPose
 
-from scripts.pose_track import Detection, build_frame_record
+from scripts.hpe.pose_track import Detection, build_frame_record
 
 # Parser
 parser = argparse.ArgumentParser()
+parser.add_argument("poc_folder", type=Path)
 parser.add_argument("run_folder", type=str)
 parser.add_argument(
     "--device",
@@ -22,14 +23,14 @@ parser.add_argument(
 
 args = parser.parse_args()
 
-FOLDER = args.run_folder
+POC_DIR = args.poc_folder
+RUN_FOLDER = args.run_folder
 DEVICE = args.device
 
 # Roots
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
-DETECTOR_ROOT = PROJECT_ROOT / 'models' / "detectors" / "rtmdet-nano-person-320x320"
-POSE_ROOT = PROJECT_ROOT / 'models' / "pose" / "rtmpose-m-halpe26-384x288"
-DATA_ROOT = PROJECT_ROOT / "run" / FOLDER
+DETECTOR_ROOT = POC_DIR / 'models' / "detectors" / "rtmdet-nano-person-320x320"
+POSE_ROOT = POC_DIR / 'models' / "pose" / "rtmpose-m-halpe26-384x288"
+DATA_ROOT = POC_DIR / "run" / RUN_FOLDER
 INPUT_ROOT = DATA_ROOT / "inputs"
 OUTPUT_ROOT = DATA_ROOT / "outputs"
 
@@ -67,7 +68,7 @@ def _infer_image(image_path: Path) -> list[Detection]:
 
     # 중요: 빈 bbox를 RTMPose에 넘기지 않는다.
     if len(bboxes) == 0:
-        return []
+        return [], 0.0, 0.0
 
     pose_s = time.perf_counter()
     keypoints, keypoint_scores = pose_model(image, bboxes=bboxes)
@@ -108,7 +109,7 @@ def main():
         pose_t += _pose_t
 
         relative_image_path = image_path.resolve().relative_to(
-            PROJECT_ROOT.resolve()
+            POC_DIR.resolve()
         )
 
         frame, previous = build_frame_record(

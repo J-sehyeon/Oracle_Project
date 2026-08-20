@@ -33,7 +33,9 @@ def render(img_dir: Path, output_dir: Path) -> None:
         if len(image_paths) != len(data["frames"]):
             print("이미지 수와 모델의 출력 프레임 데이터 수가 맞지 않음. 확인 필요.")
             raise Exception
-
+        if data["frames"][i]["people"] == []:
+            # 사람이 화면에 잡히지 않음
+            continue
         user = data["frames"][i]["people"][0]
         keypoints = np.asarray(user["keypoints"], dtype=np.float32)[np.newaxis, :]
         scores = np.asarray(user['keypoint_scores'], dtype=np.float32)[np.newaxis, :]
@@ -47,7 +49,7 @@ def render(img_dir: Path, output_dir: Path) -> None:
             radius=4,
             line_width=2,
         )
-        cv2.imwrite(RENDER_PATH / f"{i:08d}.png", result)
+        cv2.imwrite(RENDER_PATH / f"{i+1:08d}.png", result)
 
 
 

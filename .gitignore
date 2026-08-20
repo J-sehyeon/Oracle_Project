@@ -25,6 +25,7 @@ Sapiens2/inputs
 **/inputs
 
 # etc
+.env
 docs
 graphify-out
 .DS_Store
