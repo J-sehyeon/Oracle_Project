@@ -3,12 +3,12 @@
 runs/
 └── test1/
     ├── input.mp4 
-    ├── manifest.json
     ├── inputs/
     │   ├── 00000001.png
     │   └── 00000500.png
     └── outputs/
         ├── pose_predictions.json
+        ├── details.json
         ├── rendered/
         │   ├── 00000001.png
         │   └── 00000500.png

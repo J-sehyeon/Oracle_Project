@@ -106,8 +106,13 @@ def main():
 
         det_t += _det_t
         pose_t += _pose_t
+
+        relative_image_path = image_path.resolve().relative_to(
+            PROJECT_ROOT.resolve()
+        )
+
         frame, previous = build_frame_record(
-            image_path=str(image_path),
+            image_path=str(relative_image_path),
             detections=detections,
             previous=previous,
             keypoint_threshold=0.5,

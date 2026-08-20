@@ -12,6 +12,14 @@ export PYTHONPATH="$POC_DIR"
 cd "$POC_DIR"
 
 RUN_FOLDER="$1"
+RUN_DIR="$POC_DIR/run/$RUN_FOLDER"
+
+INPUT_DIR="$RUN_DIR/inputs"
+OUTPUT_DIR="$RUN_DIR/outputs"
+
+# 테스트 폴더와 inputs, outputs 폴더 생성
+mkdir -p "$INPUT_DIR" "$OUTPUT_DIR"
+
 shift
 
 
@@ -44,8 +52,31 @@ if [[ "${1:-}" == "--extract" ]]; then
     shift
 fi
 
-
-exec "$POC_DIR/.venv/bin/python" \
-  "$SCRIPT_DIR/main.py" \
-  "$RUN_FOLDER"
+## HPE 추론
+"$POC_DIR/.venv/bin/python" \
+  "$SCRIPT_DIR/hpe_model.py" \
+  "$RUN_FOLDER" \
   "$@"
+
+## 렌더링
+"$POC_DIR/.venv/bin/python" \
+  "$SCRIPT_DIR/render.py" \
+  "$POC_DIR/run/$RUN_FOLDER/inputs" \
+  "$POC_DIR/run/$RUN_FOLDER/outputs"
+
+## 렌더링 이미지로 영상 합성
+"$POC_DIR/.venv/bin/python" \
+  "$SCRIPT_DIR/compose_video.py" \
+  "$POC_DIR/run/$RUN_FOLDER/outputs/details.json" \
+  "$POC_DIR/run/$RUN_FOLDER/outputs/rendered" \
+  "$POC_DIR/run/$RUN_FOLDER/outputs/_rendered.mp4"
+
+"ffmpeg" \
+  "-hide_banner" \
+  "-loglevel error" \
+  "-stats" \
+  "-i run/test1/outputs/_rendered.mp4" \
+  "-c:v libx264" \
+  "-pix_fmt yuv420p" \
+  "-movflags +faststart" \
+  "run/test1/outputs/rendered.mp4" \

@@ -13,6 +13,7 @@ dependencies = [
     "mediapipe==0.10.35",
     "mmengine>=0.10.7",
     "pillow>=12.3.0",
+    "scipy>=1.18.0",
     "torch>=2.13.0",
     "torchvision>=0.28.0",
     "tqdm>=4.70.0",
