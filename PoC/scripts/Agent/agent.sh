@@ -8,6 +8,11 @@ SCRIPT_DIR="$(cd "$FEATURES_DIR/.." && pwd)"
 POC_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 PROJECT_DIR="$(cd "$POC_DIR/.." && pwd)"
 
+## 파이썬 import 경로 지정
+export PYTHONPATH="$POC_DIR"
+
+cd "$POC_DIR"
+
 RUN_FOLDER="$1"
 RUN_DIR="$POC_DIR/run/$RUN_FOLDER" 
 
