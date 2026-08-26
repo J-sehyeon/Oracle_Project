@@ -3,6 +3,8 @@
 from dataclasses import dataclass
 from typing import Optional
 
+import pandas as pd
+
 
 @dataclass(frozen=True)
 class Detection:
@@ -74,7 +76,8 @@ def build_frame_record(
 ) -> tuple[dict, Optional[TrackState]]:
     """Build one frame result without changing the model's raw keypoint output."""
     if not detections:
-        return {"image_path": image_path, "people": []}, None
+        # return {"image_path": image_path, "people": []}, None
+        return None, None
 
     primary_index = _primary_index(detections, previous)
     people = [

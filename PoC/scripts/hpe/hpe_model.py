@@ -56,6 +56,12 @@ pose_model = RTMPose(
     to_openpose=False,
 )
 
+# import json
+with open(OUTPUT_ROOT / "details.json", "r", encoding="utf-8") as f:
+    details = json.load(f)
+
+width = details["video"]["width"]
+
 # Funtions
 def _infer_image(image_path: Path) -> list[Detection]:
     image = cv2.imread(str(image_path))
@@ -68,7 +74,11 @@ def _infer_image(image_path: Path) -> list[Detection]:
 
     # 중요: 빈 bbox를 RTMPose에 넘기지 않는다.
     if len(bboxes) == 0:
-        return [], 0.0, 0.0
+        return [], det_e - det_s, 0.0
+
+    # 사람의 검출 구간 설정
+    if bboxes[0][0] < 10 or bboxes[0][2] > width - 10:
+        return [], det_e - det_s, 0.0
 
     pose_s = time.perf_counter()
     keypoints, keypoint_scores = pose_model(image, bboxes=bboxes)
@@ -118,6 +128,10 @@ def main():
             previous=previous,
             keypoint_threshold=0.5,
         )
+
+        # 객체 검출 안된 데이터 기록 x
+        if frame is None:
+            continue
 
         frames.append(frame)
 

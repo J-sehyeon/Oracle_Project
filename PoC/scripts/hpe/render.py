@@ -8,6 +8,7 @@ import numpy as np
 from tqdm import tqdm
 from rtmlib import draw_bbox, draw_skeleton
 
+
 def render(img_dir: Path, output_dir: Path) -> None:
     # 이미지를 for문으로 반복
     # 각 이미지별로 해당되는 hpe데이터를 입력하고 저장
@@ -26,17 +27,25 @@ def render(img_dir: Path, output_dir: Path) -> None:
     RENDER_PATH.mkdir(parents=True, exist_ok=True)
     image_paths = sorted(img_dir.glob("*.png"))
 
+    # inputs의 이미지 수와 hpe json의 frame수가 다르다. 왜냐하면 bbox가 화면 안에 들어온 순간부터 hpe를 저장하기 때문이다.
+    # 따라서 이미지 저장은 i로 하고 json과의 이미지-hpe 일치는 j로 실행한다.
+    j = 0
     for i, image_path in enumerate(tqdm(image_paths, desc="Rendering")):
         img = cv2.imread(image_path)
 
-        # 예외 처리
-        if len(image_paths) != len(data["frames"]):
-            print("이미지 수와 모델의 출력 프레임 데이터 수가 맞지 않음. 확인 필요.")
-            raise Exception
-        if data["frames"][i]["people"] == []:
-            # 사람이 화면에 잡히지 않음
+        # 인덱싱 범위 오류 해결
+        if j == len(data["frames"]):
+            cv2.imwrite(RENDER_PATH / f"{i+1:08d}.png", img)
             continue
-        user = data["frames"][i]["people"][0]
+
+        # 객체 인식 안되면 원본 이미지 입력
+        if data["frames"][j]["image_path"].split('/')[-1] != str(image_path).split('/')[-1]:
+            cv2.imwrite(RENDER_PATH / f"{i+1:08d}.png", img)
+            continue
+
+        user = data["frames"][j]["people"][0]
+        j += 1
+    
         keypoints = np.asarray(user["keypoints"], dtype=np.float32)[np.newaxis, :]
         scores = np.asarray(user['keypoint_scores'], dtype=np.float32)[np.newaxis, :]
 
