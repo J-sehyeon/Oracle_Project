@@ -136,6 +136,7 @@ for frame_index, frame in enumerate(frames):
             coordinate_source= "observed"
         elif imputed is not None:
             x,y= imputed # 관측 실패시 Null로 보간 채움
+            coordinate_source = "imputed"
         else:
             x= np.nan
             y= np.nan
