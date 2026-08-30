@@ -9,8 +9,10 @@ runs/
     └── outputs/
         ├── pose_predictions.json
         ├── details.json
+        ├── feature_results.json
         ├── rendered/
         │   ├── 00000001.png
         │   └── 00000500.png
-        └── test1_halpe26.mp4
+        ├── rendered.mp4
+        └── running_report.md
 ```
