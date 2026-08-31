@@ -110,6 +110,8 @@ def main():
 
         image, bboxes, det_t = detect_image(image_path)
 
+        det_time += det_t
+
         if len(bboxes) == 0:
             continue
 
@@ -128,7 +130,6 @@ def main():
             break
         detections, pose_t = estimate_pose(image, bboxes)
 
-        det_time += det_t
         pose_time += pose_t
 
         relative_image_path = image_path.resolve().relative_to(
@@ -155,7 +156,7 @@ def main():
     )
 
     print(f"저장 완료: {output_path}")
-    print(f"소요 시간 \nDetection : {det_time:.2f}s avg[{det_time / len(image_paths):.4f}s/frames] | HPE : {pose_time:.2f}s avg[{pose_time / len(image_paths):.4f}s/frames]")
+    print(f"소요 시간 \nDetection : {det_time:.2f}s avg[{det_time / len(frames):.4f}s/frames] | HPE : {pose_time:.2f}s avg[{pose_time / len(frames):.4f}s/frames]")
 
 
 if __name__ == "__main__":

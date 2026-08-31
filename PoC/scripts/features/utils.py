@@ -8,7 +8,7 @@ from scipy.signal import find_peaks, savgol_filter
 from typing import Pattern
 
 class PoseSequence:
-    def __init__(self, pose_data: dict, detail_data: dict):
+    def __init__(self, pose_data: dict, detail_data: dict, user_data: dict):
         """
         json 데이터를 불러온 뒤 바로 이 클래스의 인자로 입력하면 됩니다.
         y좌표는 0의 기준이 위에서 아래로 바뀝니다.
@@ -23,6 +23,7 @@ class PoseSequence:
 
         self.df = df
         self.details = detail_data
+        self.user = user_data["user"]
         self.direction = "left" if dir_index else "right"
         self.strides = []
         self.m_per_pixel = None
@@ -93,11 +94,11 @@ class PoseSequence:
         사용자의 키 정보를 사용해 1pixel을 m단위로 변경한다.
         이 때 사용하는 이미지는 TD시점이다.
         """
-        
         def _point(df, name):
             return df[[f"{name}_x", f"{name}_y"]].to_numpy(dtype=float)
         def _distance(a, b):
             return np.linalg.norm(a - b, axis=0)
+        
         # 사용할 이미지 선택
         image = self.df.loc[self.strides[0][0]]
 
@@ -117,7 +118,7 @@ class PoseSequence:
         head_length = _distance(neck, head)
 
         height_px = leg_length + torso_length + head_length
-        self.m_per_pixel = self.details['user']['height'] / height_px
+        self.m_per_pixel = self.user['height'] / height_px
         print(f"사용자의 키를 기반으로 계산한 픽셀당 meter는 {self.m_per_pixel} / pixel 입니다.")
 
         return
@@ -125,6 +126,7 @@ class PoseSequence:
     def gct(self, next: int = 0):
         """
         {side}의 heel이 지면에 접촉하고 big_toe가 지면에서 떼어지는 순간까지의 인덱스 출력
+        next는 스트라이드의 구간을 한 단계 미뤄야 할 가능성이 있기 때문에 그 때의 설계를 위해 남긴 더미.
         """
         n = len(self.strides) - (0 if len(self.strides[-1]) == 5 else 1)
         res = []

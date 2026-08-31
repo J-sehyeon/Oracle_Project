@@ -22,16 +22,20 @@ RUN_DIR = POC_DIR / "run" / RUN_FOLDER
 
 # 루트 디렉토리 바로 아래의 pose_predictions.json 지정
 OUTPUTS_DIR = RUN_DIR / "outputs"
-hpe = OUTPUTS_DIR / "pose_predictions.json"
 
-with hpe.open(mode= "r", encoding= 'utf-8') as file:
+user = RUN_DIR / "user_info.json"
+with user.open(mode="r", encoding='utf-8') as file:
+    user_data = json.load(file)
+
+hpe = OUTPUTS_DIR / "pose_predictions.json"
+with hpe.open(mode="r", encoding='utf-8') as file:
     pose_data = json.load(file)
 
 details = OUTPUTS_DIR / "details.json"
-with details.open(mode= "r", encoding= 'utf-8') as file:
+with details.open(mode="r", encoding='utf-8') as file:
     detail_data = json.load(file)
 
-ps = PoseSequence(pose_data, detail_data)
+ps = PoseSequence(pose_data, detail_data, user_data)
 
 # 피처 추출을 위한 값 계산
 ps.cal_stride()
@@ -40,14 +44,18 @@ ps.pixel2m()
 def feature1(ps: PoseSequence):
     strides = ps.gct()
 
+    # 각 스트라이드별로 골반의 수직 진동 평균
     res = 0
     for i in range(len(strides)):
         start, end = strides[i]
         res += ps.df["hip_center_y"][start:end].agg(['min', 'max']).diff()['max']
+        
     # APO: Amplitude of pelvis oscillation : 골반 진동 진폭
     apo_pixel = res / len(strides)
-    return apo_pixel * ps.m_per_pixel / ps.details['user']['height']
+    return apo_pixel * ps.m_per_pixel / ps.user['height']
 
+def feature2(ps: PoseSequence):
+    ps.df[['left_shoulder_x','left_shoulder_y', 'right_shoulder_x', 'right_shoulder_y']]
 
 if __name__ == "__main__":
     features = {
