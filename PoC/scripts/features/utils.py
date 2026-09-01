@@ -38,11 +38,8 @@ class PoseSequence:
             return
         df = self.df
         dir = self.direction
-        left_knee_angle = knee_flexion_angle(
-            [df[f"{dir}_hip_x"], df[f"{dir}_hip_y"]],
-            [df[f"{dir}_knee_x"], df[f"{dir}_knee_y"]],
-            [df[f"{dir}_ankle_x"], df[f"{dir}_ankle_y"]]
-        )
+
+        left_knee_angle = self.joint_angle(f"{dir}_knee", negative=True)
         y = np.asarray(left_knee_angle, dtype=float)
         y_smooth = savgol_filter(
             y,
@@ -147,6 +144,66 @@ class PoseSequence:
 
             res.append([td, to])
         return res
+
+    def joint_angle(self, keypoint, negative=False):
+        """관절각을 계산한다. negative=True이면 180° - 관절각을 반환한다.
+        keypoint는 두 가지 형식이 가능하다.
+        1. 좌 우 무릎 혹은 팔꿈치
+        2. 원하는 3개의 keypoint -> 중간 keypoint의 각도 출력
+        Examples:
+            ps.joint_angle("left_knee", negative=True)
+            ps.joint_angle(("left_hip", "left_knee", "left_ankle"), negative=True)
+        """
+
+        # knee_flexion_angle과 동일하게 근위 관절, 원위 관절 순서로 둔다.
+        joint_list = {
+            "left_knee": ("left_hip", "left_ankle"),
+            "right_knee": ("right_hip", "right_ankle"),
+            "left_elbow": ("left_shoulder", "left_wrist"),
+            "right_elbow": ("right_shoulder", "right_wrist"),
+        }
+
+        if keypoint not in joint_list:
+            try:
+                start_name, keypoint, end_name = keypoint
+            except:
+                raise RuntimeError("keypoint의 입력 형식 확인 부탁드립니다.")
+        else:
+            start_name, end_name = joint_list[keypoint]
+            
+        def _point(name):
+            return self.df[
+                [f"{name}_x", f"{name}_y"]
+            ].to_numpy(dtype=float)
+
+        center = _point(keypoint)
+
+        # 중심 관절에서 양쪽 관절로 향하는 벡터
+        start = _point(start_name) - center
+        end = _point(end_name) - center
+
+        # 내적은 각도의 크기, 외적은 회전 방향 계산에 사용
+        dot = np.sum(start * end, axis=1)
+        cross = (
+            start[:, 0] * end[:, 1]
+            - start[:, 1] * end[:, 0]
+        )
+
+        # 반시계방향 기준 각도 계산.
+        signed_angle = np.degrees(np.arctan2(cross, dot))
+
+        # 관절이 접히는 방향에 따라 각도 방향 변경
+        if signed_angle.mean() < 0:
+            signed_angle = -signed_angle
+
+        # arctan의 치역 문제 해결
+        result = signed_angle + np.where(signed_angle >= 0, 0.0, 360)
+
+        if negative: result = 180 - result
+        result[np.isclose(result, 0.0, atol=1e-8)] = 0.0
+
+        return result
+
 
 Halpe_26_keypoints = {
     0: "nose",
@@ -260,67 +317,3 @@ def visualize_xy(_df: pd.DataFrame) -> None:
 
     fig.tight_layout()
     plt.show()
-
-def knee_flexion_angle(
-    hip,
-    knee,
-    ankle,
-    orientation: float = 1.0,
-) -> np.ndarray:
-    """
-    무릎 굴곡 각도를 계산한다.
-
-    반환값:
-        정상 굴곡: 양수
-        완전 신전: 0
-        반대 방향 과신전: 음수
-
-    orientation:
-        촬영 방향 때문에 부호가 반대이면 -1.0을 전달한다.
-    """
-    thigh = (
-        np.asarray(hip, dtype=float)
-        - np.asarray(knee, dtype=float)
-    ).T
-
-    shank = (
-        np.asarray(ankle, dtype=float)
-        - np.asarray(knee, dtype=float)
-    ).T
-
-    thigh_norm = np.linalg.norm(thigh, axis=1)
-    shank_norm = np.linalg.norm(shank, axis=1)
-
-    valid = (
-        np.isfinite(thigh_norm)
-        & np.isfinite(shank_norm)
-        & (thigh_norm > 1e-8)
-        & (shank_norm > 1e-8)
-    )
-
-    result = np.full(len(thigh), np.nan, dtype=float)
-
-    dot = np.sum(thigh[valid] * shank[valid], axis=1)
-
-    cross = (
-        thigh[valid, 0] * shank[valid, 1]
-        - thigh[valid, 1] * shank[valid, 0]
-    )
-
-    # 무릎을 중심으로 한 두 벡터의 방향 포함 각도
-    signed_joint_angle = np.degrees(
-        np.arctan2(cross, dot)
-    )
-
-    direction = np.where(signed_joint_angle >= 0, 1.0, -1.0)
-
-    result[valid] = (
-        orientation
-        * direction
-        * (180.0 - np.abs(signed_joint_angle))
-    )
-
-    # 부동소수점으로 생기는 극소값 제거
-    result[np.isclose(result, 0.0, atol=1e-8)] = 0.0
-
-    return result
