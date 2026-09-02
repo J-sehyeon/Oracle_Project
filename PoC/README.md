@@ -8,7 +8,7 @@
 
 > 영상 형식 변경
 ``` bash
-ffmpeg -y -i IMG_1012.mov \
+ffmpeg -y -i test_run.mov \
   -map 0:v:0 \
   -map 0:a:0? \
   -c:v libx264 \

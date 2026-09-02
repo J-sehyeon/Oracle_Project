@@ -61,27 +61,27 @@ printf '\nHPE 추론\n'
   "$RUN_FOLDER" \
   "$@"
 
-## 렌더링
-printf '\n렌더링\n'
-"$POC_DIR/.venv/bin/python" \
-  "$HPE_DIR/render.py" \
-  "$RUN_DIR/inputs" \
-  "$RUN_DIR/outputs"
+# ## 렌더링
+# printf '\n렌더링\n'
+# "$POC_DIR/.venv/bin/python" \
+#   "$HPE_DIR/render.py" \
+#   "$RUN_DIR/inputs" \
+#   "$RUN_DIR/outputs"
 
-## 렌더링 이미지로 영상 합성
-printf '\n이미지 합성\n'
-"$POC_DIR/.venv/bin/python" \
-  "$HPE_DIR/compose_video.py" \
-  "$RUN_DIR/outputs/details.json" \
-  "$RUN_DIR/outputs/rendered" \
-  "$RUN_DIR/outputs/_rendered.mp4"
+# ## 렌더링 이미지로 영상 합성
+# printf '\n이미지 합성\n'
+# "$POC_DIR/.venv/bin/python" \
+#   "$HPE_DIR/compose_video.py" \
+#   "$RUN_DIR/outputs/details.json" \
+#   "$RUN_DIR/outputs/rendered" \
+#   "$RUN_DIR/outputs/_rendered.mp4"
 
-ffmpeg \
-  -hide_banner \
-  -loglevel error \
-  -stats \
-  -i "$RUN_DIR/outputs/_rendered.mp4" \
-  -c:v libx264 \
-  -pix_fmt yuv420p \
-  -movflags +faststart \
-  "$RUN_DIR/outputs/rendered.mp4"
+# ffmpeg \
+#   -hide_banner \
+#   -loglevel error \
+#   -stats \
+#   -i "$RUN_DIR/outputs/_rendered.mp4" \
+#   -c:v libx264 \
+#   -pix_fmt yuv420p \
+#   -movflags +faststart \
+#   "$RUN_DIR/outputs/rendered.mp4"

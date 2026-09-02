@@ -25,18 +25,18 @@ class PoseSequence:
         self.details = detail_data
         self.user = user_data["user"]
         self.direction = "left" if dir_index else "right"
-        self.strides = []
+        self.strides = None
         self.m_per_pixel = None
 
     def cal_stride(self) -> None:
         """
         self.stride에 1스트라이드의 시작, 끝 프레임 기록
         """
-        if self.strides:
+        if self.strides is not None:
             print('이미 stride가 계산되어 있습니다.')
             print('Stride :', self.strides)
             return
-        df = self.df
+        
         dir = self.direction
 
         left_knee_angle = self.joint_angle(f"{dir}_knee", negative=True)
@@ -66,16 +66,18 @@ class PoseSequence:
 
         _max = {
             "frame": max_indices,
+            "value": y_smooth[max_indices],
             "class": np.ones_like(max_indices)
         }
         _min = {
             "frame": min_indices,
+            "value": y_smooth[min_indices],
             "class": np.zeros_like(min_indices)
         }
         extremum = pd.concat([pd.DataFrame(_max), pd.DataFrame(_min)]).sort_values('frame')
 
-        assert len(extremum) >= 2, "온전한 스트라이드가 검출되지 않았습니다."
         # 올바른 스트라이드 검출
+        assert len(extremum) >= 2, "온전한 스트라이드가 검출되지 않았습니다."
         for i in range(1, len(extremum)):
             previous = extremum["class"].iloc[i - 1]
             current = extremum["class"].iloc[i]
@@ -83,8 +85,11 @@ class PoseSequence:
             assert {previous, current} == {0, 1}, (
                 f"예외: {i-1}, {i}행의 값이 {previous}, {current}입니다.\n올바른 스트라이드가 검출되지 않았습니다. 검출 파라미터 변경 필요."
             )
-        for i in range(len(extremum) // 4 + 1):
-            self.strides.append(extremum['frame'].iloc[4 * i : 4 * i + 5].to_list())
+
+        extremum.index = np.resize(extremum.iloc[:4]['value'].rank(method="dense", ascending=False).astype(int).values, len(extremum)).tolist()
+        self.strides = extremum
+
+        return extremum
 
     def pixel2m(self):
         """
@@ -97,7 +102,7 @@ class PoseSequence:
             return np.linalg.norm(a - b, axis=0)
         
         # 사용할 이미지 선택
-        image = self.df.loc[self.strides[0][0]]
+        image = self.df.loc[self.strides.loc[4]['frame'].iloc[0]]
 
         ankle = _point(image, f"{self.direction}_ankle")
         knee = _point(image, f"{self.direction}_knee")
@@ -118,20 +123,29 @@ class PoseSequence:
         self.m_per_pixel = self.user['height'] / height_px
         print(f"사용자의 키를 기반으로 계산한 픽셀당 meter는 {self.m_per_pixel} / pixel 입니다.")
 
-        return
+        return height_px
+    
 
     def gct(self, next: int = 0):
         """
         {side}의 heel이 지면에 접촉하고 big_toe가 지면에서 떼어지는 순간까지의 인덱스 출력
         next는 스트라이드의 구간을 한 단계 미뤄야 할 가능성이 있기 때문에 그 때의 설계를 위해 남긴 더미.
         """
-        n = len(self.strides) - (0 if len(self.strides[-1]) == 5 else 1)
-        res = []
-        for i in range(n):
-            start = self.strides[i][0]
-            end = self.strides[i][-1]
 
-            df = self.df.loc[start:end+1]
+        _df = self.strides.loc[[3, 4]].sort_values('frame')
+        start_4 = 0 if _df.index[0] == 4 else 1
+        if start_4:
+            _df = _df.iloc[start_4:]
+
+        steps = []
+        for i in range(len(_df) // 2):
+            steps.append(_df.iloc[2 * i : 2 * i + 2]['frame'].to_list())
+
+        res = []
+        for step in steps:
+            start, end = step
+
+            df = self.df.loc[start:end+5]   # 무릎 각도와 y값을 동시 반영, end는 3프레임의 여유를 두었다.
 
             heel = f"{self.direction}_heel"
             td = int(df[f"{heel}_y"].idxmin())
@@ -140,12 +154,38 @@ class PoseSequence:
             min_value = df[f"{toe}_y"].min()
 
             inside = df[f"{toe}_y"].between(min_value, min_value + 5)
-            to = df.index[~inside & inside.shift(1, fill_value=False)].to_list()[0]
+            _to = df.index[~inside & inside.shift(1, fill_value=False)].to_numpy()
+            # 최소값 도달 이후 첫 번째 프레임
+            to = int(_to[_to > df[f"{toe}_y"].idxmin()][0])
+
+            assert td < to, "지면 착지 분석에 오류가 발생했습니다. 카메라 흔들림이 있었는지 확인 부탁드립니다."
+            
 
             res.append([td, to])
+        # n = len(self.strides) - (0 if len(self.strides[-1]) == 5 else 1)
+        # res = []
+
+        # self.strides.loc[4]
+        
+        # for i in range(n):
+        #     start = self.strides[i][0]
+        #     end = self.strides[i][-1]
+
+        #     df = self.df.loc[start:end+1]
+
+        #     heel = f"{self.direction}_heel"
+        #     td = int(df[f"{heel}_y"].idxmin())
+
+        #     toe = f"{self.direction}_big_toe"
+        #     min_value = df[f"{toe}_y"].min()
+
+        #     inside = df[f"{toe}_y"].between(min_value, min_value + 5)
+        #     to = df.index[~inside & inside.shift(1, fill_value=False)].to_list()[0]
+
+        #     res.append([td, to])
         return res
 
-    def joint_angle(self, keypoint, negative=False):
+    def joint_angle(self, keypoint, smooth=False, negative=False):
         """관절각을 계산한다. negative=True이면 180° - 관절각을 반환한다.
         keypoint는 두 가지 형식이 가능하다.
         1. 좌 우 무릎 혹은 팔꿈치
@@ -201,6 +241,13 @@ class PoseSequence:
 
         if negative: result = 180 - result
         result[np.isclose(result, 0.0, atol=1e-8)] = 0.0
+
+        if smooth:
+            result = savgol_filter(
+                np.asarray(result, dtype=float),
+                window_length=5,
+                polyorder=2
+            )
 
         return result
 
@@ -284,14 +331,16 @@ def vel_acc(df: pd.DataFrame, keypoints: list[str] = None,fps: float = 60.0):
 
     return res.iloc[2:]
 
-def visualize_time(_df: pd.DataFrame, fps: float) -> None:
+def visualize_frame(_df: pd.DataFrame, points: list[int]=None) -> None:
     if type(_df) == pd.Series:
         _df = _df.to_frame()
-    time = (_df.index.to_numpy() - 2) / fps
 
     fig, axes = plt.subplots(figsize=(12, 6))
     for col in _df.columns:
-        axes.plot(time, _df[col], label=col, linewidth=1.5)
+        axes.plot(_df[col], label=col, linewidth=1.5)
+        if points:
+            for point in points:
+                axes.scatter(point, _df.loc[point, col])
     axes.set_title("Time Series Analysis")
     axes.set_xlabel("Time (s)")
     axes.set_ylabel("pixel")
