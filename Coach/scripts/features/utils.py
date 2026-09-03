@@ -46,13 +46,11 @@ class PoseSequence:
             window_length=5,
             polyorder=2
         )
+        alpha = 0
+        distance = len(self.df) // 6
+        for i in range(10):
+            if i == 9: print("러닝 패턴 분석 시도 횟수가 10회를 넘었습니다.")
 
-        while True:
-            n = 0
-            alpha = 0
-
-            assert n < 10, "러닝 패턴 분석 시도 횟수가 10회를 넘었습니다."
-            
             # 데이터 범위에 비례해 prominence 설정
             signal_range = np.percentile(y_smooth, 95) - np.percentile(y_smooth, 5)
             prominence = signal_range * (0.10 + alpha)    # 곱해지는 숫자가 클수록 큰 봉우리만 검출
@@ -61,14 +59,14 @@ class PoseSequence:
             max_indices, max_properties = find_peaks(
                 y_smooth,
                 prominence=prominence,
-                distance=10,
+                distance=distance,
             )
 
             # 최솟값: 신호에 -를 붙여서 봉우리로 변환
             min_indices, min_properties = find_peaks(
                 -y_smooth,
                 prominence=prominence,
-                distance=10,
+                distance=distance,
             )
 
             _max = {
@@ -86,8 +84,11 @@ class PoseSequence:
             # 올바른 스트라이드 검출
             if len(extremum) < 4:
                 print("러닝 리듬 분석에 실패했습니다.")
-                alpha -= 0.5
+                alpha -= 0.02
+                distance -= 1
                 continue
+
+            flag = False
             for i in range(1, len(extremum)):
                 previous = extremum["class"].iloc[i - 1]
                 current = extremum["class"].iloc[i]
@@ -96,8 +97,12 @@ class PoseSequence:
                     print(
                         f"예외: {i-1}, {i}행의 값이 {previous}, {current}입니다.\n올바른 스트라이드가 검출되지 않았습니다. 검출 파라미터 변경 필요."
                     )
-                    alpha += 0.5
-                    continue
+                    alpha += 0.02
+                    distance += 1
+                    flag = True
+                    break
+            if flag:
+                continue
             
             extremum.index = np.resize(extremum.iloc[:4]['value'].rank(method="dense", ascending=False).astype(int).values, len(extremum)).tolist()
             self.strides = extremum
@@ -115,7 +120,7 @@ class PoseSequence:
             return np.linalg.norm(a - b, axis=0)
         
         # 사용할 이미지 선택
-        image = self.df.loc[self.strides.loc[4]['frame'].iloc[0]]
+        image = self.df.loc[np.asarray(self.strides.loc[4]['frame']).reshape(-1)[0]]
 
         ankle = _point(image, f"{self.direction}_ankle")
         knee = _point(image, f"{self.direction}_knee")
@@ -172,30 +177,7 @@ class PoseSequence:
             to = int(_to[_to > df[f"{toe}_y"].idxmin()][0])
 
             assert td < to, "지면 착지 분석에 오류가 발생했습니다. 카메라 흔들림이 있었는지 확인 부탁드립니다."
-            
-
             res.append([td, to])
-        # n = len(self.strides) - (0 if len(self.strides[-1]) == 5 else 1)
-        # res = []
-
-        # self.strides.loc[4]
-        
-        # for i in range(n):
-        #     start = self.strides[i][0]
-        #     end = self.strides[i][-1]
-
-        #     df = self.df.loc[start:end+1]
-
-        #     heel = f"{self.direction}_heel"
-        #     td = int(df[f"{heel}_y"].idxmin())
-
-        #     toe = f"{self.direction}_big_toe"
-        #     min_value = df[f"{toe}_y"].min()
-
-        #     inside = df[f"{toe}_y"].between(min_value, min_value + 5)
-        #     to = df.index[~inside & inside.shift(1, fill_value=False)].to_list()[0]
-
-        #     res.append([td, to])
         return res
 
     def joint_angle(self, keypoint, smooth=False, negative=False):
