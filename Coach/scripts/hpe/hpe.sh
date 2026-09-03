@@ -5,17 +5,17 @@ echo "HPE 진입"
 
 HPE_DIR="$(cd "$(dirname "$0")" && pwd)"
 SCRIPT_DIR="$(cd "$HPE_DIR/.." && pwd)"
-POC_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+COACH_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 
-echo "PoC 진행 위치 : $POC_DIR"
+echo "Coach 진행 위치 : $COACH_DIR"
 
 ## 파이썬 import 경로 지정
-export PYTHONPATH="$POC_DIR"
+export PYTHONPATH="$COACH_DIR"
 
-cd "$POC_DIR"
+cd "$COACH_DIR"
 
 RUN_FOLDER="$1"
-RUN_DIR="$POC_DIR/run/$RUN_FOLDER"
+RUN_DIR="$COACH_DIR/run/$RUN_FOLDER"
 
 INPUT_DIR="$RUN_DIR/inputs"
 OUTPUT_DIR="$RUN_DIR/outputs"
@@ -45,7 +45,7 @@ if [[ "${1:-}" == "--extract" ]]; then
     echo "영상 발견: $VIDEO_PATH"
 
     ## 스크립트 실행
-    "$POC_DIR/.venv/bin/python" \
+    "$COACH_DIR/.venv/bin/python" \
         "$HPE_DIR/extract_frames.py" \
         "$VIDEO_PATH" \
         "$RUN_DIR/inputs"
@@ -55,33 +55,8 @@ fi
 
 ## HPE 추론
 printf '\nHPE 추론\n'
-"$POC_DIR/.venv/bin/python" \
+"$COACH_DIR/.venv/bin/python" \
   "$HPE_DIR/hpe_model.py" \
-  "$POC_DIR" \
+  "$COACH_DIR" \
   "$RUN_FOLDER" \
   "$@"
-
-# ## 렌더링
-# printf '\n렌더링\n'
-# "$POC_DIR/.venv/bin/python" \
-#   "$HPE_DIR/render.py" \
-#   "$RUN_DIR/inputs" \
-#   "$RUN_DIR/outputs"
-
-# ## 렌더링 이미지로 영상 합성
-# printf '\n이미지 합성\n'
-# "$POC_DIR/.venv/bin/python" \
-#   "$HPE_DIR/compose_video.py" \
-#   "$RUN_DIR/outputs/details.json" \
-#   "$RUN_DIR/outputs/rendered" \
-#   "$RUN_DIR/outputs/_rendered.mp4"
-
-# ffmpeg \
-#   -hide_banner \
-#   -loglevel error \
-#   -stats \
-#   -i "$RUN_DIR/outputs/_rendered.mp4" \
-#   -c:v libx264 \
-#   -pix_fmt yuv420p \
-#   -movflags +faststart \
-#   "$RUN_DIR/outputs/rendered.mp4"

@@ -46,50 +46,63 @@ class PoseSequence:
             window_length=5,
             polyorder=2
         )
-        # 데이터 범위에 비례해 prominence 설정
-        signal_range = np.percentile(y_smooth, 95) - np.percentile(y_smooth, 5)
-        prominence = signal_range * 0.10    # 곱해지는 숫자가 클수록 큰 봉우리만 검출
 
-        # 최댓값
-        max_indices, max_properties = find_peaks(
-            y_smooth,
-            prominence=prominence,
-            distance=10,
-        )
+        while True:
+            n = 0
+            alpha = 0
 
-        # 최솟값: 신호에 -를 붙여서 봉우리로 변환
-        min_indices, min_properties = find_peaks(
-            -y_smooth,
-            prominence=prominence,
-            distance=10,
-        )
+            assert n < 10, "러닝 패턴 분석 시도 횟수가 10회를 넘었습니다."
+            
+            # 데이터 범위에 비례해 prominence 설정
+            signal_range = np.percentile(y_smooth, 95) - np.percentile(y_smooth, 5)
+            prominence = signal_range * (0.10 + alpha)    # 곱해지는 숫자가 클수록 큰 봉우리만 검출
 
-        _max = {
-            "frame": max_indices,
-            "value": y_smooth[max_indices],
-            "class": np.ones_like(max_indices)
-        }
-        _min = {
-            "frame": min_indices,
-            "value": y_smooth[min_indices],
-            "class": np.zeros_like(min_indices)
-        }
-        extremum = pd.concat([pd.DataFrame(_max), pd.DataFrame(_min)]).sort_values('frame')
-
-        # 올바른 스트라이드 검출
-        assert len(extremum) >= 2, "온전한 스트라이드가 검출되지 않았습니다."
-        for i in range(1, len(extremum)):
-            previous = extremum["class"].iloc[i - 1]
-            current = extremum["class"].iloc[i]
-
-            assert {previous, current} == {0, 1}, (
-                f"예외: {i-1}, {i}행의 값이 {previous}, {current}입니다.\n올바른 스트라이드가 검출되지 않았습니다. 검출 파라미터 변경 필요."
+            # 최댓값
+            max_indices, max_properties = find_peaks(
+                y_smooth,
+                prominence=prominence,
+                distance=10,
             )
 
-        extremum.index = np.resize(extremum.iloc[:4]['value'].rank(method="dense", ascending=False).astype(int).values, len(extremum)).tolist()
-        self.strides = extremum
+            # 최솟값: 신호에 -를 붙여서 봉우리로 변환
+            min_indices, min_properties = find_peaks(
+                -y_smooth,
+                prominence=prominence,
+                distance=10,
+            )
 
-        return extremum
+            _max = {
+                "frame": max_indices,
+                "value": y_smooth[max_indices],
+                "class": np.ones_like(max_indices)
+            }
+            _min = {
+                "frame": min_indices,
+                "value": y_smooth[min_indices],
+                "class": np.zeros_like(min_indices)
+            }
+            extremum = pd.concat([pd.DataFrame(_max), pd.DataFrame(_min)]).sort_values('frame')
+
+            # 올바른 스트라이드 검출
+            if len(extremum) < 4:
+                print("러닝 리듬 분석에 실패했습니다.")
+                alpha -= 0.5
+                continue
+            for i in range(1, len(extremum)):
+                previous = extremum["class"].iloc[i - 1]
+                current = extremum["class"].iloc[i]
+
+                if {previous, current} != {0, 1}:
+                    print(
+                        f"예외: {i-1}, {i}행의 값이 {previous}, {current}입니다.\n올바른 스트라이드가 검출되지 않았습니다. 검출 파라미터 변경 필요."
+                    )
+                    alpha += 0.5
+                    continue
+            
+            extremum.index = np.resize(extremum.iloc[:4]['value'].rank(method="dense", ascending=False).astype(int).values, len(extremum)).tolist()
+            self.strides = extremum
+
+            return extremum
 
     def pixel2m(self):
         """

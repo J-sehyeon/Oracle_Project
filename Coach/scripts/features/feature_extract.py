@@ -12,13 +12,13 @@ from utils import *
 
 # Parser
 parser = argparse.ArgumentParser()
-parser.add_argument("poc_folder", type=Path)
+parser.add_argument("coach_folder", type=Path)
 parser.add_argument("run_folder", type=str)
 args = parser.parse_args()
 
-POC_DIR = args.poc_folder
+COACH_DIR = args.coach_folder
 RUN_FOLDER = args.run_folder
-RUN_DIR = POC_DIR / "run" / RUN_FOLDER
+RUN_DIR = COACH_DIR / "run" / RUN_FOLDER
 
 # 루트 디렉토리 바로 아래의 pose_predictions.json 지정
 OUTPUTS_DIR = RUN_DIR / "outputs"

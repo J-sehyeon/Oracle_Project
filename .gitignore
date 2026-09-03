@@ -3,7 +3,7 @@
 
 # data
 **/inputs
-PoC/run/_*
+Coach/run/_*
 
 # etc
 .env

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# ./PoC/scripts/main.sh test1 --extract --device mps
+# ./Coach/scripts/main.sh test1 --extract --device mps
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"

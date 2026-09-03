@@ -20,7 +20,7 @@ args = parser.parse_args()
 
 PROJECT_DIR = args.project_dir
 RUN_FOLDER = args.run_folder
-RUN_DIR = PROJECT_DIR / "PoC" / "run" / RUN_FOLDER
+RUN_DIR = PROJECT_DIR / "Coach" / "run" / RUN_FOLDER
 
 load_dotenv(PROJECT_DIR / ".env")
 api_key = os.environ.get("_OPENAI_API_KEY")
