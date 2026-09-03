@@ -47,7 +47,7 @@ class PoseSequence:
             polyorder=2
         )
         alpha = 0
-        distance = len(self.df) // 6
+        distance = self.details["video"]['fps'] // 6
         for i in range(10):
             if i == 9: print("러닝 패턴 분석 시도 횟수가 10회를 넘었습니다.")
 
