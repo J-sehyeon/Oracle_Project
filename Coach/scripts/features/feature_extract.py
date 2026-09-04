@@ -51,8 +51,6 @@ def feature1(ps: PoseSequence):
         res += ps.df["hip_center_y"][start:end].agg(['min', 'max']).diff()['max']
         
     # APO: Amplitude of pelvis oscillation : 골반 진동 진폭
-    print("strides:", ps.strides)
-    print("gct:", strides)
     apo_pixel = res / len(strides)
     return apo_pixel * ps.m_per_pixel / ps.user['height']
 
