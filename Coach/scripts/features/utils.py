@@ -1,6 +1,7 @@
 import json
 from pathlib import Path
 
+import cv2
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -85,7 +86,7 @@ class PoseSequence:
             if len(extremum) < 4:
                 print("러닝 리듬 분석에 실패했습니다.")
                 alpha -= 0.02
-                distance -= 1
+                distance = max(1, distance - 2)
                 continue
 
             flag = False
@@ -98,15 +99,28 @@ class PoseSequence:
                         f"예외: {i-1}, {i}행의 값이 {previous}, {current}입니다.\n올바른 스트라이드가 검출되지 않았습니다. 검출 파라미터 변경 필요."
                     )
                     alpha += 0.02
-                    distance += 1
+                    distance = max(1, distance - 1)
                     flag = True
                     break
             if flag:
                 continue
-            
-            extremum.index = np.resize(extremum.iloc[:4]['value'].rank(method="dense", ascending=False).astype(int).values, len(extremum)).tolist()
-            self.strides = extremum
 
+            start_index = (0 if y_smooth[max_indices[0]] > y_smooth[max_indices[1]] else 1)
+            for i in range(len(max_indices) // 2 - 1):
+                if not y_smooth[max_indices[2 * i + start_index]] > y_smooth[max_indices[2 * i + 1 + start_index]]:
+                    raise RuntimeError("무릎 각도에서 예상치 못한 예외 발생.")
+            
+            start_frame = max_indices[start_index]
+            start_position = np.flatnonzero(
+                extremum["frame"].to_numpy() == start_frame
+            )[0]
+
+            # start_frame 행이 1이 되도록 1~4 반복
+            extremum.index = (
+                (np.arange(len(extremum)) - start_position) % 4
+            ) + 1
+
+            self.strides = extremum
             return extremum
 
     def pixel2m(self):
@@ -120,7 +134,7 @@ class PoseSequence:
             return np.linalg.norm(a - b, axis=0)
         
         # 사용할 이미지 선택
-        image = self.df.loc[np.asarray(self.strides.loc[4]['frame']).reshape(-1)[0]]
+        image = self.df.loc[np.asarray(self.strides.loc[2]['frame']).reshape(-1)[0]]
 
         ankle = _point(image, f"{self.direction}_ankle")
         knee = _point(image, f"{self.direction}_knee")
@@ -144,26 +158,28 @@ class PoseSequence:
         return height_px
     
 
-    def gct(self, next: int = 0):
+    def gct(self):
         """
         {side}의 heel이 지면에 접촉하고 big_toe가 지면에서 떼어지는 순간까지의 인덱스 출력
         next는 스트라이드의 구간을 한 단계 미뤄야 할 가능성이 있기 때문에 그 때의 설계를 위해 남긴 더미.
         """
+        _df = self.strides.loc[[2, 4]].sort_values('frame')
+        if _df.index[0] == 4:
+            _df = _df.iloc[1:]
+        if len(_df) % 2:
+            _df = _df.iloc[:-1]
 
-        _df = self.strides.loc[[3, 4]].sort_values('frame')
-        start_4 = 0 if _df.index[0] == 4 else 1
-        if start_4:
-            _df = _df.iloc[start_4:]
+        steps = [
+            _df.iloc[i:i + 2]["frame"].to_list()
+            for i in range(0, len(_df), 2)
+        ]
 
-        steps = []
-        for i in range(len(_df) // 2):
-            steps.append(_df.iloc[2 * i : 2 * i + 2]['frame'].to_list())
-
+        if self.m_per_pixel is None:
+            self.pixel2m()
+        
         res = []
-        for step in steps:
-            start, end = step
-
-            df = self.df.loc[start:end+5]   # 무릎 각도와 y값을 동시 반영, end는 3프레임의 여유를 두었다.
+        for start, end in steps:
+            df = self.df.loc[start:end+10]   # 무릎 각도와 y값을 동시 반영, end는 3프레임의 여유를 두었다.
 
             heel = f"{self.direction}_heel"
             td = int(df[f"{heel}_y"].idxmin())
@@ -171,7 +187,7 @@ class PoseSequence:
             toe = f"{self.direction}_big_toe"
             min_value = df[f"{toe}_y"].min()
 
-            inside = df[f"{toe}_y"].between(min_value, min_value + 5)
+            inside = df[f"{toe}_y"].between(min_value, min_value + 0.01 / self.m_per_pixel)
             _to = df.index[~inside & inside.shift(1, fill_value=False)].to_numpy()
             # 최소값 도달 이후 첫 번째 프레임
             to = int(_to[_to > df[f"{toe}_y"].idxmin()][0])
@@ -361,3 +377,151 @@ def visualize_xy(_df: pd.DataFrame) -> None:
 
     fig.tight_layout()
     plt.show()
+
+def show_video_frames(
+    video_path,
+    frames,
+    hpe_start_frame=0,
+    *,
+    columns=2,
+):
+    """
+    HPE 기준 프레임을 원본 영상 프레임으로 변환해 출력한다.
+
+    Args:
+        video_path:
+            원본 영상 경로
+        frames:
+            HPE 기준 프레임 번호.
+            정수, 리스트, 또는 ps.gct()의 [[td, to], ...] 형식
+        hpe_start_frame:
+            원본 영상에서 HPE 분석이 시작된 프레임 번호
+        columns:
+            이미지 출력 열 개수
+
+    Returns:
+        list[np.ndarray]:
+            RGB 형식의 프레임 이미지
+    """
+    video_path = Path(video_path)
+
+    if not video_path.is_file():
+        raise FileNotFoundError(
+            f"영상 파일이 없습니다: {video_path}"
+        )
+
+    try:
+        hpe_frames = np.asarray(
+            frames,
+            dtype=float,
+        ).reshape(-1)
+    except (TypeError, ValueError) as exc:
+        raise TypeError(
+            "frames는 정수 또는 정수 배열이어야 합니다."
+        ) from exc
+
+    if hpe_frames.size == 0:
+        raise ValueError("확인할 프레임이 없습니다.")
+
+    if (
+        not np.all(np.isfinite(hpe_frames))
+        or not np.all(hpe_frames == np.floor(hpe_frames))
+    ):
+        raise ValueError("프레임 번호는 유한한 정수여야 합니다.")
+
+    hpe_frames = hpe_frames.astype(int)
+
+    # HPE 기준 프레임 → 원본 영상 프레임
+    video_frames = hpe_frames + int(hpe_start_frame)
+
+    capture = cv2.VideoCapture(str(video_path))
+
+    if not capture.isOpened():
+        raise RuntimeError(
+            f"영상을 열지 못했습니다: {video_path}"
+        )
+
+    images = []
+
+    try:
+        frame_count = int(
+            capture.get(cv2.CAP_PROP_FRAME_COUNT)
+        )
+        fps = float(
+            capture.get(cv2.CAP_PROP_FPS)
+        )
+
+        invalid = video_frames[
+            (video_frames < 0)
+            | (video_frames >= frame_count)
+        ]
+
+        if invalid.size:
+            raise IndexError(
+                f"영상 프레임 범위를 벗어났습니다: "
+                f"{invalid.tolist()} "
+                f"(유효 범위: 0~{frame_count - 1})"
+            )
+
+        for video_frame in video_frames:
+            capture.set(
+                cv2.CAP_PROP_POS_FRAMES,
+                int(video_frame),
+            )
+
+            success, bgr_image = capture.read()
+
+            if not success:
+                raise RuntimeError(
+                    f"{video_frame}번 프레임을 읽지 못했습니다."
+                )
+
+            rgb_image = cv2.cvtColor(
+                bgr_image,
+                cv2.COLOR_BGR2RGB,
+            )
+            images.append(rgb_image)
+
+    finally:
+        capture.release()
+
+    columns = max(
+        1,
+        min(int(columns), len(images)),
+    )
+    rows = int(np.ceil(len(images) / columns))
+
+    figure, axes = plt.subplots(
+        rows,
+        columns,
+        figsize=(5 * columns, 4 * rows),
+    )
+    axes = np.atleast_1d(axes).reshape(-1)
+
+    for axis, image, hpe_frame, video_frame in zip(
+        axes,
+        images,
+        hpe_frames,
+        video_frames,
+    ):
+        seconds = (
+            video_frame / fps
+            if fps > 0
+            else float("nan")
+        )
+
+        axis.imshow(image)
+        axis.set_title(
+            f"HPE {hpe_frame} → "
+            f"video {video_frame} "
+            f"({seconds:.3f}s)"
+        )
+        axis.axis("off")
+
+    for axis in axes[len(images):]:
+        axis.axis("off")
+
+    figure.tight_layout()
+    plt.show()
+
+    return images
