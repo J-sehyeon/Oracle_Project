@@ -190,7 +190,10 @@ class PoseSequence:
             inside = df[f"{toe}_y"].between(min_value, min_value + 0.01 / self.m_per_pixel)
             _to = df.index[~inside & inside.shift(1, fill_value=False)].to_numpy()
             # 최소값 도달 이후 첫 번째 프레임
-            to = int(_to[_to > df[f"{toe}_y"].idxmin()][0])
+            try:
+                to = int(_to[_to > df[f"{toe}_y"].idxmin()][0])
+            except:
+                continue
 
             assert td < to, "지면 착지 분석에 오류가 발생했습니다. 카메라 흔들림이 있었는지 확인 부탁드립니다."
             res.append([td, to])
@@ -262,6 +265,9 @@ class PoseSequence:
 
         return result
 
+    # def stride_length(self):
+
+
 
 Halpe_26_keypoints = {
     0: "nose",
@@ -306,14 +312,53 @@ def hpe2pd(pose_data: dict) -> pd.DataFrame:
         if frame['people'] == []:
             # 사람이 포착되지 않음.
             continue
-        bbox = frame['people'][0]["bbox"]
-        row["bbox_left"], row["bbox_up"], row["bbox_right"], row["bbox_down"] = bbox
+        primary = next(
+            (
+                person
+                for person in frame["people"]
+                if person.get("track_id") == 0
+            ),
+            None,
+        )
+        if primary is None: continue
 
-        for i, xy in enumerate(frame['people'][0]['keypoints']):
-            row[f"{Halpe_26_keypoints[i]}_x"] = xy[0]
-            row[f"{Halpe_26_keypoints[i]}_y"] = xy[1]
+        raw_keypoints = primary["keypoints"]
+
+        observed = primary.get(
+            "observed",
+            [True] * len(raw_keypoints),
+        )
+
+        imputed_keypoints = primary.get(
+            "imputed_keypoints",
+            [None] * len(raw_keypoints),
+        )
+
+        if not (
+            len(raw_keypoints)
+            == len(observed)
+            == len(imputed_keypoints)
+        ):
+            raise ValueError(
+                f"frame_num={frame.get('frame_num')}: "
+                "keypoint 데이터 길이가 일치하지 않습니다."
+            )
+
+        for index, raw_xy in enumerate(raw_keypoints):
+            if observed[index]:
+                x, y = raw_xy
+            elif imputed_keypoints[index] is not None:
+                x, y = imputed_keypoints[index]
+            else:
+                # 기존 파이프라인 호환을 위한 fallback
+                x, y = raw_xy
+
+            keypoint_name = Halpe_26_keypoints[index]
+            row[f"{keypoint_name}_x"] = x
+            row[f"{keypoint_name}_y"] = y
+
         rows.append(row)
-    
+
     return pd.DataFrame.from_records(rows)
 
 def vel_acc(df: pd.DataFrame, keypoints: list[str] = None,fps: float = 60.0):

@@ -3,12 +3,12 @@
 
 > main.sh 실행
 ``` zsh
-./scripts/main.sh test7 --agent false --extract --device cpu
+./scripts/main.sh test7 --agent false --device cpu
 ```
 
 > 영상 형식 변경
 ``` bash
-ffmpeg -y -i IMG_1038.mov \
+ffmpeg -y -i IMG_3412.mov \
   -map 0:v:0 \
   -map 0:a:0? \
   -c:v libx264 \
@@ -18,5 +18,5 @@ ffmpeg -y -i IMG_1038.mov \
   -c:a aac \
   -b:a 192k \
   -movflags +faststart \
-  output_h264.mp4
+  transformed.mp4
 ``` 

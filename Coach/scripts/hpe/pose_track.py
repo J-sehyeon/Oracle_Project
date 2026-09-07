@@ -1,8 +1,9 @@
 """Stable, JSON-safe tracking metadata around raw RTMPose predictions."""
-
+from collections.abc import Sequence
 from dataclasses import dataclass
 from typing import Optional
 
+import numpy as np
 import pandas as pd
 
 
@@ -94,3 +95,5 @@ def build_frame_record(
         {"frame_num": frame_num, "people": people},
         TrackState(bbox=primary.bbox, keypoints=primary.keypoints),
     )
+
+def interpolate_center()

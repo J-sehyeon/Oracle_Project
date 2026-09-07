@@ -4,6 +4,7 @@ import time
 import json
 import argparse
 from pathlib import Path
+from collections import deque
 from datetime import datetime, timezone
 
 import cv2
@@ -11,8 +12,7 @@ import numpy as np
 from tqdm import tqdm
 from rtmlib import RTMDet, RTMPose, draw_bbox, draw_skeleton
 
-from scripts.hpe.pose_track import Detection, build_frame_record
-from scripts.hpe.hpe_model import estimate_pose
+from scripts.hpe.utils import *
 
 
 # Parser
@@ -44,7 +44,7 @@ output_path = OUTPUT_ROOT / "output.mp4"
 
 OUTPUT_ROOT.mkdir(parents=True, exist_ok=True)
 
-
+start = time.perf_counter()
 # model
 detector = RTMDet(
     onnx_model=DETECTOR_ROOT/"end2end.onnx",
@@ -92,10 +92,14 @@ try:
     # 기존 로직의 구현
     previous = None
     frames = []
+
+    pending = deque()
+    last_valid = [None] * 26
     det_time, pose_time = 0.0, 0.0
     flag = True
+    bumper = 10
 
-    start = time.perf_counter()
+    
     while True:
         count += 1
         # 이미지 로드
@@ -103,6 +107,7 @@ try:
         if not success:
             break
 
+        frame_info = None
         if flag:
             # HPE model 진입
             det_s = time.perf_counter()
@@ -122,16 +127,26 @@ try:
                         detector.score_thr = 0.4
                     else: raise Exception
                 except:
-                    writer.write(frame)
+                    enqueue_and_write(
+                        pending,
+                        frame,
+                        None,
+                        writer
+                    )
                     continue
 
             outside_range = (
-                bboxes[0][0] < 10
-                or bboxes[0][2] > width - 10
+                bboxes[0][0] < bumper
+                or bboxes[0][2] > width - bumper
             )
             
             if outside_range:
-                writer.write(frame)
+                enqueue_and_write(
+                    pending,
+                    frame,
+                    None,
+                    writer
+                )
                 if len(frames) < 20:
                     # 객체가 인식된 직후 인식 오류가 날 경우
                     # raise RuntimeError ########
@@ -139,6 +154,9 @@ try:
                 # 거울 오류 해결
                 flag = False
                 continue
+
+            # inside로 들어왔으니 범퍼의 크기 감소
+            bumper = 5
 
             detections, pose_t = estimate_pose(pose_model, frame, bboxes)
             pose_time += pose_t
@@ -150,30 +168,81 @@ try:
                 keypoint_threshold=0.5,
             )
 
-            if frame_info is None:
-                writer.write(frame)
-                continue
-
-            frames.append(frame_info)
-
-            # rendering
-            user = frame_info["people"][0]
-        
-            keypoints = np.asarray(user["keypoints"], dtype=np.float32)[np.newaxis, :]
-            scores = np.asarray(user['keypoint_scores'], dtype=np.float32)[np.newaxis, :]
-
-            frame = draw_skeleton(
-                frame.copy(),
-                keypoints,
-                scores,
-                openpose_skeleton=False,
-                kpt_thr=0.3,
-                radius=4,
-                line_width=2,
-            )
             detector.score_thr = 0.4
 
-        writer.write(frame)
+            if frame_info is not None:
+                frames.append(frame_info)
+
+            # pending.append({
+            #     "frame": frame,
+            #     "frame_info": frame_info
+            # })
+
+            # if len(pending) == 5:
+            #     interpolate_center([
+            #         item["frame_info"]
+            #         for item in pending
+            #     ])
+
+            # oldest = pending.popleft()
+            # render_and_write(oldest)
+
+            # if frame_info is None:
+            #     writer.write(frame)
+            #     continue
+
+            # frames.append(frame_info)
+
+            # # rendering
+            # user = next(
+            #     (
+            #         person
+            #         for person in frame_info["people"]
+            #         if person.get("track_id") == 0
+            #     ),
+            #     None,
+            # )
+
+            # if user is None:
+            #     writer.write(frame)
+            #     continue
+        
+            # raw_keypoints = np.asarray(user["keypoints"], dtype=np.float32)
+            # observed = np.asarray(user["observed"], dtype=bool)
+
+            # render_keypoints = raw_keypoints.copy()
+            # render_scores = np.asarray(
+            #     user["keypoint_scores"],
+            #     dtype=np.float32,
+            # ).copy()
+
+            # for index, imputed in enumerate(user["imputed_keypoints"]):
+            #     if not observed[index] and imputed is not None:
+            #         render_keypoints[index] = imputed
+
+            #         # 원본 confidence는 건드리지 않고 렌더링에서만 표시
+            #         render_scores[index] = 1.0
+
+            # frame = draw_skeleton(
+            #     frame.copy(),
+            #     render_keypoints[np.newaxis, :],
+            #     render_scores[np.newaxis, :],
+            #     openpose_skeleton=False,
+            #     kpt_thr=0.3,
+            #     radius=4,
+            #     line_width=2,
+            # )
+            # detector.score_thr = 0.4
+        enqueue_and_write(
+            pending,
+            frame,
+            frame_info,
+            writer
+        )
+        # writer.write(frame)
+    while pending:
+        oldest = pending.popleft()
+        render_and_write(oldest, writer)
 finally:
     capture.release()
     writer.release()
