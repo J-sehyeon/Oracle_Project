@@ -72,8 +72,7 @@ def main(features_path: Path):
             features,
             ensure_ascii=False,
             indent=2,
-        ),
-        "paper_evidence": paper_evidence,
+        )
     })
 
 

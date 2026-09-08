@@ -191,11 +191,11 @@ class PoseSequence:
             _to = df.index[~inside & inside.shift(1, fill_value=False)].to_numpy()
             # 최소값 도달 이후 첫 번째 프레임
             try:
-                to = int(_to[_to > df[f"{toe}_y"].idxmin()][0])
+                to = int(_to[_to > df[f"{toe}_y"].idxmin()][-1])
             except:
                 continue
 
-            assert td < to, "지면 착지 분석에 오류가 발생했습니다. 카메라 흔들림이 있었는지 확인 부탁드립니다."
+            assert td < to, print(res, td, to)# "지면 착지 분석에 오류가 발생했습니다. 카메라 흔들림이 있었는지 확인 부탁드립니다."
             res.append([td, to])
         return res
 

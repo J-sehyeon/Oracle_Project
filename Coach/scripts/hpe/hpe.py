@@ -173,66 +173,6 @@ try:
             if frame_info is not None:
                 frames.append(frame_info)
 
-            # pending.append({
-            #     "frame": frame,
-            #     "frame_info": frame_info
-            # })
-
-            # if len(pending) == 5:
-            #     interpolate_center([
-            #         item["frame_info"]
-            #         for item in pending
-            #     ])
-
-            # oldest = pending.popleft()
-            # render_and_write(oldest)
-
-            # if frame_info is None:
-            #     writer.write(frame)
-            #     continue
-
-            # frames.append(frame_info)
-
-            # # rendering
-            # user = next(
-            #     (
-            #         person
-            #         for person in frame_info["people"]
-            #         if person.get("track_id") == 0
-            #     ),
-            #     None,
-            # )
-
-            # if user is None:
-            #     writer.write(frame)
-            #     continue
-        
-            # raw_keypoints = np.asarray(user["keypoints"], dtype=np.float32)
-            # observed = np.asarray(user["observed"], dtype=bool)
-
-            # render_keypoints = raw_keypoints.copy()
-            # render_scores = np.asarray(
-            #     user["keypoint_scores"],
-            #     dtype=np.float32,
-            # ).copy()
-
-            # for index, imputed in enumerate(user["imputed_keypoints"]):
-            #     if not observed[index] and imputed is not None:
-            #         render_keypoints[index] = imputed
-
-            #         # 원본 confidence는 건드리지 않고 렌더링에서만 표시
-            #         render_scores[index] = 1.0
-
-            # frame = draw_skeleton(
-            #     frame.copy(),
-            #     render_keypoints[np.newaxis, :],
-            #     render_scores[np.newaxis, :],
-            #     openpose_skeleton=False,
-            #     kpt_thr=0.3,
-            #     radius=4,
-            #     line_width=2,
-            # )
-            # detector.score_thr = 0.4
         enqueue_and_write(
             pending,
             frame,
