@@ -1,87 +1,61 @@
-from dotenv import load_dotenv
-import os
 import argparse
-
 import json
+import os
 from pathlib import Path
 
-from langchain_openai import ChatOpenAI
-from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.output_parsers import StrOutputParser
-
-from scripts.features.papers import PAPERS
-from scripts.Agent.prompts import *
+from scripts.Agent.report_format import render_report
+from scripts.Agent.exercise_video_tool import get_exercise_video_tool
+from scripts.Agent.prompts import PERSONA, INSTRUCTION, INPUT_DATA
 
 
-parser = argparse.ArgumentParser()
-parser.add_argument("project_dir", type=Path)
-parser.add_argument("run_folder", type=str)
-args = parser.parse_args()
+def main(features_path, project_dir, videos_path=None):
+    from dotenv import load_dotenv
+    from langchain_openai import ChatOpenAI
+    from langchain_core.prompts import ChatPromptTemplate
+    from langchain_core.output_parsers import StrOutputParser
 
-PROJECT_DIR = args.project_dir
-RUN_FOLDER = args.run_folder
-RUN_DIR = PROJECT_DIR / "Coach" / "run" / RUN_FOLDER
-
-load_dotenv(PROJECT_DIR / ".env")
-api_key = os.environ.get("_OPENAI_API_KEY")
-
-
-
-
-def main(features_path: Path):
-    # 1. feature_extract 결과
-    with open(features_path, "r", encoding="utf-8") as file:
-        features = json.load(file)
-
-
-    # 2. 관련 논문에서 미리 정리한 근거
-    paper_evidence = PAPERS[0]
-
-
-    # 3. 프롬프트
+    features = json.loads(features_path.read_text(encoding="utf-8"))
+    evidence_path = Path(__file__).parent / "evidence" / "papers.json"
+    papers = json.loads(evidence_path.read_text(encoding="utf-8"))
+    expected = {"paper_03", "paper_06", "paper_07", "paper_11", "paper_running_technique"}
+    if {p["id"] for p in papers} != expected or len(papers) != 5:
+        raise ValueError("논문 근거 5편이 모두 필요합니다.")
+    if any(not p["pages"] or any(not page["text"].strip() for page in p["pages"]) for p in papers):
+        raise ValueError("논문 페이지 본문이 비어 있습니다.")
+    evidence = json.dumps(papers, ensure_ascii=False)
+    load_dotenv(project_dir / ".env")
+    load_dotenv(project_dir / "Coach" / ".env")
+    api_key = os.getenv("OPENAI_API_KEY") or os.getenv("_OPENAI_API_KEY")
+    if not api_key:
+        raise ValueError(".env에 OPENAI_API_KEY를 설정하세요.")
     prompt = ChatPromptTemplate.from_messages([
-        (
-            "system",
-            (
-                PERSONA,
-                INSTRUCTION
-            )
-        ),
-        (
-            "human",
-            INPUT_DATA
-        ),
+        ("system", PERSONA + "\n" + INSTRUCTION), ("human", INPUT_DATA),
     ])
-
-
-    # 4. LLM
-    model = ChatOpenAI(
-        model="gpt-5-nano",
-        temperature=0,
-        api_key=api_key
-    )
-
-
-    # 5. LangChain 구성
+    model = ChatOpenAI(model="gpt-5-nano", api_key=api_key, timeout=180, max_retries=2)
     chain = prompt | model | StrOutputParser()
+    inputs = {"features": json.dumps(features, ensure_ascii=False), "paper_evidence": evidence}
+    for attempt in range(3):
+        summary = chain.invoke(inputs).strip()
+        if summary and len(summary) <= 250 and not any(t in summary for t in ("\n", "paper_", "PDF p.", "```")):
+            break
+        inputs["paper_evidence"] += "\n출력은 250자 이하, 줄바꿈/내부 인용 표기 없는 한 문장만 작성하세요."
+    else:
+        raise ValueError("AI 한줄평 형식을 검증하지 못했습니다.")
+    videos = (json.loads(videos_path.read_text(encoding="utf-8")) if videos_path
+              else get_exercise_video_tool().invoke({"features": features}))
+    report = render_report(features, summary, videos)
+    output = features_path.parent / "running_report.json"
+    temporary = output.with_suffix(".json.tmp")
+    temporary.write_text(json.dumps(report, ensure_ascii=False, indent=2, allow_nan=False) + "\n", encoding="utf-8")
+    temporary.replace(output)
+    print(f"보고서 저장: {output}")
 
-
-    # 6. 실행
-    report = chain.invoke({
-        "features": json.dumps(
-            features,
-            ensure_ascii=False,
-            indent=2,
-        )
-    })
-
-
-    # 7. 결과 저장
-    with open(features_path.parent / "running_report.md", "w", encoding="utf-8") as file:
-        file.write(report)
-
-    print(report)
 
 if __name__ == "__main__":
-    features_path = RUN_DIR / "outputs" / "feature_results.json"
-    main(features_path)
+    parser = argparse.ArgumentParser()
+    parser.add_argument("project_dir", type=Path)
+    parser.add_argument("run_folder")
+    parser.add_argument("--videos", type=Path, help="title/url을 가진 영상 목록 JSON")
+    args = parser.parse_args()
+    main(args.project_dir / "Coach/run" / args.run_folder / "outputs/feature_results.json",
+         args.project_dir, args.videos)

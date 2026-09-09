@@ -13,10 +13,11 @@ export PYTHONPATH="$COACH_DIR"
 
 cd "$COACH_DIR"
 
-RUN_FOLDER="$1"
+RUN_FOLDER="${1:?run folder required}"
+shift
 RUN_DIR="$COACH_DIR/run/$RUN_FOLDER" 
 
 "$COACH_DIR/.venv/bin/python" \
   "$FEATURES_DIR/Running_coach.py" \
   "$PROJECT_DIR" \
-  "$RUN_FOLDER" \
+  "$RUN_FOLDER" "$@"
