@@ -1,0 +1,470 @@
+{"kind":"deck","id":"pr/n2xvc1","name":"Deck"}
+{"kind":"layout","layoutId":"e0a19208-35e2-42a8-b7ac-134f0e99629c","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"1243f146-51bf-4304-94ac-50fd28aaff79","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/aqu7vr","slide":1,"title":"러너스아이","textShapes":6}
+{"kind":"shape","id":"sh/snex8j25","slide":1,"bbox":[0,0,18,720]}
+{"kind":"textbox","id":"sh/r25gfelk","slide":1,"text":"러너스아이","textPreview":"러너스아이","textChars":5,"textLines":1,"bbox":[72,60,260,28]}
+{"kind":"textbox","id":"sh/61wf69kf","slide":1,"text":"달리는 순간,\n데이터로 읽습니다","textPreview":"달리는 순간, | 데이터로 읽습니다","textChars":17,"textLines":2,"bbox":[72,132,560,135]}
+{"kind":"textbox","id":"sh/50nyd43u","slide":1,"text":"러닝 영상을 자세 데이터와 실행 가능한 피드백으로 바꾸는 서비스","textPreview":"러닝 영상을 자세 데이터와 실행 가능한 피드백으로 바꾸는 서비스","textChars":35,"textLines":1,"bbox":[72,300,650,36]}
+{"kind":"shape","id":"sh/4zex4z29","slide":1,"bbox":[72,370,490,0]}
+{"kind":"textbox","id":"sh/jy5gbelo","slide":1,"text":"팀 테무 꽃보다 남자","textPreview":"팀 테무 꽃보다 남자","textChars":11,"textLines":1,"bbox":[72,400,280,26]}
+{"kind":"textbox","id":"sh/ixcf29k3","slide":1,"text":"박재혁   정승인   정세현   박주환   유한나","textPreview":"박재혁   정승인   정세현   박주환   유한나","textChars":27,"textLines":1,"bbox":[72,438,540,26]}
+{"kind":"shape","id":"sh/pw7yp8jy","slide":1,"bbox":[882,78,282,568]}
+{"kind":"textbox","id":"sh/ahcvihcn","slide":1,"text":"RUNNERS EYE","textPreview":"RUNNERS EYE","textChars":11,"textLines":1,"bbox":[953,654,150,18]}
+{"kind":"image","id":"im/dkj6hs76","slide":1,"name":"","alt":"러너스아이 홈 화면","bbox":[908,90,228,540]}
+{"kind":"notes","id":"nt/aqu7vr","slide":1,"text":"약 20초. 서비스 이름과 한 문장 설명만 전달한다. Source: 기존 발표자료 1장."}
+{"kind":"slide","id":"sl/vcy0gx","slide":2,"title":"01 · 소개","textShapes":19}
+{"kind":"textbox","id":"sh/dgfulsb2","slide":2,"text":"01 · 소개","textPreview":"01 · 소개","textChars":7,"textLines":1,"bbox":[42,24,360,20]}
+{"kind":"textbox","id":"sh/qd4bqxcr","slide":2,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[1194,24,42,20]}
+{"kind":"textbox","id":"sh/redcjitc","slide":2,"text":"팀 구성과 역할","textPreview":"팀 구성과 역할","textChars":8,"textLines":1,"bbox":[42,72,1138,52]}
+{"kind":"shape","id":"sh/0j6dw7ut","slide":2,"bbox":[42,132,1194,0]}
+{"kind":"textbox","id":"sh/1kfupcbe","slide":2,"text":"발표 전 각 담당 영역을 입력할 수 있도록 역할 칸을 비워 두었습니다","textPreview":"발표 전 각 담당 영역을 입력할 수 있도록 역할 칸을 비워 두었습니다","textChars":38,"textLines":1,"bbox":[42,152,760,28]}
+{"kind":"textbox","id":"sh/ehovuxcn","slide":2,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[66,222,36,24]}
+{"kind":"textbox","id":"sh/zixcn2t8","slide":2,"text":"박재혁","textPreview":"박재혁","textChars":3,"textLines":1,"bbox":[66,256,250,38]}
+{"kind":"shape","id":"sh/gn2tk3up","slide":2,"bbox":[66,320,300,0]}
+{"kind":"textbox","id":"sh/hovud8bu","slide":2,"text":"역할  ____________________","textPreview":"역할  ____________________","textChars":24,"textLines":1,"bbox":[66,338,300,30]}
+{"kind":"textbox","id":"sh/tsfyl43m","slide":2,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[440,222,36,24]}
+{"kind":"textbox","id":"sh/sr6hczm1","slide":2,"text":"정승인","textPreview":"정승인","textChars":3,"textLines":1,"bbox":[440,256,250,38]}
+{"kind":"shape","id":"sh/7qxgjulg","slide":2,"bbox":[440,320,300,0]}
+{"kind":"textbox","id":"sh/6pozap4v","slide":2,"text":"역할  ____________________","textPreview":"역할  ____________________","textChars":24,"textLines":1,"bbox":[440,338,300,30]}
+{"kind":"textbox","id":"sh/hgzipo3i","slide":2,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[814,222,36,24]}
+{"kind":"textbox","id":"sh/gvqhgjmx","slide":2,"text":"정세현","textPreview":"정세현","textChars":3,"textLines":1,"bbox":[814,256,250,38]}
+{"kind":"shape","id":"sh/fuhgnelc","slide":2,"bbox":[814,320,300,0]}
+{"kind":"textbox","id":"sh/utoze94r","slide":2,"text":"역할  ____________________","textPreview":"역할  ____________________","textChars":24,"textLines":1,"bbox":[814,338,300,30]}
+{"kind":"textbox","id":"sh/pkzito3e","slide":2,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[252,426,36,24]}
+{"kind":"textbox","id":"sh/4jqhkjm9","slide":2,"text":"박주환","textPreview":"박주환","textChars":3,"textLines":1,"bbox":[252,460,250,38]}
+{"kind":"shape","id":"sh/ony1gnu5","slide":2,"bbox":[252,524,300,0]}
+{"kind":"textbox","id":"sh/9o72psbq","slide":2,"text":"역할  ____________________","textPreview":"역할  ____________________","textChars":24,"textLines":1,"bbox":[252,542,300,30]}
+{"kind":"textbox","id":"sh/21gjexcf","slide":2,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[626,426,36,24]}
+{"kind":"textbox","id":"sh/n2p0n2tk","slide":2,"text":"유한나","textPreview":"유한나","textChars":3,"textLines":1,"bbox":[626,460,250,38]}
+{"kind":"shape","id":"sh/wri1k7uh","slide":2,"bbox":[626,524,300,0]}
+{"kind":"textbox","id":"sh/xsr2tcb2","slide":2,"text":"역할  ____________________","textPreview":"역할  ____________________","textChars":24,"textLines":1,"bbox":[626,542,300,30]}
+{"kind":"notes","id":"nt/vcy0gx","slide":2,"text":"팀원 역할 정보는 제공 자료에 없어 빈칸으로 유지한다. 발표 전 담당 업무를 한 줄씩 입력한다."}
+{"kind":"slide","id":"sl/ytis3d","slide":3,"title":"02 · 서비스 소개","textShapes":15}
+{"kind":"textbox","id":"sh/ov2tojud","slide":3,"text":"02 · 서비스 소개","textPreview":"02 · 서비스 소개","textChars":11,"textLines":1,"bbox":[42,24,360,20]}
+{"kind":"textbox","id":"sh/nutsfets","slide":3,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[1194,24,42,20]}
+{"kind":"textbox","id":"sh/2tkbm9c7","slide":3,"text":"러너스아이 서비스","textPreview":"러너스아이 서비스","textChars":9,"textLines":1,"bbox":[42,72,1138,52]}
+{"kind":"shape","id":"sh/1sbad4bm","slide":3,"bbox":[42,132,1194,0]}
+{"kind":"textbox","id":"sh/0r2tkzu1","slide":3,"text":"측면 러닝 영상 한 번으로 자세 측정, 설명, 변화 기록까지 연결합니다","textPreview":"측면 러닝 영상 한 번으로 자세 측정, 설명, 변화 기록까지 연결합니다","textChars":39,"textLines":1,"bbox":[42,152,760,32]}
+{"kind":"textbox","id":"sh/fqtsbetw","slide":3,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[58,230,36,24]}
+{"kind":"textbox","id":"sh/ep0bi9cb","slide":3,"text":"영상 입력","textPreview":"영상 입력","textChars":5,"textLines":1,"bbox":[112,226,210,30]}
+{"kind":"textbox","id":"sh/lovup8b6","slide":3,"text":"측면 전신이 보이는 짧은 MP4와 사용자 키","textPreview":"측면 전신이 보이는 짧은 MP4와 사용자 키","textChars":24,"textLines":1,"bbox":[112,268,470,46]}
+{"kind":"shape","id":"sh/knmtw3al","slide":3,"bbox":[112,328,445,0]}
+{"kind":"textbox","id":"sh/q5wbm1sn","slide":3,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[58,360,36,24]}
+{"kind":"textbox","id":"sh/r65cvmt8","slide":3,"text":"자세 분석","textPreview":"자세 분석","textChars":5,"textLines":1,"bbox":[112,356,210,30]}
+{"kind":"textbox","id":"sh/c7ytorad","slide":3,"text":"관절 좌표에서 네 가지 러닝 자세 특성값 계산","textPreview":"관절 좌표에서 네 가지 러닝 자세 특성값 계산","textChars":25,"textLines":1,"bbox":[112,398,470,46]}
+{"kind":"shape","id":"sh/d87uxwry","slide":3,"bbox":[112,458,445,0]}
+{"kind":"textbox","id":"sh/2hwbihsb","slide":3,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[58,490,36,24]}
+{"kind":"textbox","id":"sh/3i5srmtw","slide":3,"text":"리포트와 기록","textPreview":"리포트와 기록","textChars":7,"textLines":1,"bbox":[112,486,210,30]}
+{"kind":"textbox","id":"sh/43etkrah","slide":3,"text":"측정값, 개선 피드백, 스켈레톤 영상을 저장","textPreview":"측정값, 개선 피드백, 스켈레톤 영상을 저장","textChars":24,"textLines":1,"bbox":[112,528,470,46]}
+{"kind":"shape","id":"sh/p4natwb2","slide":3,"bbox":[112,588,445,0]}
+{"kind":"shape","id":"sh/mdgbulsv","slide":3,"bbox":[708,175,218,463]}
+{"kind":"shape","id":"sh/ne9c3690","slide":3,"bbox":[962,175,218,463]}
+{"kind":"textbox","id":"sh/5kjqx8ri","slide":3,"text":"업로드","textPreview":"업로드","textChars":3,"textLines":1,"bbox":[760,644,120,22]}
+{"kind":"textbox","id":"sh/kja9o3qd","slide":3,"text":"분석 결과","textPreview":"분석 결과","textChars":5,"textLines":1,"bbox":[1010,644,126,22]}
+{"kind":"image","id":"im/ovuh4jyh","slide":3,"name":"","alt":"러닝 영상 업로드 화면","bbox":[730,188,174,438]}
+{"kind":"image","id":"im/pw3ixof2","slide":3,"name":"","alt":"분석 결과 화면","bbox":[984,188,174,438]}
+{"kind":"notes","id":"nt/ytis3d","slide":3,"text":"약 40초. Source: 기존 발표자료 4~7장과 앱 화면 이미지. 진단 서비스가 아니라 러닝 자세 분석 및 피드백 서비스로 설명한다."}
+{"kind":"slide","id":"sl/dztzgg","slide":4,"title":"03 · 시연 영상","textShapes":15}
+{"kind":"textbox","id":"sh/gvm1ofax","slide":4,"text":"03 · 시연 영상","textPreview":"03 · 시연 영상","textChars":10,"textLines":1,"bbox":[42,24,360,20]}
+{"kind":"textbox","id":"sh/fudkvatc","slide":4,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[1194,24,42,20]}
+{"kind":"textbox","id":"sh/e94jm5sr","slide":4,"text":"서비스 시연","textPreview":"서비스 시연","textChars":6,"textLines":1,"bbox":[42,72,1138,52]}
+{"kind":"shape","id":"sh/p0f21kre","slide":4,"bbox":[42,132,1194,0]}
+{"kind":"shape","id":"sh/ozmlsfat","slide":4,"bbox":[42,164,820,462]}
+{"kind":"textbox","id":"sh/2x43qpsn","slide":4,"text":"▶","textPreview":"▶","textChars":1,"textLines":1,"bbox":[388,326,92,92]}
+{"kind":"textbox","id":"sh/x4f254ra","slide":4,"text":"VIDEO PLACEHOLDER","textPreview":"VIDEO PLACEHOLDER","textChars":17,"textLines":1,"bbox":[58,586,210,18]}
+{"kind":"textbox","id":"sh/c36lwza5","slide":4,"text":"발표용 서비스 시연 영상으로 교체","textPreview":"발표용 서비스 시연 영상으로 교체","textChars":18,"textLines":1,"bbox":[895,182,315,34]}
+{"kind":"textbox","id":"sh/ido7qx07","slide":4,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[900,256,28,24]}
+{"kind":"textbox","id":"sh/jex8z21s","slide":4,"text":"영상 선택과 분석 요청","textPreview":"영상 선택과 분석 요청","textChars":12,"textLines":1,"bbox":[936,255,264,26]}
+{"kind":"shape","id":"sh/kf69s7id","slide":4,"bbox":[900,294,286,0]}
+{"kind":"textbox","id":"sh/5gfq1cjy","slide":4,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[900,328,28,24]}
+{"kind":"textbox","id":"sh/6horuh0j","slide":4,"text":"진행 상태 확인","textPreview":"진행 상태 확인","textChars":8,"textLines":1,"bbox":[936,327,264,26]}
+{"kind":"shape","id":"sh/rix83214","slide":4,"bbox":[900,366,286,0]}
+{"kind":"textbox","id":"sh/sjq9w7ip","slide":4,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[900,400,28,24]}
+{"kind":"textbox","id":"sh/tkzq5cju","slide":4,"text":"자세 점수와 핵심 피드백","textPreview":"자세 점수와 핵심 피드백","textChars":13,"textLines":1,"bbox":[936,399,264,26]}
+{"kind":"shape","id":"sh/ml47id0f","slide":4,"bbox":[900,438,286,0]}
+{"kind":"textbox","id":"sh/nmd8ri1k","slide":4,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[900,472,28,24]}
+{"kind":"textbox","id":"sh/bq94jehc","slide":4,"text":"기록 화면 재조회","textPreview":"기록 화면 재조회","textChars":9,"textLines":1,"bbox":[936,471,264,26]}
+{"kind":"shape","id":"sh/qp0nq9g7","slide":4,"bbox":[900,510,286,0]}
+{"kind":"shape","id":"sh/dsb6lozi","slide":4,"bbox":[892,560,304,70]}
+{"kind":"textbox","id":"sh/cri5sjyx","slide":4,"text":"현재는 Coach 출력 영상의 대표 프레임입니다\n영상 파일을 받으면 같은 영역에 교체합니다","textPreview":"현재는 Coach 출력 영상의 대표 프레임입니다 | 영상 파일을 받으면 같은 영역에 교체합니다","textChars":50,"textLines":2,"bbox":[910,574,268,42]}
+{"kind":"image","id":"im/u5wz2dov","slide":4,"name":"","alt":"HPE 결과 영상 포스터","bbox":[52,174,800,442]}
+{"kind":"notes","id":"nt/dztzgg","slide":4,"text":"서비스 시연 영상 파일이 제공되지 않아 교체 가능한 영상 영역으로 구성했다. 현재 포스터는 Coach/run/test12/outputs/output.mp4의 대표 프레임이다."}
+{"kind":"slide","id":"sl/4ackqz","slide":5,"title":"04 · 분석 파이프라인","textShapes":30}
+{"kind":"textbox","id":"sh/8vq1032p","slide":5,"text":"04 · 분석 파이프라인","textPreview":"04 · 분석 파이프라인","textChars":13,"textLines":1,"bbox":[42,24,360,20]}
+{"kind":"textbox","id":"sh/7uh0ryl4","slide":5,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[1194,24,42,20]}
+{"kind":"textbox","id":"sh/6t8jydkj","slide":5,"text":"영상에서 분석 리포트까지","textPreview":"영상에서 분석 리포트까지","textChars":13,"textLines":1,"bbox":[42,72,1138,52]}
+{"kind":"shape","id":"sh/lszip83y","slide":5,"bbox":[42,132,1194,0]}
+{"kind":"textbox","id":"sh/k761w32d","slide":5,"text":"러닝 영상의 관절 좌표를 추출하고 움직임 피처를 계산해 에이전트 입력으로 전달합니다","textPreview":"러닝 영상의 관절 좌표를 추출하고 움직임 피처를 계산해 에이전트 입력으로 전달합니다","textChars":46,"textLines":1,"bbox":[42,150,940,26]}
+{"kind":"shape","id":"sh/j6x0nyl8","slide":5,"bbox":[42,190,250,330]}
+{"kind":"textbox","id":"sh/y5ojutkn","slide":5,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[58,206,28,16]}
+{"kind":"shape","id":"sh/43a18n2x","slide":5,"bbox":[137,310,60,60]}
+{"kind":"textbox","id":"sh/6xw72hwr","slide":5,"text":"▶","textPreview":"▶","textChars":1,"textLines":1,"bbox":[147,322,40,36]}
+{"kind":"textbox","id":"sh/7y5obmxc","slide":5,"text":"MP4 · 측면 러닝 영상","textPreview":"MP4 · 측면 러닝 영상","textChars":14,"textLines":1,"bbox":[64,476,206,20]}
+{"kind":"shape","id":"sh/8zep4rex","slide":5,"bbox":[342,190,250,330]}
+{"kind":"textbox","id":"sh/tkn6dwf2","slide":5,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[358,206,28,16]}
+{"kind":"textbox","id":"sh/ju5o72x0","slide":5,"text":"26개 관절 좌표 · confidence","textPreview":"26개 관절 좌표 · confidence","textChars":22,"textLines":1,"bbox":[358,476,218,20]}
+{"kind":"shape","id":"sh/kvep07el","slide":5,"bbox":[642,190,250,330]}
+{"kind":"textbox","id":"sh/lwn69cf6","slide":5,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[658,206,28,16]}
+{"kind":"shape","id":"sh/ipg7a1wz","slide":5,"bbox":[652,234,110,218]}
+{"kind":"shape","id":"sh/fu14bydw","slide":5,"bbox":[772,234,110,218]}
+{"kind":"shape","id":"sh/1wjmd8vm","slide":5,"bbox":[697,304,52,18]}
+{"kind":"textbox","id":"sh/0val43uh","slide":5,"text":"102.4°","textPreview":"102.4°","textChars":6,"textLines":1,"bbox":[702,309,42,10]}
+{"kind":"textbox","id":"sh/ny14fyds","slide":5,"text":"t₀   t₁   t₂","textPreview":"t₀   t₁   t₂","textChars":12,"textLines":1,"bbox":[786,250,82,12]}
+{"kind":"shape","id":"sh/mxs36dc7","slide":5,"bbox":[660,426,94,20]}
+{"kind":"textbox","id":"sh/90jmh8vy","slide":5,"text":"관절 각도  θ","textPreview":"관절 각도  θ","textChars":8,"textLines":1,"bbox":[668,431,78,11]}
+{"kind":"shape","id":"sh/oza583ud","slide":5,"bbox":[780,426,94,20]}
+{"kind":"textbox","id":"sh/b2l4jid4","slide":5,"text":"속도  Δp / Δt","textPreview":"속도  Δp / Δt","textChars":11,"textLines":1,"bbox":[788,431,78,11]}
+{"kind":"textbox","id":"sh/a1snadcj","slide":5,"text":"프레임 간 좌표 변화 계산","textPreview":"프레임 간 좌표 변화 계산","textChars":14,"textLines":1,"bbox":[658,476,218,20]}
+{"kind":"shape","id":"sh/87ul0nah","slide":5,"bbox":[942,190,296,330]}
+{"kind":"textbox","id":"sh/ts3mtsb2","slide":5,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[958,206,28,16]}
+{"kind":"shape","id":"sh/65c3ydsr","slide":5,"bbox":[958,298,82,82]}
+{"kind":"textbox","id":"sh/76lkritw","slide":5,"text":"AI\nAGENT","textPreview":"AI | AGENT","textChars":8,"textLines":2,"bbox":[974,319,50,36]}
+{"kind":"shape","id":"sh/k3ulw3al","slide":5,"bbox":[1056,230,166,244]}
+{"kind":"shape","id":"sh/y1s3udsf","slide":5,"bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/j2lknit0","slide":5,"text":"통계 · 판정 · 코칭 리포트","textPreview":"통계 · 판정 · 코칭 리포트","textChars":16,"textLines":1,"bbox":[958,484,264,18]}
+{"kind":"shape","id":"sh/wzals3a9","slide":5,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/x0j2l8bu","slide":5,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/14zit4rm","slide":5,"bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/03qh0zq1","slide":5,"text":"KEYPOINTS","textPreview":"KEYPOINTS","textChars":9,"textLines":1,"bbox":[282,328,70,12]}
+{"kind":"textbox","id":"sh/f2h0ru9w","slide":5,"text":"FEATURES","textPreview":"FEATURES","textChars":8,"textLines":1,"bbox":[582,328,70,12]}
+{"kind":"textbox","id":"sh/ehozyp8b","slide":5,"text":"VALUES","textPreview":"VALUES","textChars":6,"textLines":1,"bbox":[882,328,70,12]}
+{"kind":"textbox","id":"sh/98zix4ry","slide":5,"text":"VIDEO","textPreview":"VIDEO","textChars":5,"textLines":1,"bbox":[42,552,250,16]}
+{"kind":"textbox","id":"sh/o7q14jqd","slide":5,"text":"영상","textPreview":"영상","textChars":2,"textLines":1,"bbox":[42,578,250,30]}
+{"kind":"textbox","id":"sh/n6h0ve9s","slide":5,"text":"POSE ESTIMATION","textPreview":"POSE ESTIMATION","textChars":15,"textLines":1,"bbox":[342,552,250,16]}
+{"kind":"textbox","id":"sh/258j2987","slide":5,"text":"HPE 데이터 추출","textPreview":"HPE 데이터 추출","textChars":10,"textLines":1,"bbox":[342,578,250,30]}
+{"kind":"textbox","id":"sh/5cfilkre","slide":5,"text":"ANGLE · VELOCITY","textPreview":"ANGLE · VELOCITY","textChars":16,"textLines":1,"bbox":[642,552,250,16]}
+{"kind":"textbox","id":"sh/4b6hsfq9","slide":5,"text":"피처 계산","textPreview":"피처 계산","textChars":5,"textLines":1,"bbox":[642,578,250,30]}
+{"kind":"textbox","id":"sh/uhkf2lor","slide":5,"text":"REPORT","textPreview":"REPORT","textChars":6,"textLines":1,"bbox":[942,552,296,16]}
+{"kind":"textbox","id":"sh/vitgvqpc","slide":5,"text":"에이전트 분석","textPreview":"에이전트 분석","textChars":7,"textLines":1,"bbox":[942,578,296,30]}
+{"kind":"textbox","id":"sh/gjmx4v6x","slide":5,"text":"main.sh는 HPE, 피처 계산, 에이전트를 순차 실행합니다","textPreview":"main.sh는 HPE, 피처 계산, 에이전트를 순차 실행합니다","textChars":35,"textLines":1,"bbox":[42,650,1196,20]}
+{"kind":"image","id":"im/87mt4r2t","slide":5,"name":"","alt":"주석이 없는 3D 러너 아바타 영상 프레임","bbox":[52,234,230,218]}
+{"kind":"image","id":"im/pgbi1o3a","slide":5,"name":"","alt":"3D 러너 아바타의 전신 관절 키포인트와 스켈레톤","bbox":[352,234,230,218]}
+{"kind":"image","id":"im/cj21w3m1","slide":5,"name":"","alt":"3D 러너 아바타의 정밀 팔꿈치 관절 각도 시각화","bbox":[658,240,98,206]}
+{"kind":"image","id":"im/x03uhgfu","slide":5,"name":"","alt":"3D 러너 아바타의 프레임 간 이동 속도 시각화","bbox":[778,240,98,206]}
+{"kind":"image","id":"im/uxgvip0n","slide":5,"name":"","alt":"러닝 통계와 피처 추이 화면","bbox":[1062,236,154,232]}
+{"kind":"notes","id":"nt/4ackqz","slide":5,"text":"Source: Coach/run/test12/transformed.mp4, Coach/run/test12/outputs/output.mp4, 기존 발표자료의 피처 이미지와 기록 화면, Coach/scripts/main.sh. 영상, HPE, 피처, 에이전트의 4단계 흐름을 한 장에 합쳤다."}
+{"kind":"slide","id":"sl/a9m78n","slide":6,"title":"04 · 분석 파이프라인","textShapes":25}
+{"kind":"textbox","id":"sh/e1gje5oj","slide":6,"text":"04 · 분석 파이프라인","textPreview":"04 · 분석 파이프라인","textChars":13,"textLines":1,"bbox":[42,24,360,20]}
+{"kind":"textbox","id":"sh/147ipk7a","slide":6,"text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[1194,24,42,20]}
+{"kind":"textbox","id":"sh/03y1gf6p","slide":6,"text":"Coach 분석 파이프라인","textPreview":"Coach 분석 파이프라인","textChars":14,"textLines":1,"bbox":[42,72,1138,52]}
+{"kind":"shape","id":"sh/n690rapg","slide":6,"bbox":[42,132,1194,0]}
+{"kind":"shape","id":"sh/25gjipov","slide":6,"bbox":[42,314,118,58]}
+{"kind":"textbox","id":"sh/p8ritk76","slide":6,"text":"영상 입력","textPreview":"영상 입력","textChars":5,"textLines":1,"bbox":[58,333,86,20]}
+{"kind":"shape","id":"sh/o7i1kf6l","slide":6,"bbox":[204,300,158,86]}
+{"kind":"textbox","id":"sh/3a50fqpw","slide":6,"text":"프레임 단위로 분할","textPreview":"프레임 단위로 분할","textChars":10,"textLines":1,"bbox":[220,329,126,22]}
+{"kind":"shape","id":"sh/i9wz6l8b","slide":6,"bbox":[468,164,224,238]}
+{"kind":"shape","id":"sh/sretsfeh","slide":6,"bbox":[500,180,160,62]}
+{"kind":"textbox","id":"sh/tcnulkv2","slide":6,"text":"detection","textPreview":"detection","textChars":9,"textLines":1,"bbox":[530,201,100,18]}
+{"kind":"shape","id":"sh/6pwbqpwr","slide":6,"bbox":[500,254,160,62]}
+{"kind":"textbox","id":"sh/7q5cjadw","slide":6,"text":"촬영 규격 검사","textPreview":"촬영 규격 검사","textChars":8,"textLines":1,"bbox":[524,275,112,18]}
+{"kind":"shape","id":"sh/gfetwzet","slide":6,"bbox":[500,328,160,62]}
+{"kind":"textbox","id":"sh/hg7up4ve","slide":6,"text":"human pose\nestimation","textPreview":"human pose | estimation","textChars":21,"textLines":2,"bbox":[528,342,104,34]}
+{"kind":"shape","id":"sh/udwbupwn","slide":6,"bbox":[754,204,180,96]}
+{"kind":"textbox","id":"sh/fe5cnud8","slide":6,"text":"5개 프레임 임시 저장","textPreview":"5개 프레임 임시 저장","textChars":12,"textLines":1,"bbox":[770,220,148,18]}
+{"kind":"textbox","id":"sh/wjutkve9","slide":6,"text":"t-2 frame\nt-1 frame\nt frame\nt+1 frame\nt+2 frame","textPreview":"t-2 frame | t-1 frame | t frame | t+1 frame | t+2 frame","textChars":47,"textLines":5,"bbox":[790,245,108,48]}
+{"kind":"shape","id":"sh/xk3ud0vu","slide":6,"bbox":[942,268,296,180]}
+{"kind":"textbox","id":"sh/d4bi1sjm","slide":6,"text":"Interpolation","textPreview":"Interpolation","textChars":13,"textLines":1,"bbox":[1030,282,120,18]}
+{"kind":"shape","id":"sh/c321sn21","slide":6,"bbox":[1008,306,164,0]}
+{"kind":"shape","id":"sh/b2t0z21g","slide":6,"bbox":[970,350,228,0]}
+{"kind":"textbox","id":"sh/q1kjqxkv","slide":6,"text":"Frame","textPreview":"Frame","textChars":5,"textLines":1,"bbox":[1198,342,36,16]}
+{"kind":"shape","id":"sh/l8vi5cji","slide":6,"bbox":[982,366,184,50]}
+{"kind":"shape","id":"sh/0721w72x","slide":6,"bbox":[982,338,0,88]}
+{"kind":"shape","id":"sh/z6t0321s","slide":6,"bbox":[978,396,8,8]}
+{"kind":"textbox","id":"sh/y5kjuxk7","slide":6,"text":"t-2","textPreview":"t-2","textChars":3,"textLines":1,"bbox":[966,326,32,12]}
+{"kind":"shape","id":"sh/9wvi9cju","slide":6,"bbox":[1028,338,0,88]}
+{"kind":"shape","id":"sh/8vm10r29","slide":6,"bbox":[1024,380,8,8]}
+{"kind":"textbox","id":"sh/6hgfu90r","slide":6,"text":"t-1","textPreview":"t-1","textChars":3,"textLines":1,"bbox":[1012,326,32,12]}
+{"kind":"shape","id":"sh/7ipgne1c","slide":6,"bbox":[1074,338,0,88]}
+{"kind":"shape","id":"sh/sjyxwjix","slide":6,"bbox":[1070,370,8,8]}
+{"kind":"textbox","id":"sh/t47ypoz2","slide":6,"text":"t","textPreview":"t","textChars":1,"textLines":1,"bbox":[1058,326,32,12]}
+{"kind":"shape","id":"sh/e5gfyt0n","slide":6,"bbox":[1120,338,0,88]}
+{"kind":"shape","id":"sh/f6pgryh8","slide":6,"bbox":[1116,384,8,8]}
+{"kind":"textbox","id":"sh/g7yx03it","slide":6,"text":"t+1","textPreview":"t+1","textChars":3,"textLines":1,"bbox":[1104,326,32,12]}
+{"kind":"shape","id":"sh/18rytoze","slide":6,"bbox":[1166,338,0,88]}
+{"kind":"shape","id":"sh/290f2t0z","slide":6,"bbox":[1162,406,8,8]}
+{"kind":"textbox","id":"sh/3a9gvyhk","slide":6,"text":"t+2","textPreview":"t+2","textChars":3,"textLines":1,"bbox":[1150,326,32,12]}
+{"kind":"shape","id":"sh/bq5gfy9o","slide":6,"bbox":[1070,324,8,8]}
+{"kind":"shape","id":"sh/apwfmts3","slide":6,"bbox":[1074,332,0,32]}
+{"kind":"textbox","id":"sh/xsnyh8re","slide":6,"text":"↓","textPreview":"↓","textChars":1,"textLines":1,"bbox":[1065,342,18,18]}
+{"kind":"shape","id":"sh/crexo3a9","slide":6,"bbox":[638,464,184,68]}
+{"kind":"textbox","id":"sh/zu5gji9k","slide":6,"text":"t-2 frame\n비디오에 저장","textPreview":"t-2 frame | 비디오에 저장","textChars":17,"textLines":2,"bbox":[660,480,140,38]}
+{"kind":"shape","id":"sh/ytwfqdsz","slide":6,"bbox":[618,554,232,70]}
+{"kind":"textbox","id":"sh/lw7yl8rq","slide":6,"text":"Human Pose Estimation\n데이터에서 피처 추출","textPreview":"Human Pose Estimation | 데이터에서 피처 추출","textChars":33,"textLines":2,"bbox":[640,572,188,38]}
+{"kind":"shape","id":"sh/kvyxs3a5","slide":6,"bbox":[916,552,152,72]}
+{"kind":"textbox","id":"sh/fylw7e9g","slide":6,"text":"Agent","textPreview":"Agent","textChars":5,"textLines":1,"bbox":[956,578,72,18]}
+{"kind":"shape","id":"sh/excfe9sv","slide":6,"bbox":[1114,558,124,60]}
+{"kind":"textbox","id":"sh/43qdofqt","slide":6,"text":"Report","textPreview":"Report","textChars":6,"textLines":1,"bbox":[1136,578,80,18]}
+{"kind":"shape","id":"sh/54juhk7e","slide":6,"bbox":[850,640,284,66]}
+{"kind":"textbox","id":"sh/i18vm58n","slide":6,"text":"prompts","textPreview":"prompts","textChars":7,"textLines":1,"bbox":[866,650,70,14]}
+{"kind":"textbox","id":"sh/j2hcfap8","slide":6,"text":"당신은 러닝 자세 분석 리포트를 작성하는 AI 입니다.   {INSTRUCTION}   {features}","textPreview":"당신은 러닝 자세 분석 리포트를 작성하는 AI 입니다.   {INSTRUCTION}   {features}","textChars":59,"textLines":1,"bbox":[866,670,252,28]}
+{"kind":"shape","id":"sh/wzqdkvqh","slide":6,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/h0zud072","slide":6,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/ud8bi58b","slide":6,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/vehcba9w","slide":6,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/0vadwzq1","slide":6,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/1w3up476","slide":6,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/pgfmt0ve","slide":6,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/of6lkvet","slide":6,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/3ex4rqd8","slide":6,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/2do3ilwn","slide":6,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/1cvmp0v2","slide":6,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/gbmlgveh","slide":6,"bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/fadknqdc","slide":6,"text":"t+3 frame load","textPreview":"t+3 frame load","textChars":14,"textLines":1,"bbox":[352,258,110,16]}
+{"kind":"notes","id":"nt/a9m78n","slide":6,"text":"Source: 사용자 제공 codex-clipboard-2ed76b86-2e47-4cdc-b27d-c352b1b25716.png. 내용, 객체 위치, 보간 그래프, 화살표 방향과 연결 관계는 변경하지 않고 선·배경·폰트·강조색만 발표자료 스타일로 변경했다."}
+{"kind":"slide","id":"sl/t4enkw","slide":7,"title":"04 · 분석 파이프라인","textShapes":18}
+{"kind":"textbox","id":"sh/xwvet87m","slide":7,"text":"04 · 분석 파이프라인","textPreview":"04 · 분석 파이프라인","textChars":13,"textLines":1,"bbox":[42,24,360,20]}
+{"kind":"textbox","id":"sh/a94vydov","slide":7,"text":"07","textPreview":"07","textChars":2,"textLines":1,"bbox":[1194,24,42,20]}
+{"kind":"textbox","id":"sh/badwripg","slide":7,"text":"네 가지 자세 피처 추출","textPreview":"네 가지 자세 피처 추출","textChars":13,"textLines":1,"bbox":[42,72,1138,52]}
+{"kind":"shape","id":"sh/kz6d4n6x","slide":7,"bbox":[42,132,1194,0]}
+{"kind":"textbox","id":"sh/l0fexs7i","slide":7,"text":"pose_predictions.json, details.json, user_info.json을 PoseSequence로 묶어 네 가지 피처를 계산합니다","textPreview":"pose_predictions.json, details.json, user_info.json을 PoseSequence로 묶어 네 가지 피처를 계산합니다","textChars":84,"textLines":1,"bbox":[42,152,1040,30]}
+{"kind":"shape","id":"sh/yx4v2do7","slide":7,"bbox":[42,206,264,330]}
+{"kind":"textbox","id":"sh/032dsj6t","slide":7,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[42,554,30,22]}
+{"kind":"textbox","id":"sh/14bulo7e","slide":7,"text":"골반 수직 진동","textPreview":"골반 수직 진동","textChars":8,"textLines":1,"bbox":[80,550,220,28]}
+{"kind":"textbox","id":"sh/hknqt0zm","slide":7,"text":"접지 중 골반 높이 변화 ÷ 신장","textPreview":"접지 중 골반 높이 변화 ÷ 신장","textChars":18,"textLines":1,"bbox":[80,586,220,42]}
+{"kind":"shape","id":"sh/gze90vi1","slide":7,"bbox":[344,206,264,330]}
+{"kind":"textbox","id":"sh/uxcryl0b","slide":7,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[344,554,30,22]}
+{"kind":"textbox","id":"sh/ponax0zy","slide":7,"text":"팔꿈치 각도","textPreview":"팔꿈치 각도","textChars":6,"textLines":1,"bbox":[382,550,220,28]}
+{"kind":"textbox","id":"sh/4ne94vid","slide":7,"text":"한 스트라이드의 각도 범위","textPreview":"한 스트라이드의 각도 범위","textChars":14,"textLines":1,"bbox":[382,586,220,42]}
+{"kind":"shape","id":"sh/3m58vahs","slide":7,"bbox":[646,206,264,330]}
+{"kind":"textbox","id":"sh/ds7a1kzu","slide":7,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[646,554,30,22]}
+{"kind":"textbox","id":"sh/cry9sfi9","slide":7,"text":"몸통 굴곡","textPreview":"몸통 굴곡","textChars":5,"textLines":1,"bbox":[684,550,220,28]}
+{"kind":"textbox","id":"sh/w76lknax","slide":7,"text":"어깨 중심과 골반 중심의 기울기","textPreview":"어깨 중심과 골반 중심의 기울기","textChars":17,"textLines":1,"bbox":[684,586,220,42]}
+{"kind":"shape","id":"sh/x8z2dsb2","slide":7,"bbox":[948,206,264,330]}
+{"kind":"textbox","id":"sh/v6xkbitc","slide":7,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[948,554,30,22]}
+{"kind":"textbox","id":"sh/kbqlonat","slide":7,"text":"전방 자세 기울기","textPreview":"전방 자세 기울기","textChars":9,"textLines":1,"bbox":[986,550,220,28]}
+{"kind":"textbox","id":"sh/5cz2hsbe","slide":7,"text":"목과 발목을 잇는 선의 각도","textPreview":"목과 발목을 잇는 선의 각도","textChars":15,"textLines":1,"bbox":[986,586,220,42]}
+{"kind":"textbox","id":"sh/i983mxsn","slide":7,"text":"OUTPUT","textPreview":"OUTPUT","textChars":6,"textLines":1,"bbox":[42,656,70,18]}
+{"kind":"textbox","id":"sh/jahkfit8","slide":7,"text":"cal_stride, pixel2m, gct 이후 feature1~4 실행 · feature_results.json 저장","textPreview":"cal_stride, pixel2m, gct 이후 feature1~4 실행 · feature_results.json 저장","textChars":67,"textLines":1,"bbox":[128,653,920,22]}
+{"kind":"image","id":"im/6lgfu9k7","slide":7,"name":"","alt":"골반 수직 진동","bbox":[52,216,244,310]}
+{"kind":"image","id":"im/0bm5wzux","slide":7,"name":"","alt":"팔꿈치 각도","bbox":[354,216,244,310]}
+{"kind":"image","id":"im/d8v614vm","slide":7,"name":"","alt":"몸통 굴곡","bbox":[656,216,244,310]}
+{"kind":"image","id":"im/tor25gb2","slide":7,"name":"","alt":"전방 자세 기울기","bbox":[958,216,244,310]}
+{"kind":"notes","id":"nt/t4enkw","slide":7,"text":"Source: Coach/scripts/features/feature_extract.py, Coach/scripts/features/utils.py. 네 함수 feature1~feature4와 PoseSequence의 cal_stride, gct, pixel2m을 설명한다."}
+{"kind":"slide","id":"sl/3eafut","slide":8,"title":"04 · 분석 파이프라인","textShapes":21}
+{"kind":"textbox","id":"sh/0v61orut","slide":8,"text":"04 · 분석 파이프라인","textPreview":"04 · 분석 파이프라인","textChars":13,"textLines":1,"bbox":[42,24,360,20]}
+{"kind":"textbox","id":"sh/fux0fmd8","slide":8,"text":"08","textPreview":"08","textChars":2,"textLines":1,"bbox":[1194,24,42,20]}
+{"kind":"textbox","id":"sh/etozmhcn","slide":8,"text":"판정 로직과 Coach 에이전트","textPreview":"판정 로직과 Coach 에이전트","textChars":17,"textLines":1,"bbox":[42,72,1138,52]}
+{"kind":"shape","id":"sh/tsfidcvi","slide":8,"bbox":[42,132,1194,0]}
+{"kind":"textbox","id":"sh/srmhk7ux","slide":8,"text":"수치 계산과 문장 생성을 분리해 결과의 근거를 추적할 수 있습니다","textPreview":"수치 계산과 문장 생성을 분리해 결과의 근거를 추적할 수 있습니다","textChars":36,"textLines":1,"bbox":[42,152,820,30]}
+{"kind":"textbox","id":"sh/r6d0b2dc","slide":8,"text":"DETERMINISTIC","textPreview":"DETERMINISTIC","textChars":13,"textLines":1,"bbox":[58,214,180,18]}
+{"kind":"textbox","id":"sh/654zihcr","slide":8,"text":"피처 계산과 구간 판정","textPreview":"피처 계산과 구간 판정","textChars":12,"textLines":1,"bbox":[58,248,360,34]}
+{"kind":"textbox","id":"sh/xozipgvm","slide":8,"text":"feature_results.json에 측정값, 기준 구간,\n행동 지시, 결과 해석을 구조화해 저장","textPreview":"feature_results.json에 측정값, 기준 구간, | 행동 지시, 결과 해석을 구조화해 저장","textChars":55,"textLines":2,"bbox":[58,300,448,74]}
+{"kind":"shape","id":"sh/cnq1wbu1","slide":8,"bbox":[58,402,438,154]}
+{"kind":"textbox","id":"sh/apw7ulcb","slide":8,"text":"{\n  value,\n  range 또는 boundary,\n  instruction, outcome\n}","textPreview":"{ |   value, |   range 또는 boundary, |   instruction, outcome | }","textChars":56,"textLines":5,"bbox":[80,424,240,110]}
+{"kind":"textbox","id":"sh/bq58n6dw","slide":8,"text":"4개 피처","textPreview":"4개 피처","textChars":5,"textLines":1,"bbox":[360,442,104,24]}
+{"kind":"textbox","id":"sh/wrepwbuh","slide":8,"text":"Rule Base 결과","textPreview":"Rule Base 결과","textChars":12,"textLines":1,"bbox":[332,482,132,24]}
+{"kind":"shape","id":"sh/xsnqpgv2","slide":8,"bbox":[566,205,2,396]}
+{"kind":"textbox","id":"sh/m1c7q1cf","slide":8,"text":"LANGCHAIN","textPreview":"LANGCHAIN","textChars":9,"textLines":1,"bbox":[626,214,150,18]}
+{"kind":"textbox","id":"sh/n2loj6d0","slide":8,"text":"gpt-5-nano가 리포트 작성","textPreview":"gpt-5-nano가 리포트 작성","textChars":18,"textLines":1,"bbox":[626,248,500,34]}
+{"kind":"textbox","id":"sh/o3upsbu5","slide":8,"text":"현재 Coach 코드는 feature_results.json만 모델에 전달합니다.\n모델은 수치를 다시 계산하지 않고 설명 문장을 작성합니다","textPreview":"현재 Coach 코드는 feature_results.json만 모델에 전달합니다. | 모델은 수치를 다시 계산하지 않고 설명 문장을 작성합니다","textChars":77,"textLines":2,"bbox":[626,300,540,74]}
+{"kind":"shape","id":"sh/943qlgvq","slide":8,"bbox":[626,416,168,94]}
+{"kind":"textbox","id":"sh/6xg7m5cj","slide":8,"text":"입력","textPreview":"입력","textChars":2,"textLines":1,"bbox":[644,432,50,18]}
+{"kind":"textbox","id":"sh/7yp8vqt4","slide":8,"text":"feature_results.json","textPreview":"feature_results.json","textChars":20,"textLines":1,"bbox":[644,466,134,26]}
+{"kind":"shape","id":"sh/32h4nitg","slide":8,"bbox":[852,416,168,94]}
+{"kind":"textbox","id":"sh/218nexsv","slide":8,"text":"모델","textPreview":"모델","textChars":2,"textLines":1,"bbox":[870,432,50,18]}
+{"kind":"textbox","id":"sh/p4zmpsbm","slide":8,"text":"gpt-5-nano","textPreview":"gpt-5-nano","textChars":10,"textLines":1,"bbox":[870,466,134,26]}
+{"kind":"shape","id":"sh/43q5gna1","slide":8,"bbox":[852,378,168,28]}
+{"kind":"textbox","id":"sh/r614r2ts","slide":8,"text":"PERSONA + INSTRUCTION","textPreview":"PERSONA + INSTRUCTION","textChars":21,"textLines":1,"bbox":[862,386,148,12]}
+{"kind":"shape","id":"sh/q58nixs7","slide":8,"bbox":[1078,416,146,94]}
+{"kind":"textbox","id":"sh/d8jmtcbi","slide":8,"text":"출력","textPreview":"출력","textChars":2,"textLines":1,"bbox":[1094,432,50,18]}
+{"kind":"textbox","id":"sh/c7a5k7ax","slide":8,"text":"running_report.md","textPreview":"running_report.md","textChars":17,"textLines":1,"bbox":[1094,466,114,28]}
+{"kind":"shape","id":"sh/za14v2to","slide":8,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/e9snmhs3","slide":8,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/wzulcrqh","slide":8,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/x03mlc72","slide":8,"bbox":[626,560,598,62]}
+{"kind":"textbox","id":"sh/axc3ah8b","slide":8,"text":"현재 Coach 구현 모델  gpt-5-nano · 기존 PPT의 모델 표기를 코드 기준으로 업데이트","textPreview":"현재 Coach 구현 모델  gpt-5-nano · 기존 PPT의 모델 표기를 코드 기준으로 업데이트","textChars":56,"textLines":1,"bbox":[646,580,558,24]}
+{"kind":"notes","id":"nt/3eafut","slide":8,"text":"Source: Coach/scripts/Agent/Running_coach.py, Coach/scripts/Agent/prompts.py. 현재 모델명은 gpt-5-nano이며 feature_results.json을 입력으로 running_report.md를 생성한다."}
+{"kind":"slide","id":"sl/68qczw","slide":9,"title":"05 · 인프라","textShapes":60}
+{"kind":"textbox","id":"sh/hwjqh8ru","slide":9,"text":"05 · 인프라","textPreview":"05 · 인프라","textChars":8,"textLines":1,"bbox":[42,24,360,20]}
+{"kind":"textbox","id":"sh/uts76tsj","slide":9,"text":"09","textPreview":"09","textChars":2,"textLines":1,"bbox":[1194,24,42,20]}
+{"kind":"textbox","id":"sh/fu18fy94","slide":9,"text":"러너스 피드 영상 분석 서비스 기술 아키텍처","textPreview":"러너스 피드 영상 분석 서비스 기술 아키텍처","textChars":24,"textLines":1,"bbox":[42,72,1138,52]}
+{"kind":"shape","id":"sh/4zupc3ql","slide":9,"bbox":[42,132,1194,0]}
+{"kind":"shape","id":"sh/p03ql8r6","slide":9,"bbox":[20,144,1240,424]}
+{"kind":"textbox","id":"sh/2xc7adsf","slide":9,"text":"러너스 피드 서비스 영역","textPreview":"러너스 피드 서비스 영역","textChars":13,"textLines":1,"bbox":[34,150,154,15]}
+{"kind":"shape","id":"sh/3yl8ji90","slide":9,"bbox":[28,170,150,382]}
+{"kind":"textbox","id":"sh/cnupgnqh","slide":9,"text":"사용자 / 외부 네트워크","textPreview":"사용자 / 외부 네트워크","textChars":13,"textLines":1,"bbox":[40,180,128,16]}
+{"kind":"shape","id":"sh/do3qpsr2","slide":9,"bbox":[196,170,838,382]}
+{"kind":"shape","id":"sh/ls7q1wn6","slide":9,"bbox":[214,190,802,164]}
+{"kind":"textbox","id":"sh/kryp8rml","slide":9,"text":"웹 · API 계층","textPreview":"웹 · API 계층","textChars":10,"textLines":1,"bbox":[566,180,120,16]}
+{"kind":"shape","id":"sh/zqp8zm50","slide":9,"bbox":[296,382,492,158]}
+{"kind":"textbox","id":"sh/ypw76h4f","slide":9,"text":"비동기 추론 파이프라인","textPreview":"비동기 추론 파이프라인","textChars":12,"textLines":1,"bbox":[430,365,210,16]}
+{"kind":"shape","id":"sh/9w7q5wn2","slide":9,"bbox":[800,382,206,158]}
+{"kind":"shape","id":"sh/8vypcrmh","slide":9,"bbox":[1050,170,196,382]}
+{"kind":"textbox","id":"sh/7up8365w","slide":9,"text":"데이터 · 결과 저장소","textPreview":"데이터 · 결과 저장소","textChars":12,"textLines":1,"bbox":[1068,180,160,16]}
+{"kind":"shape","id":"sh/mtg7a14b","slide":9,"bbox":[56,222,94,58]}
+{"kind":"textbox","id":"sh/p0n69cny","slide":9,"text":"MP4 선택\n+ 분석 이름 입력","textPreview":"MP4 선택 | + 분석 이름 입력","textChars":17,"textLines":2,"bbox":[68,234,70,34]}
+{"kind":"shape","id":"sh/ozep07md","slide":9,"bbox":[52,314,102,62]}
+{"kind":"textbox","id":"sh/g3ypg7e9","slide":9,"text":"Browser","textPreview":"Browser","textChars":7,"textLines":1,"bbox":[66,335,74,20]}
+{"kind":"shape","id":"sh/14rqpcvu","slide":9,"bbox":[238,218,136,72]}
+{"kind":"textbox","id":"sh/e1g7exw3","slide":9,"text":"NEXT.js","textPreview":"NEXT.js","textChars":7,"textLines":1,"bbox":[256,237,100,22]}
+{"kind":"textbox","id":"sh/f2p8n2do","slide":9,"text":"Next.js UI","textPreview":"Next.js UI","textChars":10,"textLines":1,"bbox":[254,268,104,14]}
+{"kind":"shape","id":"sh/o7ipkru5","slide":9,"bbox":[454,218,112,72]}
+{"kind":"textbox","id":"sh/p8rqtcvq","slide":9,"text":"NGINX","textPreview":"NGINX","textChars":5,"textLines":1,"bbox":[470,238,80,20]}
+{"kind":"textbox","id":"sh/2507ihcz","slide":9,"text":"Nginx","textPreview":"Nginx","textChars":5,"textLines":1,"bbox":[470,268,80,14]}
+{"kind":"shape","id":"sh/3698rmdk","slide":9,"bbox":[648,218,146,72]}
+{"kind":"textbox","id":"sh/cb2poruh","slide":9,"text":"FastAPI","textPreview":"FastAPI","textChars":7,"textLines":1,"bbox":[666,237,110,22]}
+{"kind":"textbox","id":"sh/dwbqxwvm","slide":9,"text":"API","textPreview":"API","textChars":3,"textLines":1,"bbox":[684,268,74,14]}
+{"kind":"shape","id":"sh/nqdsnqx4","slide":9,"bbox":[316,424,104,74]}
+{"kind":"textbox","id":"sh/m54belwj","slide":9,"text":"PostgreSQL","textPreview":"PostgreSQL","textChars":10,"textLines":1,"bbox":[326,449,84,18]}
+{"kind":"shape","id":"sh/9svap0fu","slide":9,"bbox":[448,424,96,74]}
+{"kind":"textbox","id":"sh/8rmtgvep","slide":9,"text":"Redis","textPreview":"Redis","textChars":5,"textLines":1,"bbox":[464,449,64,18]}
+{"kind":"shape","id":"sh/z2tsjqxs","slide":9,"bbox":[572,424,96,74]}
+{"kind":"textbox","id":"sh/y1kbalg7","slide":9,"text":"Celery","textPreview":"Celery","textChars":6,"textLines":1,"bbox":[586,449,68,18]}
+{"kind":"shape","id":"sh/l4valgfy","slide":9,"bbox":[696,408,80,106]}
+{"kind":"textbox","id":"sh/03mtcved","slide":9,"text":"Inference\nWorker","textPreview":"Inference | Worker","textChars":16,"textLines":2,"bbox":[706,432,60,36]}
+{"kind":"textbox","id":"sh/jyxsvaxc","slide":9,"text":"GPU","textPreview":"GPU","textChars":3,"textLines":1,"bbox":[716,486,40,14]}
+{"kind":"shape","id":"sh/ixobm5wr","slide":9,"bbox":[812,392,182,19]}
+{"kind":"textbox","id":"sh/654fq9cv","slide":9,"text":"15-1. OpenCV","textPreview":"15-1. OpenCV","textChars":12,"textLines":1,"bbox":[818,396,170,11]}
+{"kind":"shape","id":"sh/r6dwjetg","slide":9,"bbox":[812,415,182,19]}
+{"kind":"textbox","id":"sh/s7mxsju1","slide":9,"text":"15-2. RTMPose","textPreview":"15-2. RTMPose","textChars":13,"textLines":1,"bbox":[818,419,170,11]}
+{"kind":"shape","id":"sh/t8vel4bm","slide":9,"bbox":[812,438,182,19]}
+{"kind":"textbox","id":"sh/ih4vmpcz","slide":9,"text":"15-3. Metrics & Evidence","textPreview":"15-3. Metrics & Evidence","textChars":24,"textLines":1,"bbox":[818,442,170,11]}
+{"kind":"shape","id":"sh/jidwfut4","slide":9,"bbox":[812,461,182,19]}
+{"kind":"textbox","id":"sh/43mdozup","slide":9,"text":"15-4. Ollama","textPreview":"15-4. Ollama","textChars":12,"textLines":1,"bbox":[818,465,170,11]}
+{"kind":"shape","id":"sh/54veh4ba","slide":9,"bbox":[812,484,182,19]}
+{"kind":"textbox","id":"sh/2dofyts3","slide":9,"text":"15-5. Joint Overlay Renderer","textPreview":"15-5. Joint Overlay Renderer","textChars":28,"textLines":1,"bbox":[818,488,170,11]}
+{"kind":"shape","id":"sh/nyxwryto","slide":9,"bbox":[812,507,182,19]}
+{"kind":"textbox","id":"sh/xsjihsvq","slide":9,"text":"15-6. Result Packager","textPreview":"15-6. Result Packager","textChars":21,"textLines":1,"bbox":[818,511,170,11]}
+{"kind":"shape","id":"sh/c7qhone5","slide":9,"bbox":[1070,216,156,92]}
+{"kind":"textbox","id":"sh/b6hgfidk","slide":9,"text":"OCI Raw Bucket","textPreview":"OCI Raw Bucket","textChars":14,"textLines":1,"bbox":[1082,237,132,18]}
+{"kind":"textbox","id":"sh/a58zmdwf","slide":9,"text":"OCI Object Storage","textPreview":"OCI Object Storage","textChars":18,"textLines":1,"bbox":[1082,271,132,15]}
+{"kind":"shape","id":"sh/p4zyd8vu","slide":9,"bbox":[1070,432,156,98]}
+{"kind":"textbox","id":"sh/o3qhk3e9","slide":9,"text":"OCI Results Bucket","textPreview":"OCI Results Bucket","textChars":18,"textLines":1,"bbox":[1080,454,136,18]}
+{"kind":"textbox","id":"sh/n2hgbido","slide":9,"text":"OCI Object Storage","textPreview":"OCI Object Storage","textChars":18,"textLines":1,"bbox":[1082,490,132,15]}
+{"kind":"shape","id":"sh/218zidw3","slide":9,"bbox":[1022,318,2,2]}
+{"kind":"shape","id":"sh/903ipcvy","slide":9,"bbox":[1022,480,2,2]}
+{"kind":"shape","id":"sh/8zahw7ud","slide":9,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/sf2t8f61","slide":9,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/tgbahk76","slide":9,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/6dkb65ov","slide":9,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/retsfapg","slide":9,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/4b2t4v6p","slide":9,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/5cbad07a","slide":9,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/ipkr25oj","slide":9,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/jqtsbqp4","slide":9,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/wni90v6t","slide":9,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/hora907e","slide":9,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/zi9cjq90","slide":9,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/yhgbalsf","slide":9,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/lkrul0r6","slide":9,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/kjitcval","slide":9,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/7m9cnq9w","slide":9,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/ml0belsr","slide":9,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/9orup0r2","slide":9,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/8nitgvah","slide":9,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/vatcra98","slide":9,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/u90bi5sn","slide":9,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/ix0fmpor","slide":9,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/3y9wfu5c","slide":9,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/4zixoz6x","slide":9,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/50reh4ni","slide":9,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/q10fq9o3","slide":9,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/rm9gje5o","slide":9,"bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/snixsj69","slide":9,"text":"POST\n/api/uploads","textPreview":"POST | /api/uploads","textChars":17,"textLines":2,"bbox":[386,224,60,28]}
+{"kind":"textbox","id":"sh/dobylone","slide":9,"text":"X-API-Key","textPreview":"X-API-Key","textChars":9,"textLines":1,"bbox":[574,236,66,13]}
+{"kind":"textbox","id":"sh/epkfutoz","slide":9,"text":"5. 임시 업로드 URL 생성","textPreview":"5. 임시 업로드 URL 생성","textChars":16,"textLines":1,"bbox":[842,236,190,13]}
+{"kind":"textbox","id":"sh/zqtgne5k","slide":9,"text":"6. PUT video/mp4 (직접 업로드)","textPreview":"6. PUT video/mp4 (직접 업로드)","textChars":25,"textLines":1,"bbox":[354,300,312,14]}
+{"kind":"textbox","id":"sh/9kvids7m","slide":9,"text":"7. POST /uploads/complete","textPreview":"7. POST /uploads/complete","textChars":25,"textLines":1,"bbox":[326,322,222,13]}
+{"kind":"textbox","id":"sh/ojmhknqh","slide":9,"text":"8. HEAD / size / type 검증","textPreview":"8. HEAD / size / type 검증","textChars":24,"textLines":1,"bbox":[704,314,186,13]}
+{"kind":"textbox","id":"sh/nid0bipw","slide":9,"text":"9. POST /jobs","textPreview":"9. POST /jobs","textChars":13,"textLines":1,"bbox":[364,342,154,13]}
+{"kind":"textbox","id":"sh/mh4zid8b","slide":9,"text":"10. Job INSERT · QUEUED","textPreview":"10. Job INSERT · QUEUED","textChars":23,"textLines":1,"bbox":[304,400,150,13]}
+{"kind":"textbox","id":"sh/xofihs7y","slide":9,"text":"11. 추론 작업 발행","textPreview":"11. 추론 작업 발행","textChars":12,"textLines":1,"bbox":[468,400,132,13]}
+{"kind":"textbox","id":"sh/wn6honqd","slide":9,"text":"12. 작업 전달","textPreview":"12. 작업 전달","textChars":9,"textLines":1,"bbox":[660,452,62,26]}
+{"kind":"textbox","id":"sh/bmd0fips","slide":9,"text":"13. PROCESSING","textPreview":"13. PROCESSING","textChars":14,"textLines":1,"bbox":[424,512,126,13]}
+{"kind":"textbox","id":"sh/al4zmd87","slide":9,"text":"14. input.mp4 다운로드","textPreview":"14. input.mp4 다운로드","textChars":18,"textLines":1,"bbox":[770,360,146,13]}
+{"kind":"textbox","id":"sh/lcfilc7u","slide":9,"text":"16. JSON ×3 + MP4 업로드","textPreview":"16. JSON ×3 + MP4 업로드","textChars":21,"textLines":1,"bbox":[976,514,112,24]}
+{"kind":"textbox","id":"sh/kb61s7q9","slide":9,"text":"17. SUCCESS + object names","textPreview":"17. SUCCESS + object names","textChars":26,"textLines":1,"bbox":[416,532,170,13]}
+{"kind":"shape","id":"sh/xgbud8za","slide":9,"bbox":[184,460,92,38]}
+{"kind":"textbox","id":"sh/wf2t43ip","slide":9,"text":"2.5초 폴링\n최대 1시간","textPreview":"2.5초 폴링 | 최대 1시간","textChars":14,"textLines":2,"bbox":[196,468,68,24]}
+{"kind":"textbox","id":"sh/betcbyh4","slide":9,"text":"18. GET /jobs/{job_id} 폴링","textPreview":"18. GET /jobs/{job_id} 폴링","textChars":25,"textLines":1,"bbox":[190,508,118,26]}
+{"kind":"textbox","id":"sh/adkb2t0z","slide":9,"text":"19. 임시 결과 URL 제공 + 리포트 읽기","textPreview":"19. 임시 결과 URL 제공 + 리포트 읽기","textChars":25,"textLines":1,"bbox":[1004,356,204,24]}
+{"kind":"textbox","id":"sh/lkvuhszm","slide":9,"text":"20. 결과 영상 + 측정·근거·AI 해설","textPreview":"20. 결과 영상 + 측정·근거·AI 해설","textChars":23,"textLines":1,"bbox":[214,548,272,14]}
+{"kind":"shape","id":"sh/kj2t8ni1","slide":9,"bbox":[184,590,492,96]}
+{"kind":"textbox","id":"sh/jitcfihg","slide":9,"text":"관찰 가능성","textPreview":"관찰 가능성","textChars":6,"textLines":1,"bbox":[366,576,126,16]}
+{"kind":"shape","id":"sh/yhkb6d0v","slide":9,"bbox":[198,612,80,44]}
+{"kind":"textbox","id":"sh/t8vulszi","slide":9,"text":"API 로그","textPreview":"API 로그","textChars":6,"textLines":1,"bbox":[204,626,68,16]}
+{"kind":"shape","id":"sh/87mtcnix","slide":9,"bbox":[292,612,80,44]}
+{"kind":"textbox","id":"sh/qtgr6pgf","slide":9,"text":"추론 로그","textPreview":"추론 로그","textChars":5,"textLines":1,"bbox":[298,626,68,16]}
+{"kind":"shape","id":"sh/rup8fux0","slide":9,"bbox":[386,612,80,44]}
+{"kind":"textbox","id":"sh/cvy98zyl","slide":9,"text":"작업 메트릭","textPreview":"작업 메트릭","textChars":6,"textLines":1,"bbox":[392,626,68,16]}
+{"kind":"shape","id":"sh/dw7qh4f6","slide":9,"bbox":[480,612,80,44]}
+{"kind":"textbox","id":"sh/exgrapgr","slide":9,"text":"GPU 메트릭","textPreview":"GPU 메트릭","textChars":7,"textLines":1,"bbox":[486,626,68,16]}
+{"kind":"shape","id":"sh/zip8juxw","slide":9,"bbox":[574,612,80,44]}
+{"kind":"textbox","id":"sh/0jy9czyh","slide":9,"text":"알림 (실패)","textPreview":"알림 (실패)","textChars":7,"textLines":1,"bbox":[580,626,68,16]}
+{"kind":"shape","id":"sh/1k7ql4f2","slide":9,"bbox":[712,596,218,72]}
+{"kind":"textbox","id":"sh/ml0re9gn","slide":9,"text":"선택 기능","textPreview":"선택 기능","textChars":5,"textLines":1,"bbox":[782,584,78,16]}
+{"kind":"textbox","id":"sh/nm9snex8","slide":9,"text":"Ollama AI 내러티브 생성 (선택)","textPreview":"Ollama AI 내러티브 생성 (선택)","textChars":22,"textLines":1,"bbox":[734,622,174,18]}
+{"kind":"shape","id":"sh/jq98vedg","slide":9,"bbox":[974,608,42,0]}
+{"kind":"textbox","id":"sh/yp0729cv","slide":9,"text":"API / 제어 흐름","textPreview":"API / 제어 흐름","textChars":11,"textLines":1,"bbox":[1022,601,100,15]}
+{"kind":"shape","id":"sh/lsbqxov6","slide":9,"bbox":[974,636,42,0]}
+{"kind":"textbox","id":"sh/krip4jul","slide":9,"text":"영상 / 결과 데이터","textPreview":"영상 / 결과 데이터","textChars":11,"textLines":1,"bbox":[1022,629,108,15]}
+{"kind":"shape","id":"sh/bm98red4","slide":9,"bbox":[974,664,42,0]}
+{"kind":"textbox","id":"sh/al07y9cj","slide":9,"text":"선택 기능","textPreview":"선택 기능","textChars":5,"textLines":1,"bbox":[1022,657,80,15]}
+{"kind":"notes","id":"nt/68qczw","slide":9,"text":"Source: 사용자 제공 codex-clipboard-681490a5-34db-4f1f-b879-3fff821df989.png. 원본의 영역 중첩, 객체 위치, 5~20번 흐름, 방향, 저장소, 관찰 가능성, 선택 기능을 유지하고 선·배경·폰트·강조색만 발표자료 스타일로 변경했다."}
+{"kind":"slide","id":"sl/sr2klf","slide":10,"title":"05 · 인프라","textShapes":33}
+{"kind":"textbox","id":"sh/25gzulgn","slide":10,"text":"05 · 인프라","textPreview":"05 · 인프라","textChars":8,"textLines":1,"bbox":[42,24,360,20]}
+{"kind":"textbox","id":"sh/p87ipgze","slide":10,"text":"10","textPreview":"10","textChars":2,"textLines":1,"bbox":[1194,24,42,20]}
+{"kind":"textbox","id":"sh/47y1wbyt","slide":10,"text":"분석 Worker와 결과 전달","textPreview":"분석 Worker와 결과 전달","textChars":16,"textLines":1,"bbox":[42,72,1138,52]}
+{"kind":"shape","id":"sh/rap0rqh4","slide":10,"bbox":[42,132,1194,0]}
+{"kind":"textbox","id":"sh/q9gjylgz","slide":10,"text":"GPU Worker가 분석 산출물을 패키징하고, 결과 URL과 리포트를 API로 돌려줍니다","textPreview":"GPU Worker가 분석 산출물을 패키징하고, 결과 URL과 리포트를 API로 돌려줍니다","textChars":50,"textLines":1,"bbox":[42,152,920,30]}
+{"kind":"textbox","id":"sh/dwrit0za","slide":10,"text":"GPU INFERENCE WORKER","textPreview":"GPU INFERENCE WORKER","textChars":20,"textLines":1,"bbox":[42,204,210,20]}
+{"kind":"shape","id":"sh/cby10vyp","slide":10,"bbox":[42,244,188,104]}
+{"kind":"textbox","id":"sh/zy90vqhg","slide":10,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[58,260,28,18]}
+{"kind":"textbox","id":"sh/ex0j25gv","slide":10,"text":"OpenCV","textPreview":"OpenCV","textChars":6,"textLines":1,"bbox":[58,290,158,24]}
+{"kind":"textbox","id":"sh/8buxsbmt","slide":10,"text":"input.mp4","textPreview":"input.mp4","textChars":9,"textLines":1,"bbox":[58,322,158,18]}
+{"kind":"shape","id":"sh/tw3y1gny","slide":10,"bbox":[268,244,188,104]}
+{"kind":"textbox","id":"sh/69cfq14n","slide":10,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[284,260,28,18]}
+{"kind":"textbox","id":"sh/7algz658","slide":10,"text":"RTMPose","textPreview":"RTMPose","textChars":7,"textLines":1,"bbox":[284,290,158,24]}
+{"kind":"textbox","id":"sh/gzehwbmp","slide":10,"text":"관절 좌표","textPreview":"관절 좌표","textChars":5,"textLines":1,"bbox":[284,322,158,18]}
+{"kind":"shape","id":"sh/h0ny5gna","slide":10,"bbox":[494,244,188,104]}
+{"kind":"textbox","id":"sh/uxczul4j","slide":10,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[510,260,28,18]}
+{"kind":"textbox","id":"sh/vylg3q54","slide":10,"text":"Metrics & Evidence","textPreview":"Metrics & Evidence","textChars":18,"textLines":1,"bbox":[510,290,158,24]}
+{"kind":"textbox","id":"sh/43eh0vml","slide":10,"text":"피처 · 근거","textPreview":"피처 · 근거","textChars":7,"textLines":1,"bbox":[510,322,158,18]}
+{"kind":"shape","id":"sh/54ny90n6","slide":10,"bbox":[720,244,188,104]}
+{"kind":"textbox","id":"sh/dkjyt0fa","slide":10,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[736,260,28,18]}
+{"kind":"textbox","id":"sh/cjaxkve5","slide":10,"text":"Joint Overlay","textPreview":"Joint Overlay","textChars":13,"textLines":1,"bbox":[736,290,158,24]}
+{"kind":"textbox","id":"sh/ri1grqxk","slide":10,"text":"결과 영상","textPreview":"결과 영상","textChars":5,"textLines":1,"bbox":[736,322,158,18]}
+{"kind":"shape","id":"sh/qhsfilwz","slide":10,"bbox":[946,244,188,104]}
+{"kind":"textbox","id":"sh/1o3yx0fm","slide":10,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[962,260,28,18]}
+{"kind":"textbox","id":"sh/0nuhove1","slide":10,"text":"Result Packager","textPreview":"Result Packager","textChars":15,"textLines":1,"bbox":[962,290,158,24]}
+{"kind":"textbox","id":"sh/zmlgvqxg","slide":10,"text":"JSON ×3 + MP4","textPreview":"JSON ×3 + MP4","textChars":13,"textLines":1,"bbox":[962,322,158,18]}
+{"kind":"shape","id":"sh/elcfmlwv","slide":10,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/hszylgfi","slide":10,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/grqxcbex","slide":10,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/6xovmhcf","slide":10,"bbox":[534,374,240,72]}
+{"kind":"textbox","id":"sh/7yxcf2d0","slide":10,"text":"OPTIONAL","textPreview":"OPTIONAL","textChars":8,"textLines":1,"bbox":[552,388,70,16]}
+{"kind":"textbox","id":"sh/8z6do7ul","slide":10,"text":"Ollama AI narrative","textPreview":"Ollama AI narrative","textChars":19,"textLines":1,"bbox":[552,414,190,20]}
+{"kind":"textbox","id":"sh/t0fehcv6","slide":10,"text":"선택 기능 · Metrics 이후 실행","textPreview":"선택 기능 · Metrics 이후 실행","textChars":21,"textLines":1,"bbox":[792,398,240,24]}
+{"kind":"shape","id":"sh/u1ovqhcr","slide":10,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/f2hwjmdc","slide":10,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/gnqdsrux","slide":10,"bbox":[42,478,540,136]}
+{"kind":"textbox","id":"sh/hozelwv2","slide":10,"text":"RESULT DELIVERY","textPreview":"RESULT DELIVERY","textChars":15,"textLines":1,"bbox":[62,496,160,18]}
+{"kind":"textbox","id":"sh/a54vexcn","slide":10,"text":"OCI Results Bucket","textPreview":"OCI Results Bucket","textChars":18,"textLines":1,"bbox":[62,528,240,28]}
+{"kind":"textbox","id":"sh/b6dc7ids","slide":10,"text":"JSON 3개와 MP4 업로드 → FastAPI가 임시 결과 URL과 리포트 제공","textPreview":"JSON 3개와 MP4 업로드 → FastAPI가 임시 결과 URL과 리포트 제공","textChars":45,"textLines":1,"bbox":[62,568,490,30]}
+{"kind":"shape","id":"sh/ralkvu1k","slide":10,"bbox":[616,478,608,136]}
+{"kind":"textbox","id":"sh/q9cjmp0z","slide":10,"text":"OBSERVABILITY","textPreview":"OBSERVABILITY","textChars":13,"textLines":1,"bbox":[636,496,150,18]}
+{"kind":"shape","id":"sh/dc32xkjq","slide":10,"bbox":[636,530,164,30]}
+{"kind":"textbox","id":"sh/cbu1ofi5","slide":10,"text":"API 로그","textPreview":"API 로그","textChars":6,"textLines":1,"bbox":[646,537,144,16]}
+{"kind":"shape","id":"sh/ze5kzu1g","slide":10,"bbox":[820,530,164,30]}
+{"kind":"textbox","id":"sh/edwjqp0b","slide":10,"text":"추론 로그","textPreview":"추론 로그","textChars":5,"textLines":1,"bbox":[830,537,144,16]}
+{"kind":"shape","id":"sh/1gn214jm","slide":10,"bbox":[1004,530,164,30]}
+{"kind":"textbox","id":"sh/0fe1szi1","slide":10,"text":"작업 메트릭","textPreview":"작업 메트릭","textChars":6,"textLines":1,"bbox":[1014,537,144,16]}
+{"kind":"shape","id":"sh/ni5k3e1s","slide":10,"bbox":[636,572,164,30]}
+{"kind":"textbox","id":"sh/mhw3u907","slide":10,"text":"GPU 메트릭","textPreview":"GPU 메트릭","textChars":7,"textLines":1,"bbox":[646,579,144,16]}
+{"kind":"shape","id":"sh/k7y1kjy5","slide":10,"bbox":[820,572,164,30]}
+{"kind":"textbox","id":"sh/l87itofq","slide":10,"text":"실패 알림","textPreview":"실패 알림","textChars":5,"textLines":1,"bbox":[830,579,144,16]}
+{"kind":"textbox","id":"sh/ylgji9gf","slide":10,"text":"Worker 상태는 PostgreSQL에 PROCESSING → SUCCESS와 object name으로 기록","textPreview":"Worker 상태는 PostgreSQL에 PROCESSING → SUCCESS와 object name으로 기록","textChars":61,"textLines":1,"bbox":[42,646,890,20]}
+{"kind":"notes","id":"nt/sr2klf","slide":10,"text":"Source: /Users/hyeon/Downloads/시스템아키텍쳐.png. Ollama는 원본 구조도에서 선택 기능이다. 현재 Coach 코드의 리포트 에이전트는 앞 슬라이드처럼 LangChain + gpt-5-nano이며, 두 구현을 동일 구성요소로 오해하지 않도록 분리해 설명한다."}
+{"kind":"slide","id":"sl/1kaace","slide":11,"title":"러너스아이","textShapes":8}
+{"kind":"shape","id":"sh/oz6t0rih","slide":11,"bbox":[0,0,18,720]}
+{"kind":"textbox","id":"sh/3yxc7mhw","slide":11,"text":"러너스아이","textPreview":"러너스아이","textChars":5,"textLines":1,"bbox":[72,62,220,24]}
+{"kind":"textbox","id":"sh/2d4byh0b","slide":11,"text":"러닝 영상을 자세 데이터로 바꾸고,","textPreview":"러닝 영상을 자세 데이터로 바꾸고,","textChars":19,"textLines":1,"bbox":[72,180,920,58]}
+{"kind":"textbox","id":"sh/d4fudwzy","slide":11,"text":"측정값과 개선 피드백을 하나의 리포트로 연결했습니다","textPreview":"측정값과 개선 피드백을 하나의 리포트로 연결했습니다","textChars":28,"textLines":1,"bbox":[72,246,1050,58]}
+{"kind":"shape","id":"sh/c36t4rit","slide":11,"bbox":[72,348,650,0]}
+{"kind":"textbox","id":"sh/b2xcbmh8","slide":11,"text":"영상 기반 관절 추정","textPreview":"영상 기반 관절 추정","textChars":11,"textLines":1,"bbox":[72,388,248,30]}
+{"kind":"textbox","id":"sh/q1ob210n","slide":11,"text":"논문 기반 피처 판정","textPreview":"논문 기반 피처 판정","textChars":11,"textLines":1,"bbox":[342,388,248,30]}
+{"kind":"textbox","id":"sh/l8zuhgza","slide":11,"text":"이해할 수 있는 리포트","textPreview":"이해할 수 있는 리포트","textChars":12,"textLines":1,"bbox":[612,388,270,30]}
+{"kind":"textbox","id":"sh/07qd8bip","slide":11,"text":"감사합니다","textPreview":"감사합니다","textChars":5,"textLines":1,"bbox":[72,600,220,36]}
+{"kind":"textbox","id":"sh/y9ovitof","slide":11,"text":"Q&A","textPreview":"Q&A","textChars":3,"textLines":1,"bbox":[1090,600,120,36]}
+{"kind":"notes","id":"nt/1kaace","slide":11,"text":"약 20초. 핵심 문장을 읽고 Q&A로 전환한다."}

@@ -127,8 +127,9 @@ def feature1(ps: PoseSequence):
         "신장 170cm라면 각각 약 `7.8cm`, `1.2cm`, `4.8~10.4cm`에 해당합니다.", 
         "이 구간은 논문의 공식 절단값이 아니라 표본의 `평균 ± 1SD`를 이용한 실무용 분류입니다."
     )
+    return res
 
-def feature2(ps: PoseSequence, tolerance: float = 5.0):
+def feature2(ps: PoseSequence, tolerance: float = 10.0):
     """
     elbow:
         프레임별 팔꿈치 각도가 들어 있는 기존 NumPy 배열
@@ -136,9 +137,28 @@ def feature2(ps: PoseSequence, tolerance: float = 5.0):
     tolerance:
         논문의 목표 각도와 비교할 때 적용하는 허용오차
     """
-    elbow = ps.joint_angle('left_elbow', smooth=True, negative=False)
+    elbow = ps.joint_angle(f'{ps.direction}_elbow', smooth=True, negative=False)
 
-    elbow_array = np.asarray(elbow)
+    # 팔꿈치 각도를 측정하기 좋은 구간 선정
+    indices = (
+    np.where(ps.df[f'{ps.direction}_elbow_x'] < ps.df[['hip_center_x', 'neck_x']].mean(axis=1))[0]
+    if ps.direction == "right"
+    else
+    np.where(ps.df[f'{ps.direction}_elbow_x'] > ps.df[['hip_center_x', 'neck_x']].mean(axis=1))[0]
+    )
+    groups = np.split(
+        indices,
+        np.where(np.diff(indices) != 1)[0] + 1
+    )
+    middle_frame = (len(ps.df) - 1) / 2
+
+    selected_group = min(
+        groups,
+        key=lambda group: abs(np.mean(group) - middle_frame)
+    )
+    
+
+    elbow_array = np.asarray(elbow[selected_group[0]:selected_group[-1]])
     valid_elbow = elbow_array[np.isfinite(elbow_array)]
 
     if valid_elbow.size == 0:
