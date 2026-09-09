@@ -15,4 +15,4 @@ RUN_FOLDER="$1"
 "$COACH_DIR/.venv/bin/python" \
   "$FEATURES_DIR/feature_extract.py" \
   "$COACH_DIR" \
-  "$RUN_FOLDER" \
+  "$RUN_FOLDER" 
