@@ -123,7 +123,7 @@ class PoseSequence:
             self.strides = extremum
             return extremum
 
-    def pixel2m(self):
+    def pixel2m(self, frame: int = None):
         """
         사용자의 키 정보를 사용해 1pixel을 m단위로 변경한다.
         이 때 사용하는 이미지는 TD시점이다.
@@ -134,7 +134,10 @@ class PoseSequence:
             return np.linalg.norm(a - b, axis=0)
         
         # 사용할 이미지 선택
-        image = self.df.loc[np.asarray(self.strides.loc[2]['frame']).reshape(-1)[0]]
+        if frame is None:
+            image = self.df.loc[np.asarray(self.strides.loc[2]['frame']).reshape(-1)[0]]
+        else:
+            image = self.df.loc[frame]
 
         ankle = _point(image, f"{self.direction}_ankle")
         knee = _point(image, f"{self.direction}_knee")
@@ -154,8 +157,7 @@ class PoseSequence:
         height_px = leg_length + torso_length + head_length
         self.m_per_pixel = self.user['height'] / height_px
         print(f"사용자의 키를 기반으로 계산한 픽셀당 meter는 {self.m_per_pixel} / pixel 입니다.")
-
-        return height_px
+        return self.m_per_pixel
     
 
     def gct(self):

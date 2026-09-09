@@ -41,6 +41,27 @@ ps = PoseSequence(pose_data, detail_data, user_data)
 ps.cal_stride()
 ps.pixel2m()
 
+def cadence_pace(ps: PoseSequence):
+    fps = ps.details['video']['fps']
+    gct_frame = ps.gct()
+    try:
+        if len(gct_frame) > 2:
+            start = gct_frame[0][0]
+            end = gct_frame[1][0]
+        else:
+            start = ps.strides.frame.iloc[0]
+            end = ps.strides.frame.iloc[4]
+        interval = end - start
+        m_per_pixel = (ps.pixel2m(frame=start) + ps.pixel2m(frame=end)) / 2
+        distance_pixel = ps.df[f'{ps.direction}_heel_x'].loc[[start, end]].diff()[end]
+    except:
+        print("케이던스 검출 불가")
+        return None, None
+
+    time = interval / fps
+    
+    return (2 / time) * 60, (time / (distance_pixel * m_per_pixel) * 1000) / 60
+
 def feature1(ps: PoseSequence):
     strides = ps.gct()
 
@@ -432,7 +453,10 @@ def numpy_json_default(obj):
     )
 
 if __name__ == "__main__":
+    cadence, pace = cadence_pace(ps=ps)
     features = {
+        'cadence': cadence,
+        'pace': pace,
         'Amplitude of pelvis oscillation': feature1(ps=ps),
         'Elbow angle': feature2(ps=ps),
         'Trunk flexion angle': feature3(ps=ps),
